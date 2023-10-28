@@ -29,7 +29,7 @@ hvigorVersion：3.0.2
 
 #### 本地静态共享包har包使用
 
-<p>首先，下载har包，<a href="entry/libs/refresh-1.0.0.har)">点击下载</a></p>
+<p>首先，下载har包，<a href="https://github.com/AbnerMing888/HarmonyOsRefresh/raw/master/entry/libs/refresh-1.0.0.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="images/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -152,22 +152,15 @@ GridView({
 #### RefreshLayout
 
 ```typescript
-RefreshLayout
-(
-  {
-    controller: this.controller, //控制器，负责关闭下拉和上拉
-    onRefresh: () => {
-      //下拉刷新
-      this.controller.finishRefresh() //关闭下拉刷新
-    }
-  ,
-    onLoadMore: () => {
-      //上拉加载
-      this.controller.finishLoadMore() //关闭上拉加载
-    }
-  }
-)
-{
+RefreshLayout({
+        controller: this.controller, //控制器，负责关闭下拉和上拉
+        onRefresh: () => {
+          //下拉刷新
+          this.controller.finishRefresh() //关闭下拉刷新
+        }, onLoadMore: () => {
+  //上拉加载
+  this.controller.finishLoadMore() //关闭上拉加载
+} }) {
         //可以是任何组件 List/Grid/Column/Row/Text/……
 
         List() {
@@ -182,8 +175,7 @@ RefreshLayout
             }
           }, item => item)
         }
-.
-width("100%")
+.width("100%")
   .height("100%")
   .onScrollIndex((start: number, end: number) => {
     //必须添加，用于控制下拉和上拉何时展示
@@ -197,9 +189,7 @@ width("100%")
 #### 头部固定组件方式
 
 ```typescript
-Stack
-()
-{
+Stack() {
       ListView({
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),
@@ -218,16 +208,12 @@ Stack
 
       Row() {
         Text("我是标题")
-      }
-.
-width("100%")
+      }.width("100%")
   .height(80)
   .justifyContent(FlexAlign.Center)
   .backgroundColor(Color.Pink)
 
-}
-.
-alignContent(Alignment.Top)
+}.alignContent(Alignment.Top)
 ```
 
 ### 欢迎关注作者
