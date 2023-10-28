@@ -2,6 +2,10 @@
 
 HarmonyOsRefresh是一个鸿蒙版的刷新组件，超简单使用，支持下拉刷新和上拉加载，支持各种组件，List、Grid、Column、Row……
 
+### 效果
+
+<p align="center"><img src="images/refresh.gif" width="300px" /></p>
+
 ### 开发环境
 
 DevEco Studio 4.0 Beta2,Build Version: 4.0.0.400
