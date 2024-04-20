@@ -1,20 +1,6 @@
 {
   "app": {
-    "signingConfigs": [
-      {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "C:\\Users\\GW00261583\\.ohos\\config\\default_HarmonyOsRefresh_DHInV6jfPCGnuqK6KWFCrRahYcgdlmTY-NrOespL6KA=.cer",
-          "storePassword": "0000001A9BF83D7B40C1B630F600EBA73AFE3C46DFB07E330CCD9D81C6DC0858C990CA23AFC342F0D397",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001A62709436681C0281E8C5B73A554B0FACCAF63C9529470477E028555223F3CB40A8BB0A2ADD2C",
-          "profile": "C:\\Users\\GW00261583\\.ohos\\config\\default_HarmonyOsRefresh_DHInV6jfPCGnuqK6KWFCrRahYcgdlmTY-NrOespL6KA=.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\GW00261583\\.ohos\\config\\default_HarmonyOsRefresh_DHInV6jfPCGnuqK6KWFCrRahYcgdlmTY-NrOespL6KA=.p12"
-        }
-      }
-    ],
+    "signingConfigs": [],
     "products": [
       {
         "name": "default",
@@ -45,10 +31,6 @@
           ]
         }
       ]
-    },
-    {
-      "name": "refresh",
-      "srcPath": "./refresh"
     }
   ]
 }
