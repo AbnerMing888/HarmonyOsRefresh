@@ -419,7 +419,7 @@ RefreshLayout({
 每个人的时间都是宝贵的，做为开发者的我，已经做到了技术上的免费开源，但仍然有很多问题无法做到及时处理。 
 也考虑到，鸿蒙是一个新的系统，大家在使用上会遇到各种各样的问题，也为了能够及时的解决及回复问题，大家可以付费进行一对一指导。
 
-<p><img src="images/harmony_vip.png.png" width="150px" /></p>
+<p><img src="images/harmony_vip.png" width="150px" /></p>
 
 **权益如下**
 
