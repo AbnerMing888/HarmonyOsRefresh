@@ -1,9 +1,0 @@
-{
-  "src": [
-    "pages/Index",
-    "pages/ListViewPage",
-    "pages/GridViewPage",
-    "pages/RefreshLayoutPage",
-    "pages/FixedHeadPage"
-  ]
-}

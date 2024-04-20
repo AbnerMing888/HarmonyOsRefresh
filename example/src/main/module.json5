@@ -1,0 +1,37 @@
+{
+  "module": {
+    "name": "example",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "ExampleAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "ExampleAbility",
+        "srcEntry": "./ets/exampleability/ExampleAbility.ets",
+        "description": "$string:ExampleAbility_desc",
+        "icon": "$media:harmonyos_refresh",
+        "label": "$string:ExampleAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

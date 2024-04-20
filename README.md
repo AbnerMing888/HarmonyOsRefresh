@@ -1,82 +1,123 @@
-# HarmonyOsRefresh
+## 介绍
 
-HarmonyOsRefresh是一个鸿蒙版的刷新组件，超简单使用，支持下拉刷新和上拉加载，支持各种组件，List、Grid、Column、Row……
+基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新。
 
-### 效果
+**目前已经适配NEXT版本，如果您的开发环境不是NEXT版本，运行Demo可能存在问题**
+
+截至2024年4月20日，功能点如下
+
+- 1、**支持ListView列表/下拉刷新/上拉加载**
+- 2、**支持GridView网格列表/下拉刷新/上拉加载**
+- 3、**支持StaggeredGridView瀑布流列表/下拉刷新/上拉加载**
+- 4、**支持自定义刷新头和加载尾**
+- 5、**支持列表添加头组件**
+
+## 效果
+
+<p align="center">
+<img src="images/refresh_243_01.jpeg" width="100px" />
+<img src="images/refresh_243_02.jpeg" width="100px" />
+<img src="images/refresh_243_03.jpeg" width="100px" />
+<img src="images/refresh_243_04.jpeg" width="100px" />
+<img src="images/refresh_243_05.jpeg" width="100px" />
+</p>
+
+动态效果：
 
 <p align="center"><img src="images/refresh.gif" width="300px" /></p>
 
-### 开发环境
+## 开发环境
 
-DevEco Studio 4.0 Beta2,Build Version: 4.0.0.400
+DevEco Studio NEXT Developer Beta1,Build Version: 5.0.3.100
 
-Api版本：9
+Api版本：**11**
 
-hvigorVersion：3.0.2
+hvigorVersion：4.2.0
 
-#### 常见问题
+## 快速使用
 
-如果你的开发环境比较低，会造成，下载源码，运行工程失败问题，常见错误如下，是因为开发环境不一致造成。
+有多种使用方式，比如远程依赖、本地静态共享包依赖,源码方式依赖，推荐使用**远程依赖**，方便快捷，有最新修改可以及时生效。
 
-<p align="center"><img src="images/harmonyos_error.png" width="300px" /></p>
+### 1、远程依赖方式使用【推荐】
 
-**您可以选择解决问题，解决方式如下：**
+方式一：在Terminal窗口中，执行如下命令安装三方包，DevEco Studio会自动在工程的oh-package.json5中自动添加三方包依赖。
+**建议：在使用的模块路径下进行执行命令。**
 
-[解决DevEco Studio低版本导入高版本项目运行失败问题](https://juejin.cn/post/7280746811328692258)
+```
+ohpm install @abner/refresh
+```
 
-您也可以不运行，直接进行使用，完全没有问题。
+方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
-### 快速使用
+```
+"dependencies": { "@abner/refresh": "^1.0.2"}
+```
 
-**私服和远程依赖**，由于权限和审核问题，预计需要等到2024年第一季度面向所有开发者，所以，只能使用**本地静态共享包**和**源码**
-两种使用方式，本地静态共享包类似Android中的aar依赖，直接复制到项目中即可。
+<p align="center"><img src="images/harmonyos_refresh_module.jpg" width="300"></p>
 
-#### 本地静态共享包har包使用
+### 2、本地静态共享包har包使用
 
-<p>首先，下载har包，<a href="https://github.com/AbnerMing888/HarmonyOsRefresh/raw/master/entry/libs/refresh-1.0.0.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.2.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="images/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
-<p>需要注意，<strong>@app/refresh</strong>，是用来区分目录的，可以自己定义，比如@aa/bb等，关于静态共享包的创建和使用，请查看如下我的介绍，这里就不过多介绍</p>
+<p>需要注意，<strong>@abner/refresh</strong>，是用来区分目录的，可以自己定义，比如@aa/bb等，关于静态共享包的创建和使用，请查看如下我的介绍，这里就不过多介绍</p>
 
 [HarmonyOS开发：走进静态共享包的依赖与使用](https://juejin.cn/post/7274982412245876776)
 
-#### 查看是否引用成功
+### 查看是否引用成功
 
 无论使用哪种方式进行依赖，最终都会在使用的模块中，生成一个oh_modules文件，并创建源代码文件，有则成功，无则失败，如下：
 
 <p align="center"><img src="images/harmonyos_refresh_oh.jpg" width="300"></p>
 
-### 代码使用
+## 代码使用
 
-目前提供了三种用法，一种是ListView形式，就是单列表形式，一种是GridView形式，也就是网格列表形式，还有一种就是RefreshLayout形式，支持任何的组件形式，比如Column，Row等等。
+目前提供了多种种用法，一种是ListView形式，就是单列表形式，一种是GridView形式，也就是网格列表形式，一种是StaggeredGridView形式，也就是
+瀑布流形式，还有一种就是RefreshLayout形式，支持任何的组件形式，比如Column，Row等等。
 
-#### ListView
+需要注意，目前ListView、GridView、StaggeredGridView是自带刷新的，当然了您也可以当作普通的列表进行使用。
+还有一点需要注意，目前默认情况下是懒加载数据模式。
+
+### ListView
 
 ```typescript
+@State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
+
 ListView({
   items: this.array, //数据源 数组
   itemLayout: (item, index) => this.itemLayout(item, index), //条目布局
   controller: this.controller, //控制器，负责关闭下拉和上拉
   onRefresh: () => {
     //下拉刷新
-    this.controller.finishRefresh()
+    this.controller.finishRefresh() //关闭下拉刷新
   },
   onLoadMore: () => {
     //上拉加载
-    this.controller.finishLoadMore()
+    this.controller.finishLoadMore() //关闭上拉加载
   }
 })
 ```
 
 #### 相关属性介绍
 
-| 属性                | 类型           | 概述                    |
-|-------------------|--------------|-----------------------|
-| listAttribute     | ListAttr     | ListView的相关属性         |
-| listItemAttribute | ListItemAttr | ListView的Item相关属性     |
-| marginHeader      | number       | 距离头部多少距离，用于顶部有固定组件时使用 |
-
+| 属性                      | 类型                                          | 概述                |
+|-------------------------|---------------------------------------------|-------------------|
+| items                   | Array\<Object\>                             | 数据源               |
+| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局             |
+| controller              | RefreshController                           | 控制器，关闭下拉和上拉       |
+| onRefresh               | 回调                                          | 刷新回调              |
+| onLoadMore              | 回调                                          | 上拉加载              |
+| listAttribute           | ListAttr                                    | ListView的相关属性     |
+| listItemAttribute       | ListItemAttr                                | ListView的Item相关属性 |
+| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载    |
+| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1     |
+| onLazyDataSource        | 回调                                          | 懒加载数据回调           |
+| itemHeaderLayout        | @BuilderParam                               | 传递的头组件            |
+| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件          |
+| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件          |
+| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性          |
+| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性          |
 
 ##### ListAttr
 
@@ -100,9 +141,51 @@ ListView({
 | backgroundColor | ResourceColor | 背景颜色，默认透明 |
 | onClick         | 回调方法          | 点击事件      |
 
-#### GridView
+##### RefreshHeaderAttr
+
+| 属性             | 类型                         | 概述              |
+|----------------|----------------------------|-----------------|
+| width          | Length                     | 刷新控件的宽度         |
+| height         | Length                     | 刷新头的高度 默认高度 80  |
+| timeFormat     | RefreshHeaderTimeFormat    | 刷新头的时间格式,默认月日时分 |
+| timeLabel      | RefreshHeaderTimeLabel     | 刷新头的标签格式        |
+| hideTime       | boolean                    | 是否隐藏刷新头时间，默认展示  |
+| fontSize       | number / string / Resource | 刷新头的文字大小        |
+| fontColor      | ResourceColor              | 刷新头的文字颜色        |
+| timeFontSize   | number / string / Resource | 刷新头的时间文字大小      |
+| timeFontColor  | ResourceColor              | 刷新头的时间文字颜色      |
+| marginIconLeft | Length                     | 刷新文字距离左边的距离     |
+
+##### LoadMoreFooterAttr
+
+| 属性     | 类型     | 概述    |
+|--------|--------|-------|
+| width  | Length | 控件的宽度 |
+| height | Length | 高度    |
+
+##### RefreshHeaderTimeFormat
+
+```text
+  YMDHMS, //年月日时分秒 2024-04-08 08:08:08
+  MDHMS, //月日时分秒 04-08 08:08:08
+  MDHM, //月日时分秒 04-08 08:08
+  HMS //时分秒 08:08:08
+```
+
+##### RefreshHeaderTimeLabel
+
+```text
+  BACKSLASH, //反斜杠 / 2024/04/08 08:08:08
+  SHORTLINE, //短线 -  2024-04-08 08:08:08
+  CHARACTERS //文字 年月日 2024年04月08日 08时08分08秒
+```
+
+### GridView
 
 ```typescript
+
+@State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
+
 GridView({
   items: this.array, //数据源 数组
   itemLayout: (item, index) => this.itemLayout(item, index), //条目布局
@@ -120,11 +203,23 @@ GridView({
 
 #### 相关属性介绍
 
-| 属性                | 类型           | 概述                    |
-|-------------------|--------------|-----------------------|
-| gridAttribute     | GridAttr     | GridView相关属性          |
-| gridItemAttribute | GridItemAttr | GridView的Item相关属性     |
-| marginHeader      | number       | 距离头部多少距离，用于顶部有固定组件时使用 |
+| 属性                      | 类型                                          | 概述                |
+|-------------------------|---------------------------------------------|-------------------|
+| items                   | Array\<Object\>                             | 数据源               |
+| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局             |
+| controller              | RefreshController                           | 控制器，关闭下拉和上拉       |
+| onRefresh               | 回调                                          | 刷新回调              |
+| onLoadMore              | 回调                                          | 上拉加载              |
+| gridAttribute           | GridAttr                                    | GridView相关属性      |
+| gridItemAttribute       | GridItemAttr                                | GridView的Item相关属性 |
+| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载    |
+| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1     |
+| onLazyDataSource        | 回调                                          | 懒加载数据回调           |
+| itemHeaderLayout        | @BuilderParam                               | 传递的头组件            |
+| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件          |
+| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件          |
+| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性          |
+| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性          |
 
 ##### GridAttr
 
@@ -153,84 +248,186 @@ GridView({
 | backgroundColor | ResourceColor    | 背景颜色，默认透明 |
 | onClick         | 回调方法             | 点击事件      |
 
+##### RefreshHeaderAttr
+
+| 属性             | 类型                         | 概述              |
+|----------------|----------------------------|-----------------|
+| width          | Length                     | 刷新控件的宽度         |
+| height         | Length                     | 刷新头的高度 默认高度 80  |
+| timeFormat     | RefreshHeaderTimeFormat    | 刷新头的时间格式,默认月日时分 |
+| timeLabel      | RefreshHeaderTimeLabel     | 刷新头的标签格式        |
+| hideTime       | boolean                    | 是否隐藏刷新头时间，默认展示  |
+| fontSize       | number / string / Resource | 刷新头的文字大小        |
+| fontColor      | ResourceColor              | 刷新头的文字颜色        |
+| timeFontSize   | number / string / Resource | 刷新头的时间文字大小      |
+| timeFontColor  | ResourceColor              | 刷新头的时间文字颜色      |
+| marginIconLeft | Length                     | 刷新文字距离左边的距离     |
+
+##### LoadMoreFooterAttr
+
+| 属性     | 类型     | 概述    |
+|--------|--------|-------|
+| width  | Length | 控件的宽度 |
+| height | Length | 高度    |
+
+##### RefreshHeaderTimeFormat
+
+```text
+  YMDHMS, //年月日时分秒 2024-04-08 08:08:08
+  MDHMS, //月日时分秒 04-08 08:08:08
+  MDHM, //月日时分秒 04-08 08:08
+  HMS //时分秒 08:08:08
+```
+
+##### RefreshHeaderTimeLabel
+
+```text
+  BACKSLASH, //反斜杠 / 2024/04/08 08:08:08
+  SHORTLINE, //短线 -  2024-04-08 08:08:08
+  CHARACTERS //文字 年月日 2024年04月08日 08时08分08秒
+```
+
+### StaggeredGridView
+
+```typescript
+
+@State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
+
+StaggeredGridView({
+  items: this.array, //数据源
+  itemLayout: (item: Object, index: number) => this.itemLayout(item, index), //条目布局
+  controller: this.controller, //控制器，负责关闭下拉和上拉
+  onRefresh: () => {
+    //下拉刷新
+    this.controller.finishRefresh()
+  },
+  onLoadMore: () => {
+    //上拉加载
+    this.controller.finishLoadMore()
+  }
+})
+```
+
+#### 相关属性介绍
+
+| 属性                      | 类型                                          | 概述             |
+|-------------------------|---------------------------------------------|----------------|
+| columnsTemplate         | string                                      | 展示几列，默认是两列     |
+| columnsGap              | Length                                      | 列与列的间距，默认为0    |
+| rowsGap                 | Length                                      | 行与行的间距         |
+| bgColor                 | ResourceColor                               | 整体的背景          |
+| sWidth                  | Length                                      | 宽度             |
+| sHeight                 | Length                                      | 高度             |
+| items                   | Array\<Object\>                             | 数据源            |
+| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局          |
+| controller              | RefreshController                           | 控制器，关闭下拉和上拉    |
+| onRefresh               | 回调                                          | 刷新回调           |
+| onLoadMore              | 回调                                          | 上拉加载           |
+| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载 |
+| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1  |
+| onLazyDataSource        | 回调                                          | 懒加载数据回调        |
+| itemHeaderLayout        | @BuilderParam                               | 传递的头组件         |
+| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件       |
+| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件       |
+| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性       |
+| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性       |
+
+##### RefreshHeaderAttr
+
+| 属性             | 类型                         | 概述              |
+|----------------|----------------------------|-----------------|
+| width          | Length                     | 刷新控件的宽度         |
+| height         | Length                     | 刷新头的高度 默认高度 80  |
+| timeFormat     | RefreshHeaderTimeFormat    | 刷新头的时间格式,默认月日时分 |
+| timeLabel      | RefreshHeaderTimeLabel     | 刷新头的标签格式        |
+| hideTime       | boolean                    | 是否隐藏刷新头时间，默认展示  |
+| fontSize       | number / string / Resource | 刷新头的文字大小        |
+| fontColor      | ResourceColor              | 刷新头的文字颜色        |
+| timeFontSize   | number / string / Resource | 刷新头的时间文字大小      |
+| timeFontColor  | ResourceColor              | 刷新头的时间文字颜色      |
+| marginIconLeft | Length                     | 刷新文字距离左边的距离     |
+
+##### LoadMoreFooterAttr
+
+| 属性     | 类型     | 概述    |
+|--------|--------|-------|
+| width  | Length | 控件的宽度 |
+| height | Length | 高度    |
+
+##### RefreshHeaderTimeFormat
+
+```text
+  YMDHMS, //年月日时分秒 2024-04-08 08:08:08
+  MDHMS, //月日时分秒 04-08 08:08:08
+  MDHM, //月日时分秒 04-08 08:08
+  HMS //时分秒 08:08:08
+```
+
+##### RefreshHeaderTimeLabel
+
+```text
+  BACKSLASH, //反斜杠 / 2024/04/08 08:08:08
+  SHORTLINE, //短线 -  2024-04-08 08:08:08
+  CHARACTERS //文字 年月日 2024年04月08日 08时08分08秒
+```
+
 #### RefreshLayout
 
 ```typescript
 RefreshLayout({
-        controller: this.controller, //控制器，负责关闭下拉和上拉
-        onRefresh: () => {
-          //下拉刷新
-          this.controller.finishRefresh() //关闭下拉刷新
-        }, onLoadMore: () => {
-  //上拉加载
-  this.controller.finishLoadMore() //关闭上拉加载
-} }) {
-        //可以是任何组件 List/Grid/Column/Row/Text/……
-
-        List() {
-          ForEach(this.array, (item, index) => {
-            ListItem() {
-              Text("测试数据" + index)
-                .width("95%")
-                .height(50)
-                .margin(10)
-                .textAlign(TextAlign.Center)
-                .border({ width: 1, color: Color.Pink })
-            }
-          }, item => item)
-        }
-.width("100%")
-  .height("100%")
-  .onScrollIndex((start: number, end: number) => {
-    //必须添加，用于控制下拉和上拉何时展示
-    this.controller.markLocation(start, end, this.array.length - 1)
-  })
-  .edgeEffect(EdgeEffect.None)
-
+  controller: this.controller,
+  itemLayout: () => this.itemLayout(), //条目布局
+  onRefresh: () => {
+    this.controller.finishRefresh()
+  },
+  onLoadMore: () => {
+    this.controller.finishLoadMore()
+  }
 }
+)
 ```
 
-#### 头部固定组件方式
 
-```typescript
-Stack() {
-      ListView({
-        items: this.array, //数据源 数组
-        itemLayout: (item, index) => this.itemLayout(item, index),
-        controller: this.controller, //控制器，负责关闭下拉和上拉
-        marginHeader: 80,
-        onRefresh: () => {
-          //下拉刷新
-          this.controller.finishRefresh()
-        },
-        onLoadMore: () => {
-          //上拉加载
-          this.controller.finishLoadMore()
-        }
-      })
+#### 更多案例
 
+可以查看相关Demo。
 
-      Row() {
-        Text("我是标题")
-      }.width("100%")
-  .height(80)
-  .justifyContent(FlexAlign.Center)
-  .backgroundColor(Color.Pink)
+运行Demo，如果自身相关开发环境不一致，会运行失败，可更改环境或者直接源码复制至您的项目即可。
 
-}.alignContent(Alignment.Top)
-```
+#### 常见问题
 
-### 欢迎关注作者
+如果你打算下载源码使用，并且你的开发环境比较低，会造成，运行工程失败问题，常见错误如下，是因为开发环境不一致造成。
 
-微信搜索【App开发干货铺】，或扫描下面二维码关注，查阅更多技术文章！
+<p align="center"><img src="images/harmonyos_error.png" width="300px" /></p>
 
-<img src="images/abner.jpg" width="200px" />
+**您可以选择解决问题，解决方式如下：**
 
-### 赞赏作者
+[解决DevEco Studio低版本导入高版本项目运行失败问题](https://juejin.cn/post/7280746811328692258)
 
-看在作者这么努力的份上，微信赞赏随意，给个鼓励好不好~
+您也可以不运行，直接进行使用，完全没有问题。
 
-<img src="images/wx_code.jpg" width="200px" />
+#### 关注公众号
+
+鸿蒙先驱者，只分享精华的鸿蒙或者移动端技术文章，可扫码关注
+
+<p><img src="images/abner.jpg" width="150px" /></p>
+
+[鸿蒙精华技术文章列表](https://juejin.cn/column/7269566781248389178)
+
+#### 一对一指导【收费】
+
+每个人的时间都是宝贵的，做为开发者的我，已经做到了技术上的免费开源，但仍然有很多问题无法做到及时处理。 
+也考虑到，鸿蒙是一个新的系统，大家在使用上会遇到各种各样的问题，也为了能够及时的解决及回复问题，大家可以付费进行一对一指导。
+
+<p><img src="images/harmony_vip.png.png" width="150px" /></p>
+
+**权益如下**
+
+1、针对刷新库使用1对1辅导使用，并跟踪相关问题排查。
+2、针对我的所有鸿蒙开源库，1对1辅导使用，并跟踪相关问题排查。
+3、根据时间安排，您的任何鸿蒙项目所遇到的问题，进行协助排查解决。
+4、未来鸿蒙开源库，先遣体验。
+5、未来鸿蒙脚手架，首批次体验使用。
 
 ### License
 

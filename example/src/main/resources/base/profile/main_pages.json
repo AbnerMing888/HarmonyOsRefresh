@@ -1,0 +1,16 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/list/ListViewPage",
+    "pages/list/ListViewRefreshPage",
+    "pages/list/ListViewUpAndDownPage",
+    "pages/list/ListViewHeaderPage",
+    "pages/grid/GridViewPage",
+    "pages/grid/GridViewRefreshPage",
+    "pages/grid/GridViewUpAndDownPage",
+    "pages/grid/GridViewHeaderPage",
+    "pages/layout/LayoutViewPage",
+    "pages/staggered/StaggeredPage",
+    "pages/staggered/StaggeredHeadPage"
+  ]
+}
