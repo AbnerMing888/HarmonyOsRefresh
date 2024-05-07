@@ -16,7 +16,7 @@ struct Index {
     "普通的列表ListView", "下拉刷新列表ListView", "下拉上下列表ListView", "带有头的ListView",
     "普通的列表GridView", "下拉刷新列表GridView", "下拉上下列表GridView", "带有头的GridView",
     "普通的瀑布流列表", "带有头的瀑布流列表",
-    "任意组件"
+    "任意组件", "侧滑展示按钮"
   ]
   private routerPaths: Array<string> = [
     "pages/list/ListViewPage",
@@ -29,7 +29,8 @@ struct Index {
     "pages/grid/GridViewHeaderPage",
     "pages/staggered/StaggeredPage",
     "pages/staggered/StaggeredHeadPage",
-    "pages/layout/LayoutViewPage"
+    "pages/layout/LayoutViewPage",
+    "pages/list/SlideMenuListViewPage"
   ]
 
   /**

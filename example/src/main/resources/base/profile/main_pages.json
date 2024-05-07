@@ -11,6 +11,7 @@
     "pages/grid/GridViewHeaderPage",
     "pages/layout/LayoutViewPage",
     "pages/staggered/StaggeredPage",
-    "pages/staggered/StaggeredHeadPage"
+    "pages/staggered/StaggeredHeadPage",
+    "pages/list/SlideMenuListViewPage"
   ]
 }

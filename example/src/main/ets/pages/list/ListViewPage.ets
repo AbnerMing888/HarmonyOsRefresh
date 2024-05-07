@@ -1,5 +1,5 @@
 import { ActionBar } from '../ActionBar'
-import { ListView, RefreshDataSource } from '@abner/refresh'
+import { ListView } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
@@ -11,7 +11,6 @@ import { ListView, RefreshDataSource } from '@abner/refresh'
 @Component
 struct ListViewPage {
   @State array: Array<number> = []
-  private dataSource?: RefreshDataSource
 
   aboutToAppear() {
     for (let i = 0; i < 40; i++) {
@@ -26,8 +25,8 @@ struct ListViewPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: Object, index: number): void {
-    Text("测试数据" + index)
+  itemLayout(item: Object, _: number): void {
+    Text("测试数据" + item)
       .width("95%")
       .height(50)
       .margin(10)
@@ -40,10 +39,7 @@ struct ListViewPage {
       ActionBar({ title: "普通的列表ListView" })
       ListView({
         items: this.array, //数据源 数组
-        itemLayout: (item, index) => this.itemLayout(item, index),
-        onLazyDataSource: (dataSource: RefreshDataSource) => {
-          this.dataSource = dataSource
-        }
+        itemLayout: (item, index) => this.itemLayout(item, index)
       })
     }
   }

@@ -4,13 +4,14 @@
 
 **目前已经适配NEXT版本，如果您的开发环境不是NEXT版本，运行Demo可能存在问题**
 
-截至2024年4月20日，功能点如下
+截至2024年5月6日，功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
 - 3、**支持StaggeredGridView瀑布流列表/下拉刷新/上拉加载**
 - 4、**支持自定义刷新头和加载尾**
 - 5、**支持列表添加头组件**
+- 6、**支持列表右侧侧滑展示按钮**
 
 ## 效果
 
@@ -20,11 +21,16 @@
 <img src="images/refresh_243_03.jpeg" width="100px" />
 <img src="images/refresh_243_04.jpeg" width="100px" />
 <img src="images/refresh_243_05.jpeg" width="100px" />
+<img src="images/refresh_243_07.png" width="100px" />
 </p>
 
-动态效果：
+**动态效果：**
 
-<p align="center"><img src="images/refresh.gif" width="300px" /></p>
+<p align="center">
+<img src="images/refresh.gif" width="300px" />
+<img src="images/refresh_243_06.gif" width="300px" />
+</p>
+
 
 ## 开发环境
 
@@ -50,14 +56,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.0.2"}
+"dependencies": { "@abner/refresh": "^1.0.3"}
 ```
 
 <p align="center"><img src="images/harmonyos_refresh_module.jpg" width="300"></p>
 
-### 2、本地静态共享包har包使用
+### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.2.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.3.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="images/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -118,6 +124,8 @@ ListView({
 | footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件          |
 | refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性          |
 | loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性          |
+| slideRightMenuLayout    | @BuilderParam (index: number)               | 右侧侧滑展示的View       |
+| slideMenuAttr           | 回调(attribute: SlideMenuAttr)                | 右侧侧滑属性            |
 
 ##### ListAttr
 
