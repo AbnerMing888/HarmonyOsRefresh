@@ -38,10 +38,11 @@ struct ListViewHeaderPage {
   @Builder
   itemHeaderLayout(): void {
     Column() {
-
+      Text("我是头View")
     }.height(100)
     .width("100%")
     .backgroundColor(Color.Pink)
+    .justifyContent(FlexAlign.Center)
   }
 
   build() {
@@ -57,14 +58,14 @@ struct ListViewHeaderPage {
           //下拉刷新
           setTimeout(() => {
             this.controller.finishRefresh();
-          }, 3000)
+          }, 1000)
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
             this.array.push(51);
             this.controller.finishLoadMore(true);
-          }, 3000)
+          }, 1000)
         }
       })
     }

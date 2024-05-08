@@ -37,7 +37,7 @@ struct ListViewUpAndDownPage {
 
   build() {
     Column() {
-      ActionBar({ title: "下拉上下列表ListView" })
+      ActionBar({ title: "刷新加载列表ListView" })
       ListView({
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),
@@ -47,16 +47,15 @@ struct ListViewUpAndDownPage {
           //下拉刷新
           setTimeout(() => {
             this.controller.finishRefresh();
-          }, 3000)
+          }, 1000)
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.array.push(51);
-            this.controller.finishLoadMore(true);
-          }, 3000)
+            this.controller.finishLoadMore();
+          }, 1000)
         }
       })
-    }
+    }.padding({ bottom: 20 })
   }
 }

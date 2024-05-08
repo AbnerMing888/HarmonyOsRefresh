@@ -47,30 +47,6 @@ struct StaggeredPage {
   build() {
     Column() {
       ActionBar({ title: "普通的交错布局页面" })
-      // RefreshLayout({
-      //   controller: this.controller,
-      //   onRefresh: () => {
-      //     this.controller.finishRefresh()
-      //   },
-      //   onLoadMore: () => {
-      //     this.controller.finishLoadMore()
-      //   }
-      // }) {
-      //   WaterFlowView({
-      //     scroller: this.scroller,
-      //     items: this.array,
-      //     isRefresh: true,
-      //     itemView: (item: UnionData, index: number) => this.itemLayout(item, index),
-      //     reachStart: (start: number) => {
-      //       this.controller.markReachStart(start)
-      //     },
-      //     reachEnd: (isEnd: boolean) => {
-      //       this.controller.markReachEnd(isEnd)
-      //     }
-      //   })
-      //
-      // }
-
       StaggeredGridView({
         items: this.array,
         itemLayout: (item: Object, index: number) => this.itemLayout(item, index),

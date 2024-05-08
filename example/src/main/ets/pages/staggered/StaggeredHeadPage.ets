@@ -38,10 +38,11 @@ struct StaggeredHeadPage {
   @Builder
   itemHeaderLayout() {
     Column() {
-
-    }.width("100%")
-    .height(200)
+      Text("我是头View")
+    }.height(100)
+    .width("100%")
     .backgroundColor(Color.Pink)
+    .justifyContent(FlexAlign.Center)
   }
 
   @Builder
@@ -98,8 +99,7 @@ struct StaggeredHeadPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.array.push(21)
-            this.dataSource.reloadData()
+
             this.controller.finishLoadMore()
           }, 3000)
         }

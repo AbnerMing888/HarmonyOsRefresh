@@ -13,8 +13,8 @@ import { ListView, RefreshController } from '@abner/refresh'
 struct Index {
   @State controller: RefreshController = new RefreshController() //刷新控制器
   private array: Array<string> = [
-    "普通的列表ListView", "下拉刷新列表ListView", "下拉上下列表ListView", "带有头的ListView",
-    "普通的列表GridView", "下拉刷新列表GridView", "下拉上下列表GridView", "带有头的GridView",
+    "普通的列表ListView", "下拉刷新列表ListView", "刷新加载列表ListView", "带有头的ListView",
+    "普通的列表GridView", "下拉刷新列表GridView", "刷新加载列表GridView", "带有头的GridView",
     "普通的瀑布流列表", "带有头的瀑布流列表",
     "任意组件", "侧滑展示按钮"
   ]

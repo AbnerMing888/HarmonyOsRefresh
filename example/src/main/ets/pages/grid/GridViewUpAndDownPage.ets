@@ -37,7 +37,7 @@ struct GridViewUpAndDownPage {
 
   build() {
     Column() {
-      ActionBar({ title: "下拉上下列表GridView" })
+      ActionBar({ title: "刷新加载列表GridView" })
       GridView({
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),

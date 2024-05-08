@@ -2,26 +2,43 @@
 
 基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新。
 
-**目前已经适配NEXT版本，如果您的开发环境不是NEXT版本，运行Demo可能存在问题**
-
-截至2024年5月6日，功能点如下
+截至2024年5月8日，功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
 - 3、**支持StaggeredGridView瀑布流列表/下拉刷新/上拉加载**
 - 4、**支持自定义刷新头和加载尾**
-- 5、**支持列表添加头组件**
-- 6、**支持列表右侧侧滑展示按钮**
+- 5、**支持列表(ListView/GridView/StaggeredGridView)添加头组件**
+- 6、**支持列表(ListView)右侧侧滑展示按钮**
 
 ## 效果
 
+### 所有功能
+
 <p align="center">
-<img src="images/refresh_243_01.jpeg" width="100px" />
-<img src="images/refresh_243_02.jpeg" width="100px" />
-<img src="images/refresh_243_03.jpeg" width="100px" />
-<img src="images/refresh_243_04.jpeg" width="100px" />
-<img src="images/refresh_243_05.jpeg" width="100px" />
-<img src="images/refresh_243_07.png" width="100px" />
+<img src="images/refresh_243_01.jpeg" width="300px" />
+</p>
+
+### 刷新效果
+<p align="center">
+<img src="images/refresh_243_02.jpeg" width="200px" />
+<img src="images/refresh_243_03.jpeg" width="200px" />
+<img src="images/refresh_243_04.jpeg" width="200px" />
+<img src="images/refresh_243_05.jpeg" width="200px" />
+</p>
+
+### 列表自定义头部效果
+
+<p align="center">
+<img src="images/refresh_243_08.png" width="300px" />
+<img src="images/refresh_243_09.png" width="300px" />
+<img src="images/refresh_243_10.png" width="300px" />
+</p>
+
+### 列表侧滑展示按钮效果
+
+<p align="center">
+<img src="images/refresh_243_07.png" width="300px" />
 </p>
 
 **动态效果：**
@@ -56,14 +73,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.0.3"}
+"dependencies": { "@abner/refresh": "^1.0.4"}
 ```
 
 <p align="center"><img src="images/harmonyos_refresh_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.3.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.4.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="images/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -83,49 +100,134 @@ ohpm install @abner/refresh
 瀑布流形式，还有一种就是RefreshLayout形式，支持任何的组件形式，比如Column，Row等等。
 
 需要注意，目前ListView、GridView、StaggeredGridView是自带刷新的，当然了您也可以当作普通的列表进行使用。
-还有一点需要注意，目前默认情况下是懒加载数据模式。
+还有一点需要注意，目前默认情况下是**懒加载数据模式**。
 
 ### ListView
 
-```typescript
-@State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
+#### 1、懒加载数据使用（LazyForEach）
 
+默认情况下既是，目的是进行组件销毁回收以降低内存占用，提高性能，当然了也是推荐使用，相对于普通使用，需要使用RefreshDataSource进行数据的增删改查！
+
+```typescript
+
+@State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
+@State dataSource: RefreshDataSource = new RefreshDataSource()//数据懒加载操作对象，执行数据增删改查
+        
 ListView({
-  items: this.array, //数据源 数组
+  items: this.array, //数据源 数组,任意类型
   itemLayout: (item, index) => this.itemLayout(item, index), //条目布局
   controller: this.controller, //控制器，负责关闭下拉和上拉
+  onLazyDataSource: (dataSource: RefreshDataSource) => {
+    this.dataSource = dataSource
+  },
   onRefresh: () => {
     //下拉刷新
-    this.controller.finishRefresh() //关闭下拉刷新
+    //数据懒加载使用：1、数组数据添加，this.dataSource.pushDataArray()，2、单个数据添加，this.dataSource.pushData()
+    this.controller.finishRefresh() //关闭下拉刷新，在数据请求回后进行关闭
   },
   onLoadMore: () => {
     //上拉加载
-    this.controller.finishLoadMore() //关闭上拉加载
+    //数据懒加载使用：1、数组数据添加，this.dataSource.pushDataArray()，2、单个数据添加，this.dataSource.pushData()
+    this.controller.finishLoadMore() //关闭上拉加载,在数据请求回后进行关闭
   }
 })
+/**
+ * Author:AbnerMing
+ * Describe:条目布局
+ * @param item  数据对象
+ * @param index  数据索引
+ */
+@Builder
+itemLayout(item: Object, index: number): void {
+  //条目视图，任意组件
+}
 ```
 
-#### 相关属性介绍
+#### 2、普通使用（ForEach）
 
-| 属性                      | 类型                                          | 概述                |
-|-------------------------|---------------------------------------------|-------------------|
-| items                   | Array\<Object\>                             | 数据源               |
-| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局             |
-| controller              | RefreshController                           | 控制器，关闭下拉和上拉       |
-| onRefresh               | 回调                                          | 刷新回调              |
-| onLoadMore              | 回调                                          | 上拉加载              |
-| listAttribute           | ListAttr                                    | ListView的相关属性     |
-| listItemAttribute       | ListItemAttr                                | ListView的Item相关属性 |
-| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载    |
-| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1     |
-| onLazyDataSource        | 回调                                          | 懒加载数据回调           |
-| itemHeaderLayout        | @BuilderParam                               | 传递的头组件            |
-| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件          |
-| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件          |
-| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性          |
-| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性          |
-| slideRightMenuLayout    | @BuilderParam (index: number)               | 右侧侧滑展示的View       |
-| slideMenuAttr           | 回调(attribute: SlideMenuAttr)                | 右侧侧滑属性            |
+普通使用正常的数据加载即可，只需关注数据源。
+
+```typescript
+
+@State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
+
+ListView({
+        items: this.array, //数据源 数组,任意类型
+        itemLayout: (item, index) => this.itemLayout(item, index),
+        controller: this.controller, //控制器，负责关闭下拉和上拉
+        isLazyData: false,//禁止懒加载，也就是使用ForEach进行数据加载
+        onRefresh: () => {
+          //下拉刷新
+          this.controller.finishRefresh();
+        },
+        onLoadMore: () => {
+          //上拉加载
+          this.controller.finishLoadMore();
+        }
+      })
+
+/**
+ * Author:AbnerMing
+ * Describe:条目布局
+ * @param item  数据对象
+ * @param index  数据索引
+ */
+@Builder
+itemLayout(item: Object, index: number): void {
+  //条目视图，任意组件
+}
+```
+
+#### 3、相关属性介绍
+
+| 属性                      | 类型                                          | 概述                                                |
+|-------------------------|---------------------------------------------|---------------------------------------------------|
+| items                   | Array\<Object\>                             | 数据源                                               |
+| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局                                             |
+| controller              | RefreshController                           | 控制器，关闭下拉和上拉                                       |
+| onRefresh               | 回调                                          | 刷新回调                                              |
+| onLoadMore              | 回调                                          | 上拉加载                                              |
+| listAttribute           | ListAttr                                    | ListView的相关属性                                     |
+| listItemAttribute       | ListItemAttr                                | ListView的Item相关属性                                 |
+| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载                                    |
+| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1                                     |
+| onLazyDataSource        | 回调                                          | 懒加载数据回调                                           |
+| itemHeaderLayout        | @BuilderParam                               | 传递的头组件                                            |
+| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件                                          |
+| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件                                          |
+| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性                                          |
+| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性                                          |
+| slideRightMenuLayout    | @BuilderParam (index: number)               | 右侧侧滑展示的View                                       |
+| slideMenuAttr           | 回调(attribute: SlideMenuAttr)                | 右侧侧滑属性                                            |
+| enableRefresh           | boolean                                     | 是否禁止刷新,也可以通过onRefresh进行控制，onRefresh有代表需要刷新        |
+| enableLoadMore          | boolean                                     | 是否禁止上拉加载，也可以通过onLoadMore进行控制，onLoadMore有代表需要上拉加载  |
+
+
+##### RefreshDataSource
+
+数据懒加载操作对象，当使用数据懒加载时，必须通过此对象进行操作数据，否则无法生效！
+
+懒加载数据的增删改查，必须实现属性：onLazyDataSource
+
+```typescript
+onLazyDataSource: (dataSource: RefreshDataSource) => {
+          this.dataSource = dataSource
+        }
+```
+
+**相关属性介绍**
+
+| 方法            | 类型                            | 概述              |
+|---------------|-------------------------------|-----------------|
+| reloadData    | 无参                            | 重置所有子组件的index索引 |
+| addData       | (index: number, data: Object) | 添加数据            |
+| pushData      | (data: Object)                | 追加数据            |
+| pushDataArray | (data: Array\<Object\>)       | 追加数组数据          |
+| deleteData    | (index: number)               | 删除数据            |
+| moveData      | (from: number, to: number)    | 交换数据            |
+| changeData    | (index: number, data: Object) | 改变单个数据          |
+| modifyAllData | 无参                            | 改变多个数据          |
+
 
 ##### ListAttr
 
@@ -188,46 +290,129 @@ ListView({
   CHARACTERS //文字 年月日 2024年04月08日 08时08分08秒
 ```
 
-### GridView
+### GridView【网格】
+
+#### 1、懒加载数据使用（LazyForEach）
+
+默认情况下既是，目的是进行组件销毁回收以降低内存占用，提高性能，当然了也是推荐使用，相对于普通使用，需要使用RefreshDataSource进行数据的增删改查！
+
+```typescript
+
+@State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
+@State dataSource: RefreshDataSource = new RefreshDataSource()//数据懒加载操作对象，执行数据增删改查
+
+GridView({
+  items: this.array, //数据源 数组,任意类型
+  itemLayout: (item, index) => this.itemLayout(item, index), //条目布局
+  controller: this.controller, //控制器，负责关闭下拉和上拉
+  onLazyDataSource: (dataSource: RefreshDataSource) => {
+    this.dataSource = dataSource
+  },
+  onRefresh: () => {
+    //下拉刷新
+    //数据懒加载使用：1、数组数据添加，this.dataSource.pushDataArray()，2、单个数据添加，this.dataSource.pushData()
+    this.controller.finishRefresh() //关闭下拉刷新，在数据请求回后进行关闭
+  },
+  onLoadMore: () => {
+    //上拉加载
+    //数据懒加载使用：1、数组数据添加，this.dataSource.pushDataArray()，2、单个数据添加，this.dataSource.pushData()
+    this.controller.finishLoadMore() //关闭上拉加载,在数据请求回后进行关闭
+  }
+})
+/**
+ * Author:AbnerMing
+ * Describe:条目布局
+ * @param item  数据对象
+ * @param index  数据索引
+ */
+@Builder
+itemLayout(item: Object, index: number): void {
+  //条目视图，任意组件
+}
+```
+
+#### 2、普通使用（ForEach）
+
+普通使用正常的数据加载即可，只需关注数据源。
 
 ```typescript
 
 @State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
 
 GridView({
-  items: this.array, //数据源 数组
-  itemLayout: (item, index) => this.itemLayout(item, index), //条目布局
-  controller: this.controller, //控制器，负责关闭下拉和上拉
-  onRefresh: () => {
-    //下拉刷新
-    this.controller.finishRefresh() //关闭下拉刷新
-  },
-  onLoadMore: () => {
-    //上拉加载
-    this.controller.finishLoadMore() //关闭上拉加载
-  }
-})
+        items: this.array, //数据源 数组,任意类型
+        itemLayout: (item, index) => this.itemLayout(item, index),
+        controller: this.controller, //控制器，负责关闭下拉和上拉
+        isLazyData: false,//禁止懒加载，也就是使用ForEach进行数据加载
+        onRefresh: () => {
+          //下拉刷新
+          this.controller.finishRefresh();
+        },
+        onLoadMore: () => {
+          //上拉加载
+          this.controller.finishLoadMore();
+        }
+      })
+
+/**
+ * Author:AbnerMing
+ * Describe:条目布局
+ * @param item  数据对象
+ * @param index  数据索引
+ */
+@Builder
+itemLayout(item: Object, index: number): void {
+  //条目视图，任意组件
+}
 ```
 
-#### 相关属性介绍
+#### 3、相关属性介绍
 
-| 属性                      | 类型                                          | 概述                |
-|-------------------------|---------------------------------------------|-------------------|
-| items                   | Array\<Object\>                             | 数据源               |
-| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局             |
-| controller              | RefreshController                           | 控制器，关闭下拉和上拉       |
-| onRefresh               | 回调                                          | 刷新回调              |
-| onLoadMore              | 回调                                          | 上拉加载              |
-| gridAttribute           | GridAttr                                    | GridView相关属性      |
-| gridItemAttribute       | GridItemAttr                                | GridView的Item相关属性 |
-| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载    |
-| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1     |
-| onLazyDataSource        | 回调                                          | 懒加载数据回调           |
-| itemHeaderLayout        | @BuilderParam                               | 传递的头组件            |
-| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件          |
-| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件          |
-| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性          |
-| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性          |
+| 属性                      | 类型                                          | 概述                                               |
+|-------------------------|---------------------------------------------|--------------------------------------------------|
+| items                   | Array\<Object\>                             | 数据源                                              |
+| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局                                            |
+| controller              | RefreshController                           | 控制器，关闭下拉和上拉                                      |
+| onRefresh               | 回调                                          | 刷新回调                                             |
+| onLoadMore              | 回调                                          | 上拉加载                                             |
+| gridAttribute           | GridAttr                                    | GridView相关属性                                     |
+| gridItemAttribute       | GridItemAttr                                | GridView的Item相关属性                                |
+| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载                                   |
+| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1                                    |
+| onLazyDataSource        | 回调                                          | 懒加载数据回调                                          |
+| itemHeaderLayout        | @BuilderParam                               | 传递的头组件                                           |
+| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件                                         |
+| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件                                         |
+| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性                                         |
+| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性                                         |
+| enableRefresh           | boolean                                     | 是否禁止刷新,也可以通过onRefresh进行控制，onRefresh有代表需要刷新       |
+| enableLoadMore          | boolean                                     | 是否禁止上拉加载，也可以通过onLoadMore进行控制，onLoadMore有代表需要上拉加载 |
+
+##### RefreshDataSource
+
+数据懒加载操作对象，当使用数据懒加载时，必须通过此对象进行操作数据，否则无法生效！
+
+懒加载数据的增删改查，必须实现属性：onLazyDataSource
+
+```typescript
+onLazyDataSource: (dataSource: RefreshDataSource) => {
+          this.dataSource = dataSource
+        }
+```
+
+**相关属性介绍**
+
+| 方法            | 类型                            | 概述              |
+|---------------|-------------------------------|-----------------|
+| reloadData    | 无参                            | 重置所有子组件的index索引 |
+| addData       | (index: number, data: Object) | 添加数据            |
+| pushData      | (data: Object)                | 追加数据            |
+| pushDataArray | (data: Array\<Object\>)       | 追加数组数据          |
+| deleteData    | (index: number)               | 删除数据            |
+| moveData      | (from: number, to: number)    | 交换数据            |
+| changeData    | (index: number, data: Object) | 改变单个数据          |
+| modifyAllData | 无参                            | 改变多个数据          |
+
 
 ##### GridAttr
 
@@ -295,50 +480,134 @@ GridView({
   CHARACTERS //文字 年月日 2024年04月08日 08时08分08秒
 ```
 
-### StaggeredGridView
+### StaggeredGridView【瀑布流】
+
+#### 1、懒加载数据使用（LazyForEach）
+
+默认情况下既是，目的是进行组件销毁回收以降低内存占用，提高性能，当然了也是推荐使用，相对于普通使用，需要使用RefreshDataSource进行数据的增删改查！
+
+```typescript
+
+@State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
+@State dataSource: RefreshDataSource = new RefreshDataSource()//数据懒加载操作对象，执行数据增删改查
+
+StaggeredGridView({
+  items: this.array, //数据源 数组,任意类型
+  itemLayout: (item, index) => this.itemLayout(item, index), //条目布局
+  controller: this.controller, //控制器，负责关闭下拉和上拉
+  onLazyDataSource: (dataSource: RefreshDataSource) => {
+    this.dataSource = dataSource
+  },
+  onRefresh: () => {
+    //下拉刷新
+    //数据懒加载使用：1、数组数据添加，this.dataSource.pushDataArray()，2、单个数据添加，this.dataSource.pushData()
+    this.controller.finishRefresh() //关闭下拉刷新，在数据请求回后进行关闭
+  },
+  onLoadMore: () => {
+    //上拉加载
+    //数据懒加载使用：1、数组数据添加，this.dataSource.pushDataArray()，2、单个数据添加，this.dataSource.pushData()
+    this.controller.finishLoadMore() //关闭上拉加载,在数据请求回后进行关闭
+  }
+})
+/**
+ * Author:AbnerMing
+ * Describe:条目布局
+ * @param item  数据对象
+ * @param index  数据索引
+ */
+@Builder
+itemLayout(item: Object, index: number): void {
+  //条目视图，任意组件
+}
+```
+
+#### 2、普通使用（ForEach）
+
+普通使用正常的数据加载即可，只需关注数据源。
 
 ```typescript
 
 @State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
 
 StaggeredGridView({
-  items: this.array, //数据源
-  itemLayout: (item: Object, index: number) => this.itemLayout(item, index), //条目布局
-  controller: this.controller, //控制器，负责关闭下拉和上拉
-  onRefresh: () => {
-    //下拉刷新
-    this.controller.finishRefresh()
-  },
-  onLoadMore: () => {
-    //上拉加载
-    this.controller.finishLoadMore()
-  }
-})
+        items: this.array, //数据源 数组,任意类型
+        itemLayout: (item, index) => this.itemLayout(item, index),
+        controller: this.controller, //控制器，负责关闭下拉和上拉
+        isLazyData: false,//禁止懒加载，也就是使用ForEach进行数据加载
+        onRefresh: () => {
+          //下拉刷新
+          this.controller.finishRefresh();
+        },
+        onLoadMore: () => {
+          //上拉加载
+          this.controller.finishLoadMore();
+        }
+      })
+
+/**
+ * Author:AbnerMing
+ * Describe:条目布局
+ * @param item  数据对象
+ * @param index  数据索引
+ */
+@Builder
+itemLayout(item: Object, index: number): void {
+  //条目视图，任意组件
+}
 ```
 
-#### 相关属性介绍
+#### 3、相关属性介绍
 
-| 属性                      | 类型                                          | 概述             |
-|-------------------------|---------------------------------------------|----------------|
-| columnsTemplate         | string                                      | 展示几列，默认是两列     |
-| columnsGap              | Length                                      | 列与列的间距，默认为0    |
-| rowsGap                 | Length                                      | 行与行的间距         |
-| bgColor                 | ResourceColor                               | 整体的背景          |
-| sWidth                  | Length                                      | 宽度             |
-| sHeight                 | Length                                      | 高度             |
-| items                   | Array\<Object\>                             | 数据源            |
-| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局          |
-| controller              | RefreshController                           | 控制器，关闭下拉和上拉    |
-| onRefresh               | 回调                                          | 刷新回调           |
-| onLoadMore              | 回调                                          | 上拉加载           |
-| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载 |
-| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1  |
-| onLazyDataSource        | 回调                                          | 懒加载数据回调        |
-| itemHeaderLayout        | @BuilderParam                               | 传递的头组件         |
-| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件       |
-| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件       |
-| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性       |
-| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性       |
+| 属性                      | 类型                                          | 概述                                                |
+|-------------------------|---------------------------------------------|---------------------------------------------------|
+| columnsTemplate         | string                                      | 展示几列，默认是两列                                        |
+| columnsGap              | Length                                      | 列与列的间距，默认为0                                       |
+| rowsGap                 | Length                                      | 行与行的间距                                            |
+| bgColor                 | ResourceColor                               | 整体的背景                                             |
+| sWidth                  | Length                                      | 宽度                                                |
+| sHeight                 | Length                                      | 高度                                                |
+| items                   | Array\<Object\>                             | 数据源                                               |
+| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局                                             |
+| controller              | RefreshController                           | 控制器，关闭下拉和上拉                                       |
+| onRefresh               | 回调                                          | 刷新回调                                              |
+| onLoadMore              | 回调                                          | 上拉加载                                              |
+| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载                                    |
+| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1                                     |
+| onLazyDataSource        | 回调                                          | 懒加载数据回调                                           |
+| itemHeaderLayout        | @BuilderParam                               | 传递的头组件                                            |
+| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件                                          |
+| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件                                          |
+| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性                                          |
+| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性                                          |
+| enableRefresh           | boolean                                     | 是否禁止刷新,也可以通过onRefresh进行控制，onRefresh有代表需要刷新        |
+| enableLoadMore          | boolean                                     | 是否禁止上拉加载，也可以通过onLoadMore进行控制，onLoadMore有代表需要上拉加载  |
+
+
+##### RefreshDataSource
+
+数据懒加载操作对象，当使用数据懒加载时，必须通过此对象进行操作数据，否则无法生效！
+
+懒加载数据的增删改查，必须实现属性：onLazyDataSource
+
+```typescript
+onLazyDataSource: (dataSource: RefreshDataSource) => {
+          this.dataSource = dataSource
+        }
+```
+
+**相关属性介绍**
+
+| 方法            | 类型                            | 概述              |
+|---------------|-------------------------------|-----------------|
+| reloadData    | 无参                            | 重置所有子组件的index索引 |
+| addData       | (index: number, data: Object) | 添加数据            |
+| pushData      | (data: Object)                | 追加数据            |
+| pushDataArray | (data: Array\<Object\>)       | 追加数组数据          |
+| deleteData    | (index: number)               | 删除数据            |
+| moveData      | (from: number, to: number)    | 交换数据            |
+| changeData    | (index: number, data: Object) | 改变单个数据          |
+| modifyAllData | 无参                            | 改变多个数据          |
+
 
 ##### RefreshHeaderAttr
 

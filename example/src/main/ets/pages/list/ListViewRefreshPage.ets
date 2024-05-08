@@ -26,7 +26,7 @@ struct ListViewRefreshPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: number, index: number): void {
+  itemLayout(_: number, index: number): void {
     Text("测试数据" + index)
       .width("95%")
       .height(50)

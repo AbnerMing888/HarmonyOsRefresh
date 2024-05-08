@@ -38,10 +38,11 @@ struct GridViewHeaderPage {
   @Builder
   itemHeaderLayout(): void {
     Column() {
-
+      Text("我是头View")
     }.height(100)
     .width("100%")
     .backgroundColor(Color.Pink)
+    .justifyContent(FlexAlign.Center)
   }
 
   build() {
