@@ -39,9 +39,9 @@ struct ListViewRefreshPage {
     Column() {
       ActionBar({ title: "下拉刷新列表ListView" })
       ListView({
-        items: this.array, //数据源 数组
-        itemLayout: (item, index) => {
-          this.itemLayout(item as number, index)
+        items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
+        itemLayout: (item:Object, index:number) => {
+          this.itemLayout(item as number, index)//转成你需要的对象
         },
         controller: this.controller, //控制器，负责关闭下拉和上拉
         onRefresh: () => {

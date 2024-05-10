@@ -40,9 +40,10 @@ struct SlideMenuListViewPage {
       ActionBar({ title: "侧滑右侧展示按钮" })
       ListView({
         items: this.array, //数据源 数组
-        itemLayout: (item, index) => this.itemLayout(item, index),
-        slideRightMenuLayout: this.slideRightMenuLayout,
+        itemLayout: (item, index) => this.itemLayout(item, index),//条目视图
+        slideRightMenuLayout: this.slideRightMenuLayout,//侧滑视图
         slideMenuAttr: (attr) => {
+          //设置侧滑属性
           attr.rightMenuWidth = 100
         },
         onLazyDataSource: (dataSource: RefreshDataSource) => {

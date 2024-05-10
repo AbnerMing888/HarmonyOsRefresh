@@ -22,7 +22,6 @@ export default class ExampleAbility extends UIAbility {
 
       let windowClass: window.Window = windowStage.getMainWindowSync(); // 获取应用主窗口
 
-
       let sysBarProps: window.SystemBarProperties = {
         statusBarColor: '#ff0000',
         navigationBarColor: '#ff0000',
@@ -30,6 +29,13 @@ export default class ExampleAbility extends UIAbility {
         statusBarContentColor: '#ffffff',
         navigationBarContentColor: '#ffffff'
       };
+
+      let area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
+      let statusBarHeight = area.topRect.height
+
+      console.log("============" + JSON.stringify(area))
+
+
       windowClass.setWindowSystemBarProperties(sysBarProps, (err: BusinessError) => {
         let errCode: number = err.code;
         if (errCode) {

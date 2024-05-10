@@ -1,6 +1,6 @@
 import router from '@ohos.router'
 import { ActionBar } from './ActionBar'
-import { ListView, RefreshController } from '@abner/refresh'
+import { GridView, RefreshController } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
@@ -16,7 +16,7 @@ struct Index {
     "普通的列表ListView", "下拉刷新列表ListView", "刷新加载列表ListView", "带有头的ListView",
     "普通的列表GridView", "下拉刷新列表GridView", "刷新加载列表GridView", "带有头的GridView",
     "普通的瀑布流列表", "带有头的瀑布流列表",
-    "任意组件", "侧滑展示按钮"
+    "任意组件", "侧滑展示按钮", "下滑进入二楼"
   ]
   private routerPaths: Array<string> = [
     "pages/list/ListViewPage",
@@ -30,7 +30,8 @@ struct Index {
     "pages/staggered/StaggeredPage",
     "pages/staggered/StaggeredHeadPage",
     "pages/layout/LayoutViewPage",
-    "pages/list/SlideMenuListViewPage"
+    "pages/list/SlideMenuListViewPage",
+    "pages/floor/SecondFloorPage"
   ]
 
   /**
@@ -44,7 +45,7 @@ struct Index {
     Text(item.toString())
       .width("95%")
       .height(50)
-      .margin(10)
+      .margin({ left: "2.5%", top: 10 })
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
       .onClick(() => {
@@ -56,7 +57,7 @@ struct Index {
     Column() {
       ActionBar({ title: "首页", hiddenBack: true })
 
-      ListView({
+      GridView({
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉

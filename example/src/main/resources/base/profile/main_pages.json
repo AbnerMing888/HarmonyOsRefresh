@@ -12,6 +12,7 @@
     "pages/layout/LayoutViewPage",
     "pages/staggered/StaggeredPage",
     "pages/staggered/StaggeredHeadPage",
-    "pages/list/SlideMenuListViewPage"
+    "pages/list/SlideMenuListViewPage",
+    "pages/floor/SecondFloorPage"
   ]
 }

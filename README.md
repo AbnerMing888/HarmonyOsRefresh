@@ -2,7 +2,7 @@
 
 基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新。
 
-截至2024年5月8日，功能点如下
+截至2024年5月10日，功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
@@ -10,13 +10,14 @@
 - 4、**支持自定义刷新头和加载尾**
 - 5、**支持列表(ListView/GridView/StaggeredGridView)添加头组件**
 - 6、**支持列表(ListView)右侧侧滑展示按钮**
+- 7、**支持下滑进入二楼/半楼功能（仿京东或淘宝）**
 
 ## 效果
 
 ### 所有功能
 
 <p align="center">
-<img src="images/refresh_243_01.jpeg" width="300px" />
+<img src="images/refresh_all.png" width="300px" />
 </p>
 
 ### 刷新效果
@@ -30,22 +31,23 @@
 ### 列表自定义头部效果
 
 <p align="center">
-<img src="images/refresh_243_08.png" width="300px" />
-<img src="images/refresh_243_09.png" width="300px" />
-<img src="images/refresh_243_10.png" width="300px" />
+<img src="images/refresh_243_08.png" width="200px" />
+<img src="images/refresh_243_09.png" width="200px" />
+<img src="images/refresh_243_10.png" width="200px" />
 </p>
 
 ### 列表侧滑展示按钮效果
 
 <p align="center">
-<img src="images/refresh_243_07.png" width="300px" />
+<img src="images/refresh_243_07.png" width="200px" />
 </p>
 
 **动态效果：**
 
 <p align="center">
-<img src="images/refresh.gif" width="300px" />
-<img src="images/refresh_243_06.gif" width="300px" />
+<img src="images/refresh.gif" width="200px" />
+<img src="images/refresh_243_06.gif" width="200px" />
+<img src="images/refresh_sf.gif" width="200px" />
 </p>
 
 
@@ -73,14 +75,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.0.4"}
+"dependencies": { "@abner/refresh": "^1.0.6"}
 ```
 
 <p align="center"><img src="images/harmonyos_refresh_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.4.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.6.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="images/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -102,7 +104,7 @@ ohpm install @abner/refresh
 需要注意，目前ListView、GridView、StaggeredGridView是自带刷新的，当然了您也可以当作普通的列表进行使用。
 还有一点需要注意，目前默认情况下是**懒加载数据模式**。
 
-### ListView
+### 1、ListView
 
 #### 1、懒加载数据使用（LazyForEach）
 
@@ -253,18 +255,26 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
 
 ##### RefreshHeaderAttr
 
-| 属性             | 类型                         | 概述              |
-|----------------|----------------------------|-----------------|
-| width          | Length                     | 刷新控件的宽度         |
-| height         | Length                     | 刷新头的高度 默认高度 80  |
-| timeFormat     | RefreshHeaderTimeFormat    | 刷新头的时间格式,默认月日时分 |
-| timeLabel      | RefreshHeaderTimeLabel     | 刷新头的标签格式        |
-| hideTime       | boolean                    | 是否隐藏刷新头时间，默认展示  |
-| fontSize       | number / string / Resource | 刷新头的文字大小        |
-| fontColor      | ResourceColor              | 刷新头的文字颜色        |
-| timeFontSize   | number / string / Resource | 刷新头的时间文字大小      |
-| timeFontColor  | ResourceColor              | 刷新头的时间文字颜色      |
-| marginIconLeft | Length                     | 刷新文字距离左边的距离     |
+默认的刷新头属性
+
+| 属性             | 类型                                        | 概述              |
+|----------------|-------------------------------------------|-----------------|
+| width          | Length                                    | 刷新控件的宽度         |
+| height         | Length                                    | 刷新头的高度 默认高度 80  |
+| timeFormat     | RefreshHeaderTimeFormat                   | 刷新头的时间格式,默认月日时分 |
+| timeLabel      | RefreshHeaderTimeLabel                    | 刷新头的标签格式        |
+| hideTime       | boolean                                   | 是否隐藏刷新头时间，默认展示  |
+| fontSize       | number / string / Resource                | 刷新头的文字大小        |
+| fontColor      | ResourceColor                             | 刷新头的文字颜色        |
+| timeFontSize   | number / string / Resource                | 刷新头的时间文字大小      |
+| timeFontColor  | ResourceColor                             | 刷新头的时间文字颜色      |
+| marginIconLeft | Length                                    | 刷新文字距离左边的距离     |
+| iconDown       | PixelMap/ResourceStr/DrawableDescriptor   | 刷新的下拉箭头         |
+| iconUpLoad     | PixelMap / ResourceStr/DrawableDescriptor | 下拉刷新icon        |
+| pullingText    | string /Resource                          | 下拉可以刷新文本        |
+| releaseText    | string /Resource                          | 释放立即刷新文本        |
+| refreshingText | string /Resource                          | 正在刷新中文本         |
+| finishText     | string /Resource                          | 刷新结束文本          |
 
 ##### LoadMoreFooterAttr
 
@@ -290,7 +300,7 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
   CHARACTERS //文字 年月日 2024年04月08日 08时08分08秒
 ```
 
-### GridView【网格】
+### 2、GridView【网格】
 
 #### 1、懒加载数据使用（LazyForEach）
 
@@ -421,8 +431,8 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
 | width           | Length                  | 宽度                                  |
 | height          | Length                  | 高度                                  |
 | backgroundColor | ResourceColor           | 背景颜色，默认透明                           |
-| columnsTemplate | string                  | 设置当前网格布局列的数量，不设置时默认2列               |
-| rowsTemplate    | string                  | 设置当前网格布局行的数量，不设置时默认1行。              |
+| columnsTemplate | string                  | 设置当前网格布局列的数量，不设置时默认2列，例如：1fr 1fr    |
+| rowsTemplate    | string                  | 设置当前网格布局行的数量，不设置时默认1行，例如：1fr 1fr    |
 | columnsGap      | Length                  | 设置列与列的间距。默认值：0                      |
 | rowsGap         | Length                  | 设置行与行的间距。默认值：0                      |
 | scrollBar       | BarState                | 设置滚动条状态。默认值：BarState.Off            |
@@ -443,20 +453,30 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
 
 ##### RefreshHeaderAttr
 
-| 属性             | 类型                         | 概述              |
-|----------------|----------------------------|-----------------|
-| width          | Length                     | 刷新控件的宽度         |
-| height         | Length                     | 刷新头的高度 默认高度 80  |
-| timeFormat     | RefreshHeaderTimeFormat    | 刷新头的时间格式,默认月日时分 |
-| timeLabel      | RefreshHeaderTimeLabel     | 刷新头的标签格式        |
-| hideTime       | boolean                    | 是否隐藏刷新头时间，默认展示  |
-| fontSize       | number / string / Resource | 刷新头的文字大小        |
-| fontColor      | ResourceColor              | 刷新头的文字颜色        |
-| timeFontSize   | number / string / Resource | 刷新头的时间文字大小      |
-| timeFontColor  | ResourceColor              | 刷新头的时间文字颜色      |
-| marginIconLeft | Length                     | 刷新文字距离左边的距离     |
+默认的刷新头属性
+
+| 属性             | 类型                                        | 概述              |
+|----------------|-------------------------------------------|-----------------|
+| width          | Length                                    | 刷新控件的宽度         |
+| height         | Length                                    | 刷新头的高度 默认高度 80  |
+| timeFormat     | RefreshHeaderTimeFormat                   | 刷新头的时间格式,默认月日时分 |
+| timeLabel      | RefreshHeaderTimeLabel                    | 刷新头的标签格式        |
+| hideTime       | boolean                                   | 是否隐藏刷新头时间，默认展示  |
+| fontSize       | number / string / Resource                | 刷新头的文字大小        |
+| fontColor      | ResourceColor                             | 刷新头的文字颜色        |
+| timeFontSize   | number / string / Resource                | 刷新头的时间文字大小      |
+| timeFontColor  | ResourceColor                             | 刷新头的时间文字颜色      |
+| marginIconLeft | Length                                    | 刷新文字距离左边的距离     |
+| iconDown       | PixelMap/ResourceStr/DrawableDescriptor   | 刷新的下拉箭头         |
+| iconUpLoad     | PixelMap / ResourceStr/DrawableDescriptor | 下拉刷新icon        |
+| pullingText    | string /Resource                          | 下拉可以刷新文本        |
+| releaseText    | string /Resource                          | 释放立即刷新文本        |
+| refreshingText | string /Resource                          | 正在刷新中文本         |
+| finishText     | string /Resource                          | 刷新结束文本          |
 
 ##### LoadMoreFooterAttr
+
+默认的加载尾属性
 
 | 属性     | 类型     | 概述    |
 |--------|--------|-------|
@@ -480,7 +500,7 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
   CHARACTERS //文字 年月日 2024年04月08日 08时08分08秒
 ```
 
-### StaggeredGridView【瀑布流】
+### 3、StaggeredGridView【瀑布流】
 
 #### 1、懒加载数据使用（LazyForEach）
 
@@ -558,29 +578,29 @@ itemLayout(item: Object, index: number): void {
 
 #### 3、相关属性介绍
 
-| 属性                      | 类型                                          | 概述                                                |
-|-------------------------|---------------------------------------------|---------------------------------------------------|
-| columnsTemplate         | string                                      | 展示几列，默认是两列                                        |
-| columnsGap              | Length                                      | 列与列的间距，默认为0                                       |
-| rowsGap                 | Length                                      | 行与行的间距                                            |
-| bgColor                 | ResourceColor                               | 整体的背景                                             |
-| sWidth                  | Length                                      | 宽度                                                |
-| sHeight                 | Length                                      | 高度                                                |
-| items                   | Array\<Object\>                             | 数据源                                               |
-| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局                                             |
-| controller              | RefreshController                           | 控制器，关闭下拉和上拉                                       |
-| onRefresh               | 回调                                          | 刷新回调                                              |
-| onLoadMore              | 回调                                          | 上拉加载                                              |
-| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载                                    |
-| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1                                     |
-| onLazyDataSource        | 回调                                          | 懒加载数据回调                                           |
-| itemHeaderLayout        | @BuilderParam                               | 传递的头组件                                            |
-| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件                                          |
-| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件                                          |
-| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性                                          |
-| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性                                          |
-| enableRefresh           | boolean                                     | 是否禁止刷新,也可以通过onRefresh进行控制，onRefresh有代表需要刷新        |
-| enableLoadMore          | boolean                                     | 是否禁止上拉加载，也可以通过onLoadMore进行控制，onLoadMore有代表需要上拉加载  |
+| 属性                      | 类型                                          | 概述                                               |
+|-------------------------|---------------------------------------------|--------------------------------------------------|
+| columnsTemplate         | string                                      | 展示几列，默认是两列，例如：1fr 1fr                            |
+| columnsGap              | Length                                      | 列与列的间距，默认为0                                      |
+| rowsGap                 | Length                                      | 行与行的间距                                           |
+| bgColor                 | ResourceColor                               | 整体的背景                                            |
+| sWidth                  | Length                                      | 宽度                                               |
+| sHeight                 | Length                                      | 高度                                               |
+| items                   | Array\<Object\>                             | 数据源                                              |
+| itemLayout              | @BuilderParam (item: Object, index: number) | 传递的布局                                            |
+| controller              | RefreshController                           | 控制器，关闭下拉和上拉                                      |
+| onRefresh               | 回调                                          | 刷新回调                                             |
+| onLoadMore              | 回调                                          | 上拉加载                                             |
+| isLazyData              | boolean                                     | 是否使用懒加载，默认是懒加载                                   |
+| lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1                                    |
+| onLazyDataSource        | 回调                                          | 懒加载数据回调                                          |
+| itemHeaderLayout        | @BuilderParam                               | 传递的头组件                                           |
+| headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件                                         |
+| footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件                                         |
+| refreshHeaderAttribute  | (attribute: RefreshHeaderAttr)              | 默认的刷新头属性                                         |
+| loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性                                         |
+| enableRefresh           | boolean                                     | 是否禁止刷新,也可以通过onRefresh进行控制，onRefresh有代表需要刷新       |
+| enableLoadMore          | boolean                                     | 是否禁止上拉加载，也可以通过onLoadMore进行控制，onLoadMore有代表需要上拉加载 |
 
 
 ##### RefreshDataSource
@@ -611,20 +631,30 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
 
 ##### RefreshHeaderAttr
 
-| 属性             | 类型                         | 概述              |
-|----------------|----------------------------|-----------------|
-| width          | Length                     | 刷新控件的宽度         |
-| height         | Length                     | 刷新头的高度 默认高度 80  |
-| timeFormat     | RefreshHeaderTimeFormat    | 刷新头的时间格式,默认月日时分 |
-| timeLabel      | RefreshHeaderTimeLabel     | 刷新头的标签格式        |
-| hideTime       | boolean                    | 是否隐藏刷新头时间，默认展示  |
-| fontSize       | number / string / Resource | 刷新头的文字大小        |
-| fontColor      | ResourceColor              | 刷新头的文字颜色        |
-| timeFontSize   | number / string / Resource | 刷新头的时间文字大小      |
-| timeFontColor  | ResourceColor              | 刷新头的时间文字颜色      |
-| marginIconLeft | Length                     | 刷新文字距离左边的距离     |
+默认的刷新头属性
+
+| 属性             | 类型                                        | 概述              |
+|----------------|-------------------------------------------|-----------------|
+| width          | Length                                    | 刷新控件的宽度         |
+| height         | Length                                    | 刷新头的高度 默认高度 80  |
+| timeFormat     | RefreshHeaderTimeFormat                   | 刷新头的时间格式,默认月日时分 |
+| timeLabel      | RefreshHeaderTimeLabel                    | 刷新头的标签格式        |
+| hideTime       | boolean                                   | 是否隐藏刷新头时间，默认展示  |
+| fontSize       | number / string / Resource                | 刷新头的文字大小        |
+| fontColor      | ResourceColor                             | 刷新头的文字颜色        |
+| timeFontSize   | number / string / Resource                | 刷新头的时间文字大小      |
+| timeFontColor  | ResourceColor                             | 刷新头的时间文字颜色      |
+| marginIconLeft | Length                                    | 刷新文字距离左边的距离     |
+| iconDown       | PixelMap/ResourceStr/DrawableDescriptor   | 刷新的下拉箭头         |
+| iconUpLoad     | PixelMap / ResourceStr/DrawableDescriptor | 下拉刷新icon        |
+| pullingText    | string /Resource                          | 下拉可以刷新文本        |
+| releaseText    | string /Resource                          | 释放立即刷新文本        |
+| refreshingText | string /Resource                          | 正在刷新中文本         |
+| finishText     | string /Resource                          | 刷新结束文本          |
 
 ##### LoadMoreFooterAttr
+
+默认的加载尾属性
 
 | 属性     | 类型     | 概述    |
 |--------|--------|-------|
@@ -648,7 +678,9 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
   CHARACTERS //文字 年月日 2024年04月08日 08时08分08秒
 ```
 
-#### RefreshLayout
+### 4、RefreshLayout
+
+支持任何组件刷新和加载，前提在遇到滑动组件时，需要自己控制起始位置。
 
 ```typescript
 RefreshLayout({
@@ -664,24 +696,109 @@ RefreshLayout({
 )
 ```
 
+### 5、侧滑展示按钮
 
-#### 更多案例
+```typescript
+ListView({
+        items: this.array, //数据源 数组
+        itemLayout: (item, index) => this.itemLayout(item, index),//条目视图
+        slideRightMenuLayout: this.slideRightMenuLayout,//侧滑视图
+        slideMenuAttr: (attr) => {
+          //设置侧滑属性
+          attr.rightMenuWidth = 100
+        },
+        onLazyDataSource: (dataSource: RefreshDataSource) => {
+          //懒加载数据操作对象，用于执行数据的增删改查
+          this.dataSource = dataSource
+        }
+      })
+```
+
+### 6、下滑二楼功能
+
+完整功能请查看Demo中的SecondFloorPage文件。
+
+```typescript
+SecondFloorLayout({
+        firstFloorView: () => { //一楼视图
+          this.firstFloorView(this)
+        },
+        isNeedHalfFloor: false, //是否需要半楼功能
+        secondFloorView: this.secondFloorView, //二楼视图
+        enableScrollInteraction: (isInteraction: boolean) => {
+          //用于解决嵌套的滑动组件冲突
+          this.mScrollInteraction = isInteraction
+        },
+        topFixedView: () => {
+          //顶部固定视图
+          this.topFixedView(this)
+        },
+        sfController: this.sfController, //刷新控制器
+        refreshHeaderAttribute: (attr) => {
+          //刷新头及二楼滑动属性配置
+          attr.fontColor = Color.White
+          attr.timeFontColor = Color.White
+        },
+        onRefresh: () => {
+          //下拉刷新
+          setTimeout(() => {
+            this.sfController.finishRefresh()
+          }, 2000)
+        },
+        onScrollStatus: (status) => {
+          //当前的滑动状态
+
+        }
+      })
+```
+
+#### RefreshLayoutStatus状态
+
+```typescript
+  Pulling, //拖拽  下拉可以刷新
+  Release, //释放立即刷新
+  Refreshing, //正在刷新中
+  Finish, //刷新结束
+  ReleaseHalfFloor, //释放进入半楼
+  HalfFloor, //进入半楼
+  FirstFloor, //一楼
+  ReleaseSecondFloor, //释放进入二楼
+  SecondFloor, //二楼状态
+  SecondFloorSlideUp //二楼向上滑动状态
+```
+
+#### RefreshHeaderAttr属性
+
+默认的刷新头属性
+
+| 属性                      | 类型                                        | 概述              |
+|-------------------------|-------------------------------------------|-----------------|
+| width                   | Length                                    | 刷新控件的宽度         |
+| height                  | Length                                    | 刷新头的高度 默认高度 80  |
+| timeFormat              | RefreshHeaderTimeFormat                   | 刷新头的时间格式,默认月日时分 |
+| timeLabel               | RefreshHeaderTimeLabel                    | 刷新头的标签格式        |
+| hideTime                | boolean                                   | 是否隐藏刷新头时间，默认展示  |
+| fontSize                | number / string / Resource                | 刷新头的文字大小        |
+| fontColor               | ResourceColor                             | 刷新头的文字颜色        |
+| timeFontSize            | number / string / Resource                | 刷新头的时间文字大小      |
+| timeFontColor           | ResourceColor                             | 刷新头的时间文字颜色      |
+| marginIconLeft          | Length                                    | 刷新文字距离左边的距离     |
+| iconDown                | PixelMap/ResourceStr/DrawableDescriptor   | 刷新的下拉箭头         |
+| iconUpLoad              | PixelMap / ResourceStr/DrawableDescriptor | 下拉刷新icon        |
+| pullingText             | string /Resource                          | 下拉可以刷新文本        |
+| releaseText             | string /Resource                          | 释放立即刷新文本        |
+| refreshingText          | string /Resource                          | 正在刷新中文本         |
+| finishText              | string /Resource                          | 刷新结束文本          |
+| releaseHalfFloorText    | string /Resource                          | 释放进入半楼文本        |
+| halfFloorText           | string /Resource                          | 进入半楼文本          |
+| firstFloorText          | string /Resource                          | 一楼文本            |
+| releaseSecondFloorText  | string /Resource                          | 释放进入二楼文本        |
+| secondFloorText         | string /Resource                          | 二楼状态文本          |
+| secondFloorSlideUpText  | string /Resource                          | 二楼向上滑动状态文本      |
+
+## 更多案例
 
 可以查看相关Demo。
-
-运行Demo，如果自身相关开发环境不一致，会运行失败，可更改环境或者直接源码复制至您的项目即可。
-
-#### 常见问题
-
-如果你打算下载源码使用，并且你的开发环境比较低，会造成，运行工程失败问题，常见错误如下，是因为开发环境不一致造成。
-
-<p align="center"><img src="images/harmonyos_error.png" width="300px" /></p>
-
-**您可以选择解决问题，解决方式如下：**
-
-[解决DevEco Studio低版本导入高版本项目运行失败问题](https://juejin.cn/post/7280746811328692258)
-
-您也可以不运行，直接进行使用，完全没有问题。
 
 ## 关注公众号
 
