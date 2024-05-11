@@ -79,13 +79,13 @@ ohpm install @abner/refresh
 "dependencies": { "@abner/refresh": "^1.0.7"}
 ```
 
-<p align="center"><img src="images/harmonyos_refresh_module.jpg" width="300"></p>
+<p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
 <p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.7.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
-<p><img src="images/harmonyos_refresh_har.jpg"></p>
+<p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
 <p>需要注意，<strong>@abner/refresh</strong>，是用来区分目录的，可以自己定义，比如@aa/bb等，关于静态共享包的创建和使用，请查看如下我的介绍，这里就不过多介绍</p>
 
@@ -95,7 +95,7 @@ ohpm install @abner/refresh
 
 无论使用哪种方式进行依赖，最终都会在使用的模块中，生成一个oh_modules文件，并创建源代码文件，有则成功，无则失败，如下：
 
-<p align="center"><img src="images/harmonyos_refresh_oh.jpg" width="300"></p>
+<p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_refresh_oh.jpg" width="300"></p>
 
 ## 代码使用
 
@@ -949,7 +949,7 @@ this.dataSource.changeData(3, 9999)
 
 ### 开源库使用指导
 
-<p><img src="images/h_github_9.png" width="150px" /></p>
+<p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/h_github_9.png" width="150px" /></p>
 
 **重要信息：一定要在付款时备注您的微信号，我会主动加您！切记！切记！！切记！！！**
 **诚信经营，来自一个北漂的老程序员心声！**
