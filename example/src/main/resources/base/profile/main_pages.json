@@ -13,6 +13,8 @@
     "pages/staggered/StaggeredPage",
     "pages/staggered/StaggeredHeadPage",
     "pages/list/SlideMenuListViewPage",
-    "pages/floor/SecondFloorPage"
+    "pages/floor/SecondFloorPage",
+    "pages/data/DataOperationPage",
+    "pages/data/LazyDataOperationPage"
   ]
 }

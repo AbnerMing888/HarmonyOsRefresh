@@ -47,7 +47,7 @@ struct ListViewHeaderPage {
 
   build() {
     Column() {
-      ActionBar({ title: "下拉上下列表ListView" })
+      ActionBar({ title: "带有头的ListView" })
       ListView({
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),

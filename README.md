@@ -2,7 +2,7 @@
 
 基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新。
 
-截至2024年5月10日，功能点如下
+截至2024年5月11日，功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
@@ -11,43 +11,44 @@
 - 5、**支持列表(ListView/GridView/StaggeredGridView)添加头组件**
 - 6、**支持列表(ListView)右侧侧滑展示按钮**
 - 7、**支持下滑进入二楼/半楼功能（仿京东或淘宝）**
+- 8、**数据操作（增删改查）提供便捷方式，适应更多场景运用**
 
 ## 效果
 
 ### 所有功能
 
 <p align="center">
-<img src="images/refresh_all.png" width="300px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_all.png" width="300px" />
 </p>
 
 ### 刷新效果
 <p align="center">
-<img src="images/refresh_243_02.jpeg" width="200px" />
-<img src="images/refresh_243_03.jpeg" width="200px" />
-<img src="images/refresh_243_04.jpeg" width="200px" />
-<img src="images/refresh_243_05.jpeg" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_02.jpeg" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_03.jpeg" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_04.jpeg" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_05.jpeg" width="200px" />
 </p>
 
 ### 列表自定义头部效果
 
 <p align="center">
-<img src="images/refresh_243_08.png" width="200px" />
-<img src="images/refresh_243_09.png" width="200px" />
-<img src="images/refresh_243_10.png" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_08.png" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_09.png" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_10.png" width="200px" />
 </p>
 
 ### 列表侧滑展示按钮效果
 
 <p align="center">
-<img src="images/refresh_243_07.png" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_07.png" width="200px" />
 </p>
 
 **动态效果：**
 
 <p align="center">
-<img src="images/refresh.gif" width="200px" />
-<img src="images/refresh_243_06.gif" width="200px" />
-<img src="images/refresh_sf.gif" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_01.gif" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_06.gif" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_sf.gif" width="200px" />
 </p>
 
 
@@ -75,14 +76,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.0.6"}
+"dependencies": { "@abner/refresh": "^1.0.7"}
 ```
 
 <p align="center"><img src="images/harmonyos_refresh_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.6.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.7.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="images/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -796,6 +797,138 @@ SecondFloorLayout({
 | secondFloorText         | string /Resource                          | 二楼状态文本          |
 | secondFloorSlideUpText  | string /Resource                          | 二楼向上滑动状态文本      |
 
+### 7、列表数据操作（增删改查）
+
+【Demo案例可直接查看LazyDataOperationPage和DataOperationPage两个页面】
+
+无论是懒加载数据方式还是普通列表加载方式，均提供了数据之间的操作，普通数据直接可以针对传递的数组进行操作，需要自己拿到
+数组，直接对数组更改即可，懒加载方式需要获取RefreshDataSource，进行数据操作。
+
+新的语言，对于一些小伙伴而言，在系统Api数据操作上可能略有阻碍，为了更好，更便捷的让大家使用，自1.0.7版本之后，对懒加载数据和普通数据做了优化和拓展。
+
+大家只关注两个类即可，普通数据列表使用DataController，懒加载数据列表继续使用RefreshDataSource。
+
+#### 普通数据列表操作
+
+定义DataController全局变量，并传入列表之中（ListView/GridView/StaggeredGridView）。
+
+
+```typescripty
+
+dataController: DataController = new DataController() //数据控制器
+
+ ListView({
+        items: this.array, //数据源 数组
+        dataController: this.dataController,
+        isLazyData: false, //标记为普通加载，也就是使用ForEach
+        itemLayout: (item, index) => this.itemLayout(item, index)
+      })
+      
+```
+
+相关方法如下：
+
+```typescript
+ //增加一个数据
+ this.dataController.add(100)
+//指定位置增加一个数据
+this.dataController.addPosition(2, 999)
+//数组添加
+ this.dataController.addArray([200, 300, 400])
+ //可变参数形式添加
+this.dataController.addVariable(600, 700)
+//删除第一个
+this.dataController.deleteFirst()
+//删除最后一个
+this.dataController.deleteLast()
+//删除指定一个
+this.dataController.deleteData(2)
+//删除全部
+this.dataController.deleteAll()
+//修改某一条数据
+this.dataController.change(6, 1000)
+```
+
+##### DataController方法介绍
+
+
+| 方法          | 参数                               | 概述                    |
+|-------------|----------------------------------|-----------------------|
+| add         | (item: Object )                  | 可传递任意类型，用于添加单条数据      |
+| addPosition | (position: number, item: Object) | 指定位置添加数据              |
+| addVariable | (...items: Object[])             | 添加可变参数数据              |
+| addArray    | items: Object[]                  | 添加数组                  |
+| deleteFirst | 无参                               | 删除第一条数据               |
+| deleteLast  | 无参                               | 删除最后一条数据              |
+| deleteData  | (position: number)               | 删除一条数据                |
+| deleteAll   | 无参                               | 删除全部数据                |
+| changeData  | (position: number, item: Object) | 修改数据                  |
+| getDataAll  | 无参                               | 返回所有的数据 （返回值Object[]） |
+| getData     | (index: number)                  | 返回某一条数据               |
+| totalCount  | 无参                               | 返回数据数量（返回值number      |
+
+
+#### 懒加载数据列表操作
+
+定义RefreshDataSource全局变量，并传入列表之中（ListView/GridView/StaggeredGridView）。
+
+
+```typescript
+@State dataSource: RefreshDataSource = new RefreshDataSource() //数据懒加载操作对象，执行数据增删改查
+
+ListView({
+  items: this.array, //数据源 数组
+  itemLayout: (item, index) => this.itemLayout(item, index),
+  onLazyDataSource: (dataSource: RefreshDataSource) => {
+    //必须实现此属性，用RefreshDataSource进行数据的操作
+    this.dataSource = dataSource
+  }
+})
+
+```
+
+相关方法如下：
+
+```typescript
+//增加一个
+this.dataSource.pushData(100)
+//指定位置增加一个
+this.dataSource.pushDataPosition(2, 200)
+//数组添加
+this.dataSource.pushDataArray([300, 301, 302])
+ //可变参数形式添加
+this.dataSource.pushDataVariable(400, 401, 402)
+ //删除第一个
+this.dataSource.deleteFirst()
+ //删除最后一个
+this.dataSource.deleteLast()
+//删除指定一个
+this.dataSource.deleteData(2)
+ //删除全部
+this.dataSource.deleteAll()
+//修改数据
+this.dataSource.changeData(3, 9999)
+```
+
+##### RefreshDataSource方法介绍
+
+
+| 方法               | 参数                               | 概述                    |
+|------------------|----------------------------------|-----------------------|
+| pushData         | (item: Object )                  | 可传递任意类型，用于添加单条数据      |
+| pushDataPosition | (position: number, item: Object) | 指定位置添加数据              |
+| pushDataVariable | (...items: Object[])             | 添加可变参数数据              |
+| pushDataArray    | items: Object[]                  | 添加数组                  |
+| deleteFirst      | 无参                               | 删除第一条数据               |
+| deleteLast       | 无参                               | 删除最后一条数据              |
+| deleteData       | (position: number)               | 删除一条数据                |
+| deleteAll        | 无参                               | 删除全部数据                |
+| changeData       | (position: number, item: Object) | 修改数据                  |
+| getDataAll       | 无参                               | 返回所有的数据 （返回值Object[]） |
+| getData          | (index: number)                  | 返回某一条数据               |
+| totalCount       | 无参                               | 返回数据数量（返回值number      |
+
+
 ## 更多案例
 
 可以查看相关Demo。
@@ -804,7 +937,8 @@ SecondFloorLayout({
 
 鸿蒙先驱者，只分享精华的鸿蒙或者移动端技术文章，可扫码关注
 
-<p><img src="images/abner.jpg" width="150px" /></p>
+<p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/abner.jpg" width="150px" /></p>
+
 
 [鸿蒙精华技术文章列表](https://juejin.cn/column/7269566781248389178)
 
@@ -813,19 +947,21 @@ SecondFloorLayout({
 每个人的时间都是宝贵的，做为开发者的我，已经做到了技术上的免费开源，但仍然有很多问题无法做到及时处理。 
 也考虑到，鸿蒙是一个新的系统，大家在使用上会遇到各种各样的问题，也为了能够及时的解决及回复问题，大家可以付费进行一对一指导。
 
-<p><img src="images/harmony_vip.png" width="150px" /></p>
+### 开源库使用指导
 
-**重要信息：一定要在备注您的微信号，我会主动加您！切记！切记！！切记！！！**
+<p><img src="images/h_github_9.png" width="150px" /></p>
+
+**重要信息：一定要在付款时备注您的微信号，我会主动加您！切记！切记！！切记！！！**
+**诚信经营，来自一个北漂的老程序员心声！**
 
 **一杯饮料的钱，您可以获取权益如下**
 
 - 1、针对刷新库使用1对1辅导使用，并跟踪相关问题排查。
 - 2、针对我的所有鸿蒙开源库，1对1辅导使用，并跟踪相关问题排查。
-- 3、根据时间安排，您的任何鸿蒙项目所遇到的问题，进行协助排查解决。
-- 4、未来鸿蒙开源库，先遣体验。
-- 5、未来鸿蒙脚手架，首批次体验使用。
+- 3、涉及到我的开源库，您提的业务需求，率先第一时间满足，并及时针对性开发。
+- 4、未来我的鸿蒙开源库，可先遣体验。
+- 5、鸿蒙脚手架，正在研发中，可首批次体验使用。
 
-<p>可以通过文字、语音、视频、远程辅助，让您的鸿蒙道路更加顺畅！</p>
 
 ### License
 
