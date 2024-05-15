@@ -2,7 +2,7 @@
 
 基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新。
 
-截至2024年5月11日，功能点如下
+截至2024年5月15日，功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
@@ -12,13 +12,14 @@
 - 6、**支持列表(ListView)右侧侧滑展示按钮**
 - 7、**支持下滑进入二楼/半楼功能（仿京东或淘宝）**
 - 8、**数据操作（增删改查）提供便捷方式，适应更多场景运用**
+- 9、**支持页面刷新加载吸顶效果(ListView/GridView/StaggeredGridView)**
 
 ## 效果
 
 ### 所有功能
 
 <p align="center">
-<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_all.png" width="300px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/root_001.png" width="300px" />
 </p>
 
 ### 刷新效果
@@ -43,12 +44,19 @@
 <img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_07.png" width="200px" />
 </p>
 
+### 吸顶效果
+
+<p align="center">
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/sticky_top.png" width="200px" />
+</p>
+
 **动态效果：**
 
 <p align="center">
 <img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_01.gif" width="200px" />
 <img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_243_06.gif" width="200px" />
 <img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh_sf.gif" width="200px" />
+<img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/sticky_grid.gif" width="200px" />
 </p>
 
 
@@ -935,7 +943,7 @@ this.dataSource.changeData(3, 9999)
 
 ## 关注公众号
 
-鸿蒙先驱者，只分享精华的鸿蒙或者移动端技术文章，可扫码关注
+鸿蒙先驱者，只分享精华的鸿蒙或者移动端技术文章，可微信扫码关注
 
 <p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/abner.jpg" width="150px" /></p>
 
@@ -963,7 +971,8 @@ this.dataSource.changeData(3, 9999)
 - 5、鸿蒙脚手架，正在研发中，可首批次体验使用。
 
 
-### License
+
+## License
 
 ```
 Copyright (C) AbnerMing, HarmonyOsRefresh Open Source Project
