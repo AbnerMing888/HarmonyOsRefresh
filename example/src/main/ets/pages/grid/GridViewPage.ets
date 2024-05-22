@@ -32,6 +32,7 @@ struct GridViewPage {
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
       .margin({ top: 10 })
+
   }
 
   build() {

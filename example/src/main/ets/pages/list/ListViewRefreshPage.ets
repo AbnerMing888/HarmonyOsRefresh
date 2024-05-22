@@ -1,6 +1,5 @@
 import { ActionBar } from '../ActionBar'
 import { ListView, RefreshController } from '@abner/refresh'
-import { RefreshLayoutStatus } from '@abner/refresh/src/main/ets/constants/RefreshLayoutStatus'
 
 /**
  * AUTHOR:AbnerMing

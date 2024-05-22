@@ -109,7 +109,7 @@ struct SecondFloorPage {
         firstFloorView: () => { //一楼视图
           this.firstFloorView(this)
         },
-        isNeedHalfFloor: false, //是否需要半楼功能
+        isNeedHalfFloor: true, //是否需要半楼功能
         secondFloorView: this.secondFloorView, //二楼视图
         enableScrollInteraction: (isInteraction: boolean) => {
           //用于解决嵌套的滑动组件冲突

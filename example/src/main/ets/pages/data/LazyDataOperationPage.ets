@@ -1,4 +1,4 @@
-import { DataController, GridView, ListView, RefreshDataSource } from '@abner/refresh/Index'
+import { GridView, ListView, RefreshDataSource } from '@abner/refresh/Index'
 import { ActionBar } from '../ActionBar'
 
 /**
@@ -6,6 +6,7 @@ import { ActionBar } from '../ActionBar'
  * DATE:2024/5/10
  * INTRODUCE:懒加载数据列表操作
  * */
+
 @Entry
 @Component
 struct LazyDataOperationPage {

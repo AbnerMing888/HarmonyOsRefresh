@@ -17,7 +17,7 @@ struct Index {
     "普通的列表GridView", "下拉刷新列表GridView", "刷新加载列表GridView", "带有头的GridView",
     "普通的瀑布流列表", "带有头的瀑布流列表",
     "任意组件", "侧滑展示按钮", "下滑进入二楼", "普通加载数据操作", "懒加载数据操作",
-    "列表页面吸顶","瀑布流页面吸顶"
+    "列表页面吸顶", "瀑布流页面吸顶"
   ]
   private routerPaths: Array<string> = [
     "pages/list/ListViewPage",

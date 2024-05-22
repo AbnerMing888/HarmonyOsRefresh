@@ -2,7 +2,7 @@
 
 基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新。
 
-截至2024年5月15日，功能点如下
+截至2024年5月22日，功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
@@ -13,6 +13,7 @@
 - 7、**支持下滑进入二楼/半楼功能（仿京东或淘宝）**
 - 8、**数据操作（增删改查）提供便捷方式，适应更多场景运用**
 - 9、**支持页面刷新加载吸顶效果(ListView/GridView/StaggeredGridView)**
+- 10、**支持默认进入页面自动刷新/手动刷新**
 
 ## 效果
 
@@ -84,14 +85,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.0.8"}
+"dependencies": { "@abner/refresh": "^1.1.1"}
 ```
 
 <p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.0.8.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.1.1.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -212,6 +213,20 @@ itemLayout(item: Object, index: number): void {
 | slideMenuAttr           | 回调(attribute: SlideMenuAttr)                | 右侧侧滑属性                                            |
 | enableRefresh           | boolean                                     | 是否禁止刷新,也可以通过onRefresh进行控制，onRefresh有代表需要刷新        |
 | enableLoadMore          | boolean                                     | 是否禁止上拉加载，也可以通过onLoadMore进行控制，onLoadMore有代表需要上拉加载  |
+
+##### RefreshController
+
+| 属性                      | 参数                     | 概述                             |
+|-------------------------|------------------------|--------------------------------|
+| finishRefresh           | 无参                     | 关闭下拉刷新                         |
+| finishLoadMore          | ooterNothing: boolean  | 关闭上拉加载，参数默认为false，为true则为无数据展示 |
+| autoRefresh             | isAutoRefresh: boolean | 自动刷新，默认为true                   |
+| markStartLocation       | start: boolean         | 标记开始位置                         |
+| markEndLocation         | isEnd: boolean         | 标记结束位置                         |
+| getRefreshLayoutStatus  | 无参                     | 获取下拉刷新状态                       |
+| getLoadMoreLayoutStatus | 无参                     | 获取上拉加载状态                       |
+| scrollToIndex           | value: number          | 滑动到某一个位置                       |
+| scrollEdge              | value: Edge            | 滚动到容器边缘                        |
 
 
 ##### RefreshDataSource
@@ -406,6 +421,21 @@ itemLayout(item: Object, index: number): void {
 | loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性                                         |
 | enableRefresh           | boolean                                     | 是否禁止刷新,也可以通过onRefresh进行控制，onRefresh有代表需要刷新       |
 | enableLoadMore          | boolean                                     | 是否禁止上拉加载，也可以通过onLoadMore进行控制，onLoadMore有代表需要上拉加载 |
+
+##### RefreshController
+
+| 属性                      | 参数                     | 概述                             |
+|-------------------------|------------------------|--------------------------------|
+| finishRefresh           | 无参                     | 关闭下拉刷新                         |
+| finishLoadMore          | ooterNothing: boolean  | 关闭上拉加载，参数默认为false，为true则为无数据展示 |
+| autoRefresh             | isAutoRefresh: boolean | 自动刷新，默认为true                   |
+| markStartLocation       | start: boolean         | 标记开始位置                         |
+| markEndLocation         | isEnd: boolean         | 标记结束位置                         |
+| getRefreshLayoutStatus  | 无参                     | 获取下拉刷新状态                       |
+| getLoadMoreLayoutStatus | 无参                     | 获取上拉加载状态                       |
+| scrollToIndex           | value: number          | 滑动到某一个位置                       |
+| scrollEdge              | value: Edge            | 滚动到容器边缘                        |
+
 
 ##### RefreshDataSource
 
@@ -610,6 +640,20 @@ itemLayout(item: Object, index: number): void {
 | loadMoreFooterAttribute | (attribute: LoadMoreFooterAttr)             | 默认的加载尾属性                                         |
 | enableRefresh           | boolean                                     | 是否禁止刷新,也可以通过onRefresh进行控制，onRefresh有代表需要刷新       |
 | enableLoadMore          | boolean                                     | 是否禁止上拉加载，也可以通过onLoadMore进行控制，onLoadMore有代表需要上拉加载 |
+
+##### RefreshController
+
+| 属性                      | 参数                     | 概述                             |
+|-------------------------|------------------------|--------------------------------|
+| finishRefresh           | 无参                     | 关闭下拉刷新                         |
+| finishLoadMore          | ooterNothing: boolean  | 关闭上拉加载，参数默认为false，为true则为无数据展示 |
+| autoRefresh             | isAutoRefresh: boolean | 自动刷新，默认为true                   |
+| markStartLocation       | start: boolean         | 标记开始位置                         |
+| markEndLocation         | isEnd: boolean         | 标记结束位置                         |
+| getRefreshLayoutStatus  | 无参                     | 获取下拉刷新状态                       |
+| getLoadMoreLayoutStatus | 无参                     | 获取上拉加载状态                       |
+| scrollToIndex           | value: number          | 滑动到某一个位置                       |
+| scrollEdge              | value: Edge            | 滚动到容器边缘                        |
 
 
 ##### RefreshDataSource

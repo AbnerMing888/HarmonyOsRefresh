@@ -1,5 +1,5 @@
 import { ActionBar } from '../ActionBar'
-import { GridView, RefreshController } from '@abner/refresh'
+import { GridAttr, GridView, RefreshController } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
@@ -12,28 +12,6 @@ import { GridView, RefreshController } from '@abner/refresh'
 struct GridViewRefreshPage {
   @State controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
-
-  aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
-      this.array.push(i)
-    }
-  }
-
-  /**
-   * Author:AbnerMing
-   * Describe:条目布局
-   * @param item  数据对象
-   * @param index  数据索引
-   */
-  @Builder
-  itemLayout(item:Object, index:number):void {
-    Text("测试数据" + index)
-      .width("95%")
-      .height(50)
-      .textAlign(TextAlign.Center)
-      .border({ width: 1, color: Color.Pink })
-      .margin({ top: 10 })
-  }
 
   build() {
     Column() {
@@ -48,5 +26,27 @@ struct GridViewRefreshPage {
         }
       })
     }
+  }
+
+  aboutToAppear() {
+    for (let i = 0; i < 50; i++) {
+      this.array.push(i)
+    }
+  }
+
+  /**
+   * Author:AbnerMing
+   * Describe:条目布局
+   * @param item  数据对象
+   * @param index  数据索引
+   */
+  @Builder
+  itemLayout(item: Object, index: number): void {
+    Text("测试数据" + index)
+      .width("95%")
+      .height(50)
+      .textAlign(TextAlign.Center)
+      .border({ width: 1, color: Color.Pink })
+      .margin({ top: 10 })
   }
 }

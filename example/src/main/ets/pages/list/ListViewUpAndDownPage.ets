@@ -26,7 +26,7 @@ struct ListViewUpAndDownPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: Object, index: number): void {
+  itemLayout(_: Object, index: number): void {
     Text("测试数据" + index)
       .width("95%")
       .height(50)
@@ -46,16 +46,16 @@ struct ListViewUpAndDownPage {
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
-            this.controller.finishRefresh();
+            this.controller.finishRefresh()
           }, 1000)
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.controller.finishLoadMore();
+            this.controller.finishLoadMore()
           }, 1000)
         }
       })
-    }.padding({ bottom: 20 })
+    }
   }
 }

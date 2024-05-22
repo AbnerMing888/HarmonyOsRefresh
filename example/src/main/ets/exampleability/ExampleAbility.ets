@@ -30,11 +30,6 @@ export default class ExampleAbility extends UIAbility {
         navigationBarContentColor: '#ffffff'
       };
 
-      let area = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
-      let statusBarHeight = area.topRect.height
-
-      console.log("============" + JSON.stringify(area))
-
 
       windowClass.setWindowSystemBarProperties(sysBarProps, (err: BusinessError) => {
         let errCode: number = err.code;

@@ -13,7 +13,7 @@ struct ListViewPage {
   @State array: Array<number> = []
 
   aboutToAppear() {
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 50; i++) {
       this.array.push(i)
     }
   }
@@ -25,13 +25,14 @@ struct ListViewPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: Object, _: number): void {
+  itemLayout(item: Object, index: number): void {
     Text("测试数据" + item)
       .width("95%")
       .height(50)
       .margin(10)
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
+
   }
 
   build() {
