@@ -2,7 +2,7 @@
 
 基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新。
 
-截至2024年5月27日，功能点如下
+截至2024年5月28日，功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
@@ -16,6 +16,7 @@
 - 10、**支持默认进入页面自动刷新/手动刷新**
 - 11、**支持内部缺省页设置（空布局/错误布局）**
 - 12、**支持ListView条目分组吸顶效果**
+- 13、**默认刷新头支持三个点旋转效果**
 
 ## 效果
 
@@ -87,14 +88,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.1.3"}
+"dependencies": { "@abner/refresh": "^1.1.4"}
 ```
 
 <p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.1.3.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.1.4.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -283,25 +284,26 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
 
 默认的刷新头属性
 
-| 属性               | 类型                                        | 概述              |
-|------------------|-------------------------------------------|-----------------|
-| width            | Length                                    | 刷新控件的宽度         |
-| height           | Length                                    | 刷新头的高度 默认高度 80  |
-| timeFormat       | RefreshHeaderTimeFormat                   | 刷新头的时间格式,默认月日时分 |
-| timeLabel        | RefreshHeaderTimeLabel                    | 刷新头的标签格式        |
-| hideTime         | boolean                                   | 是否隐藏刷新头时间，默认展示  |
-| fontSize         | number / string / Resource                | 刷新头的文字大小        |
-| fontColor        | ResourceColor                             | 刷新头的文字颜色        |
-| timeFontSize     | number / string / Resource                | 刷新头的时间文字大小      |
-| timeFontColor    | ResourceColor                             | 刷新头的时间文字颜色      |
-| marginIconLeft   | Length                                    | 刷新文字距离左边的距离     |
-| iconDown         | PixelMap/ResourceStr/DrawableDescriptor   | 刷新的下拉箭头         |
-| iconUpLoad       | PixelMap / ResourceStr/DrawableDescriptor | 下拉刷新icon        |
-| pullingText      | string /Resource                          | 下拉可以刷新文本        |
-| releaseText      | string /Resource                          | 释放立即刷新文本        |
-| refreshingText   | string /Resource                          | 正在刷新中文本         |
-| finishText       | string /Resource                          | 刷新结束文本          |
-| backgroundColor  | ResourceColor                             | 刷新头背景颜色         |
+| 属性              | 类型                                        | 概述                                    |
+|-----------------|-------------------------------------------|---------------------------------------|
+| width           | Length                                    | 刷新控件的宽度                               |
+| height          | Length                                    | 刷新头的高度 默认高度 80                        |
+| timeFormat      | RefreshHeaderTimeFormat                   | 刷新头的时间格式,默认月日时分                       |
+| timeLabel       | RefreshHeaderTimeLabel                    | 刷新头的标签格式                              |
+| hideTime        | boolean                                   | 是否隐藏刷新头时间，默认展示                        |
+| fontSize        | number / string / Resource                | 刷新头的文字大小                              |
+| fontColor       | ResourceColor                             | 刷新头的文字颜色                              |
+| timeFontSize    | number / string / Resource                | 刷新头的时间文字大小                            |
+| timeFontColor   | ResourceColor                             | 刷新头的时间文字颜色                            |
+| marginIconLeft  | Length                                    | 刷新文字距离左边的距离                           |
+| iconDown        | PixelMap/ResourceStr/DrawableDescriptor   | 刷新的下拉箭头                               |
+| iconUpLoad      | PixelMap / ResourceStr/DrawableDescriptor | 下拉刷新icon                              |
+| pullingText     | string /Resource                          | 下拉可以刷新文本                              |
+| releaseText     | string /Resource                          | 释放立即刷新文本                              |
+| refreshingText  | string /Resource                          | 正在刷新中文本                               |
+| finishText      | string /Resource                          | 刷新结束文本                                |
+| backgroundColor | ResourceColor                             | 刷新头背景颜色                               |
+| headerType      | RefreshHeaderType                         | 默认刷新头样式，默认是RefreshHeaderType.DEFAULT  |
 
 ##### LoadMoreFooterAttr
 
