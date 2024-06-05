@@ -2,6 +2,7 @@ import router from '@ohos.router'
 import { ActionBar } from './ActionBar'
 import { GridView, RefreshController } from '@abner/refresh'
 
+
 /**
  * AUTHOR:AbnerMing
  * DATE:2023/10/14
@@ -14,29 +15,36 @@ struct Index {
   @State controller: RefreshController = new RefreshController() //刷新控制器
   private array: Array<string> = [
     "普通的列表ListView", "下拉刷新列表ListView", "刷新加载列表ListView", "带有头的ListView",
-    "普通的列表GridView", "下拉刷新列表GridView", "刷新加载列表GridView", "带有头的GridView",
+    "侧滑展示按钮", "系统侧滑按钮", "侧滑删除", "列表分组吸顶",
+    "普通的网格列表", "下拉刷新网格列表", "刷新加载网格列表", "带有头的网格列表",
     "普通的瀑布流列表", "带有头的瀑布流列表",
-    "任意组件", "侧滑展示按钮", "下滑进入二楼", "普通加载数据操作", "懒加载数据操作",
-    "列表页面吸顶", "瀑布流页面吸顶"
+    "任意组件", "下滑进入二楼", "二楼应用场景", "普通加载数据操作", "懒加载数据操作",
+    "列表页面吸顶", "瀑布流页面吸顶", "缺省页", "结合Tabs使用",
   ]
   private routerPaths: Array<string> = [
     "pages/list/ListViewPage",
     "pages/list/ListViewRefreshPage",
     "pages/list/ListViewUpAndDownPage",
-    "pages/list/ListViewHeaderPage",
-    "pages/grid/GridViewPage",
-    "pages/grid/GridViewRefreshPage",
-    "pages/grid/GridViewUpAndDownPage",
-    "pages/grid/GridViewHeaderPage",
-    "pages/staggered/StaggeredPage",
-    "pages/staggered/StaggeredHeadPage",
-    "pages/layout/LayoutViewPage",
-    "pages/list/SlideMenuListViewPage",
-    "pages/floor/SecondFloorPage",
-    "pages/data/DataOperationPage",
-    "pages/data/LazyDataOperationPage",
-    "pages/sticky/StickyTopPage",
-    "pages/sticky/StickyTopStaggeredPage"
+    "pages/list/ListViewHeaderPage", //带有头的ListView
+    "pages/list/SlideMenuListViewPage", //侧滑展示按钮
+    "pages/list/SwipeActionListViewPage", //系统侧滑按钮
+    "pages/list/SlideDeleteListViewPage", //侧滑删除
+    "pages/group/ItemGroupPage", //列表分组吸顶
+    "pages/grid/GridViewPage", //普通的网格列表
+    "pages/grid/GridViewRefreshPage", //下拉刷新网格列表
+    "pages/grid/GridViewUpAndDownPage", //刷新加载网格列表
+    "pages/grid/GridViewHeaderPage", //带有头的网格列表
+    "pages/staggered/StaggeredPage", //普通的瀑布流列表
+    "pages/staggered/StaggeredHeadPage", //带有头的瀑布流列表
+    "pages/layout/LayoutViewPage", //任意组件
+    "pages/floor/SecondFloorPage", //下滑进入二楼
+    "pages/floor/example/SecondFloorExample", //二楼应用场景
+    "pages/data/DataOperationPage", //普通加载数据操作
+    "pages/data/LazyDataOperationPage", //懒加载数据操作
+    "pages/sticky/StickyTopPage", //列表页面吸顶
+    "pages/sticky/StickyTopStaggeredPage", //瀑布流页面吸顶
+    "pages/default/ErrorOrEmptyPage", //缺省页
+    "pages/tabs/TabsPage"//结合Tabs使用
   ]
 
   /**

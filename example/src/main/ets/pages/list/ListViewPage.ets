@@ -7,13 +7,14 @@ import { ListView } from '@abner/refresh'
  * INTRODUCE:普通的列表ListView
  * */
 
+
 @Entry
 @Component
 struct ListViewPage {
-  @State array: Array<number> = []
+  @State array: number[] = []
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
@@ -25,22 +26,21 @@ struct ListViewPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: Object, index: number): void {
-    Text("测试数据" + item)
+  itemLayout(_: Object, index: number): void {
+    Text("测试数据" + index)
       .width("95%")
       .height(50)
       .margin(10)
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
-
   }
 
   build() {
     Column() {
       ActionBar({ title: "普通的列表ListView" })
       ListView({
-        items: this.array, //数据源 数组
-        itemLayout: (item, index) => this.itemLayout(item, index)
+        items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
+        itemLayout: this.itemLayout //转成你需要的对象
       })
     }
   }

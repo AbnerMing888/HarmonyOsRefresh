@@ -1,5 +1,5 @@
 import { ActionBar } from '../ActionBar'
-import { GridAttr, GridView, RefreshController } from '@abner/refresh'
+import { GridView, RefreshController } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
@@ -10,7 +10,7 @@ import { GridAttr, GridView, RefreshController } from '@abner/refresh'
 @Entry
 @Component
 struct GridViewRefreshPage {
-  @State controller: RefreshController = new RefreshController() //刷新控制器
+  controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
 
   build() {
@@ -20,9 +20,15 @@ struct GridViewRefreshPage {
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉，
+        gridAttribute: (attr) => {
+          attr.scrollSpringHeight = 300
+        },
         onRefresh: () => {
           //下拉刷新
-          this.controller.finishRefresh()
+          setTimeout(() => {
+            //模拟耗时
+            this.controller.finishRefresh()
+          }, 3000)
         }
       })
     }
@@ -41,7 +47,7 @@ struct GridViewRefreshPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: Object, index: number): void {
+  itemLayout(_: Object, index: number): void {
     Text("测试数据" + index)
       .width("95%")
       .height(50)

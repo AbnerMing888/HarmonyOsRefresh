@@ -25,7 +25,7 @@ struct GridViewPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: Object, index: number): void {
+  itemLayout(_: Object, index: number): void {
     Text("测试数据" + index)
       .width("95%")
       .height(50)

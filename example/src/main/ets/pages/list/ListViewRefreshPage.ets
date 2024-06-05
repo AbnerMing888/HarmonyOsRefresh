@@ -10,7 +10,7 @@ import { ListView, RefreshController } from '@abner/refresh'
 @Entry
 @Component
 struct ListViewRefreshPage {
-  @State controller: RefreshController = new RefreshController() //刷新控制器
+  controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
 
   aboutToAppear() {

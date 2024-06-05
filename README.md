@@ -2,7 +2,7 @@
 
 基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新。
 
-截至2024年5月28日，功能点如下
+截至2024年5月31日，功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
@@ -17,6 +17,7 @@
 - 11、**支持内部缺省页设置（空布局/错误布局）**
 - 12、**支持ListView条目分组吸顶效果**
 - 13、**默认刷新头支持三个点旋转效果**
+- 14、**ListView支持滑动直接删除**
 
 ## 效果
 
@@ -66,7 +67,7 @@
 
 ## 开发环境
 
-DevEco Studio NEXT Developer Beta1,Build Version: 5.0.3.100
+DevEco Studio NEXT Developer Beta1,Build Version: 5.0.3.200
 
 Api版本：**11**
 
@@ -88,14 +89,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.1.4"}
+"dependencies": { "@abner/refresh": "^1.1.6"}
 ```
 
 <p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.1.4.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.1.6.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -947,6 +948,7 @@ this.dataSource.changeData(3, 9999)
 - 3、涉及到我的开源库，您提的业务需求，率先第一时间满足，并及时针对性开发。
 - 4、未来我的鸿蒙开源库，可先遣体验。
 - 5、鸿蒙脚手架，正在研发中，可首批次体验使用。
+
 
 
 ## License

@@ -17,6 +17,12 @@
     "pages/data/DataOperationPage",
     "pages/data/LazyDataOperationPage",
     "pages/sticky/StickyTopPage",
-    "pages/sticky/StickyTopStaggeredPage"
+    "pages/sticky/StickyTopStaggeredPage",
+    "pages/default/ErrorOrEmptyPage",
+    "pages/tabs/TabsPage",
+    "pages/list/SwipeActionListViewPage",
+    "pages/group/ItemGroupPage",
+    "pages/floor/example/SecondFloorExample",
+    "pages/list/SlideDeleteListViewPage"
   ]
 }

@@ -10,13 +10,14 @@ import { ActionBar } from '../ActionBar'
 @Entry
 @Component
 struct LazyDataOperationPage {
-  @State dataSource: RefreshDataSource = new RefreshDataSource() //数据懒加载操作对象，执行数据增删改查
+  dataSource: RefreshDataSource = new RefreshDataSource() //数据懒加载操作对象，执行数据增删改查
   @State array: Array<number> = []
 
   aboutToAppear() {
     for (let i = 0; i < 10; i++) {
       this.array.push(i)
     }
+    this.dataSource.initData(this.array)
   }
 
   /**
@@ -88,12 +89,8 @@ struct LazyDataOperationPage {
       }).height(150)
 
       ListView({
-        items: this.array, //数据源 数组
+        lazyDataSource: this.dataSource,
         itemLayout: (item, index) => this.itemLayout(item, index),
-        onLazyDataSource: (dataSource: RefreshDataSource) => {
-          //必须实现此属性，用RefreshDataSource进行数据的操作
-          this.dataSource = dataSource
-        }
       }).padding({ bottom: 150 })
     }
   }

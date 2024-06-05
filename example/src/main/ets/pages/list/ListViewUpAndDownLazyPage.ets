@@ -1,22 +1,24 @@
 import { ActionBar } from '../ActionBar'
-import { GridView, RefreshController } from '@abner/refresh'
+import { ListView, RefreshController, RefreshDataSource } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
  * DATE:2023/10/14
- * INTRODUCE:带有头的GridView页面
+ * INTRODUCE:下拉上下列表ListView 懒加载模式
  * */
 
 @Entry
 @Component
-struct GridViewHeaderPage {
+struct ListViewUpAndDownPage {
   controller: RefreshController = new RefreshController() //刷新控制器
-  @State array: Array<number> = []
+  lazyDataSource: RefreshDataSource = new RefreshDataSource() //懒加载数据
 
   aboutToAppear() {
+    let array: Array<number> = []
     for (let i = 0; i < 50; i++) {
-      this.array.push(i)
+      array.push(i)
     }
+    this.lazyDataSource.initData(array)
   }
 
   /**
@@ -30,44 +32,29 @@ struct GridViewHeaderPage {
     Text("测试数据" + index)
       .width("95%")
       .height(50)
+      .margin(10)
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
-      .margin({ top: 10 })
-  }
-
-  @Builder
-  itemHeaderLayout(): void {
-    Column() {
-      Text("我是头View")
-    }.height(100)
-    .width("100%")
-    .backgroundColor(Color.Pink)
-    .justifyContent(FlexAlign.Center)
   }
 
   build() {
     Column() {
-      ActionBar({ title: "带有头的GridView" })
-      GridView({
-        items: this.array, //数据源 数组
+      ActionBar({ title: "刷新加载列表ListView" })
+      ListView({
+        lazyDataSource: this.lazyDataSource,
         itemLayout: (item, index) => this.itemLayout(item, index),
-        controller: this.controller, //控制器，负责关闭下拉和上拉，
-        itemHeaderLayout: this.itemHeaderLayout,
-        isLazyData: false,
-        gridAttribute: (g) => {
-          g.rowsGap = 10 //设置行间距
-        },
+        controller: this.controller, //控制器，负责关闭下拉和上拉
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
             this.controller.finishRefresh()
-          }, 3000)
+          }, 1000)
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
             this.controller.finishLoadMore()
-          }, 3000)
+          }, 1000)
         }
       })
     }

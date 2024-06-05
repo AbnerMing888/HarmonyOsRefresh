@@ -102,7 +102,6 @@ struct StickyTopStaggeredPage {
       controller: this.controller,
       onRefresh: () => {
         //下拉刷新
-        //模拟耗时
         setTimeout(() => {
           this.controller.finishRefresh()
         }, 1000)

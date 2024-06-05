@@ -10,7 +10,7 @@ import { ListView, RefreshController } from '@abner/refresh'
 @Entry
 @Component
 struct ListViewHeaderPage {
-  @State controller: RefreshController = new RefreshController() //刷新控制器
+  controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
 
   aboutToAppear() {
@@ -26,7 +26,7 @@ struct ListViewHeaderPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: Object, index: number): void {
+  itemLayout(_: Object, index: number): void {
     Text("测试数据" + index)
       .width("95%")
       .height(50)
@@ -52,7 +52,6 @@ struct ListViewHeaderPage {
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉
-        isLazyData: false,
         itemHeaderLayout: this.itemHeaderLayout,
         onRefresh: () => {
           //下拉刷新
@@ -63,7 +62,6 @@ struct ListViewHeaderPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.array.push(51);
             this.controller.finishLoadMore(true);
           }, 1000)
         }

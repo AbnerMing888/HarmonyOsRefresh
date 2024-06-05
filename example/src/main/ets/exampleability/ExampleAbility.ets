@@ -2,7 +2,7 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
-import { RefreshConfig } from '@abner/refresh/Index';
+
 
 export default class ExampleAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
@@ -29,7 +29,6 @@ export default class ExampleAbility extends UIAbility {
         statusBarContentColor: '#ffffff',
         navigationBarContentColor: '#ffffff'
       };
-
 
       windowClass.setWindowSystemBarProperties(sysBarProps, (err: BusinessError) => {
         let errCode: number = err.code;
