@@ -51,8 +51,9 @@ struct ListViewUpAndDownPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
+            //模拟耗时
             this.controller.finishLoadMore()
-          }, 3000)
+          }, 2000)
         }
       })
     }

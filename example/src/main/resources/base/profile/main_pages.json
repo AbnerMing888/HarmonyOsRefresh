@@ -21,7 +21,8 @@
     "pages/default/ErrorOrEmptyPage",
     "pages/tabs/TabsPage",
     "pages/list/SwipeActionListViewPage",
-    "pages/group/ItemGroupPage",
+    "pages/group/ListItemGroupPage",
+    "pages/group/GridItemGroupPage",
     "pages/floor/example/SecondFloorExample",
     "pages/list/SlideDeleteListViewPage"
   ]

@@ -15,7 +15,7 @@ struct Index {
   @State controller: RefreshController = new RefreshController() //刷新控制器
   private array: Array<string> = [
     "普通的列表ListView", "下拉刷新列表ListView", "刷新加载列表ListView", "带有头的ListView",
-    "侧滑展示按钮", "系统侧滑按钮", "侧滑删除", "列表分组吸顶",
+    "侧滑展示按钮", "系统侧滑按钮", "侧滑删除", "列表分组吸顶", "网格分组吸顶",
     "普通的网格列表", "下拉刷新网格列表", "刷新加载网格列表", "带有头的网格列表",
     "普通的瀑布流列表", "带有头的瀑布流列表",
     "任意组件", "下滑进入二楼", "二楼应用场景", "普通加载数据操作", "懒加载数据操作",
@@ -29,7 +29,8 @@ struct Index {
     "pages/list/SlideMenuListViewPage", //侧滑展示按钮
     "pages/list/SwipeActionListViewPage", //系统侧滑按钮
     "pages/list/SlideDeleteListViewPage", //侧滑删除
-    "pages/group/ItemGroupPage", //列表分组吸顶
+    "pages/group/ListItemGroupPage", //列表分组吸顶
+    "pages/group/GridItemGroupPage", //网格分组
     "pages/grid/GridViewPage", //普通的网格列表
     "pages/grid/GridViewRefreshPage", //下拉刷新网格列表
     "pages/grid/GridViewUpAndDownPage", //刷新加载网格列表

@@ -1,5 +1,5 @@
 import { ActionBar } from '../ActionBar'
-import { ListView, RefreshDataSource } from '@abner/refresh'
+import { ListView, RefreshController, RefreshDataSource } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
@@ -11,6 +11,7 @@ import { ListView, RefreshDataSource } from '@abner/refresh'
 @Component
 struct SlideDeleteListViewPage {
   private mRefreshDataSource: RefreshDataSource = new RefreshDataSource()
+  controller: RefreshController = new RefreshController() //刷新控制器
 
   aboutToAppear() {
     let array: Array<number> = []
@@ -35,37 +36,24 @@ struct SlideDeleteListViewPage {
       .margin(10)
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
+      .onClick(() => {
+        console.log("===========" + index)
+      })
   }
 
   build() {
     Column() {
-      ActionBar({ title: "侧滑直接删除" })
+      ActionBar({ title: "侧滑删除" })
       ListView({
         lazyDataSource: this.mRefreshDataSource,
         isSwipeDelete: true,
+        isDeleteReloadIndex: true, //删除之后是否重置索引
+        controller: this.controller,
         itemLayout: (item, index) => this.itemLayout(item, index), //条目视图
+        onRefresh: () => {
+          this.controller.finishRefresh()
+        }
       })
     }
-  }
-
-  @Builder
-  slideRightMenuLayout(index: number) {
-
-    Row() {
-      Text("编辑")
-        .width(50)
-        .height(50)
-        .fontColor(Color.White)
-        .backgroundColor(Color.Blue)
-        .textAlign(TextAlign.Center)
-      Text("删除")
-        .width(50)
-        .height(50)
-        .fontColor(Color.White)
-        .backgroundColor(Color.Red)
-        .textAlign(TextAlign.Center)
-    }.width(100)
-    .height(50)
-
   }
 }

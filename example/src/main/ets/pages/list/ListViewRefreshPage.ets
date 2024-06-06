@@ -35,6 +35,7 @@ struct ListViewRefreshPage {
       .border({ width: 1, color: Color.Pink })
   }
 
+
   build() {
     Column() {
       ActionBar({ title: "下拉刷新列表ListView" })

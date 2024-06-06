@@ -10,7 +10,8 @@ import { RefreshController, StaggeredGridView } from '@abner/refresh'
 @Component
 struct StickyTopStaggeredPage {
   @State controller: RefreshController = new RefreshController() //刷新控制器
-  @State arr: number[] = []
+  @State arr1: number[] = [] //实际情况当以tab指示器对应得数据为主，这里仅仅是测试
+  @State arr2: number[] = []
   @State listPosition: number = 0
   private itemHeightArray: number[] = []
   @State colors: number[] = [0xFFC0CB, 0xDA70D6, 0x6B8E23, 0x6A5ACD, 0x00FFFF, 0x00FF7F]
@@ -31,8 +32,11 @@ struct StickyTopStaggeredPage {
   }
 
   aboutToAppear() {
+    for (let i = 0; i < 30; i++) {
+      this.arr1.push(i)
+    }
     for (let i = 0; i < 50; i++) {
-      this.arr.push(i)
+      this.arr2.push(i)
     }
     this.setItemSizeArray()
   }
@@ -57,11 +61,11 @@ struct StickyTopStaggeredPage {
           .textAlign(TextAlign.Center)
         Tabs({ barPosition: BarPosition.Start }) {
           TabContent() {
-            this.testLayout()
+            this.testLayout(this.arr1)
           }.tabBar("Tab1")
 
           TabContent() {
-            this.testLayout()
+            this.testLayout(this.arr2)
           }.tabBar("Tab2")
         }
         .vertical(false)
@@ -90,12 +94,12 @@ struct StickyTopStaggeredPage {
 
   /*
   * Author:AbnerMing
-  * Describe:测试布局
+  * Describe:这里仅仅是测试，实际应以业务需求为主，可以是任意得组件视图
   */
   @Builder
-  testLayout() {
+  testLayout(arr: number[]) {
     StaggeredGridView({
-      items: this.arr,
+      items: arr,
       itemLayout: (item: Object, index: number) => {
         this.itemLayout(this, item, index)
       },

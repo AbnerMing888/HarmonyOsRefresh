@@ -1,15 +1,16 @@
-import { ItemGroupModel, ListView } from '@abner/refresh'
+import { ItemGroupModel, ListView, RefreshController } from '@abner/refresh'
 import { ActionBar } from '../ActionBar'
 
 /**
  * AUTHOR:AbnerMing
  * DATE:2024/5/24
- * INTRODUCE:分组吸顶
+ * INTRODUCE:listView分组吸顶
  * */
 
 @Entry
 @Component
-struct ItemGroupPage {
+struct ListItemGroupPage {
+  controller: RefreshController = new RefreshController() //刷新控制器
   private itemGroupModelArray?: Array<ItemGroupModel> = [
     {
       title: "星期一",
@@ -44,7 +45,7 @@ struct ItemGroupPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: Object, index: number) {
+  itemLayout(item: Object, _: number) {
     Text(item.toString())
       .width("95%")
       .height(50)
@@ -67,9 +68,22 @@ struct ItemGroupPage {
     Column() {
       ActionBar({ title: "列表分组吸顶" })
       ListView({
-        itemGroupHeader: this.itemGroupHeader,
-        itemGroupData: this.itemGroupModelArray,
-        itemLayout: this.itemLayout
+        controller: this.controller, //刷新控制器
+        itemGroupHeader: this.itemGroupHeader, //分组头
+        itemGroupData: this.itemGroupModelArray, //分组数据
+        itemLayout: this.itemLayout, //内容视图
+        onRefresh: () => {
+          setTimeout(() => {
+            //模拟耗时
+            this.controller.finishRefresh()
+          }, 2000)
+        },
+        onLoadMore: () => {
+          setTimeout(() => {
+            //模拟耗时
+            this.controller.finishLoadMore()
+          }, 2000)
+        }
       })
     }
   }

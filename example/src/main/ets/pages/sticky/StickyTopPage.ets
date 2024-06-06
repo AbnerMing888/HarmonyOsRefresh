@@ -10,8 +10,18 @@ import { ListView, RefreshController } from '@abner/refresh'
 @Component
 struct StickyTopPage {
   @State controller: RefreshController = new RefreshController() //刷新控制器
-  @State arr: number[] = []
+  @State arr1: number[] = [] //实际情况当以tab指示器对应得数据为主，这里仅仅是测试
+  @State arr2: number[] = []
   @State listPosition: number = 0
+
+  aboutToAppear() {
+    for (let i = 0; i < 30; i++) {
+      this.arr1.push(i)
+    }
+    for (let i = 0; i < 50; i++) {
+      this.arr2.push(i)
+    }
+  }
 
   @Builder
   itemLayout(item: Object, _: number) {
@@ -32,11 +42,11 @@ struct StickyTopPage {
           .textAlign(TextAlign.Center)
         Tabs({ barPosition: BarPosition.Start }) {
           TabContent() {
-            this.testLayout()
+            this.testLayout(this.arr1)
           }.tabBar("Tab1")
 
           TabContent() {
-            this.testLayout()
+            this.testLayout(this.arr2)
           }.tabBar("Tab2")
         }
         .vertical(false)
@@ -63,20 +73,14 @@ struct StickyTopPage {
 
   }
 
-  aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
-      this.arr.push(i)
-    }
-  }
-
   /*
   * Author:AbnerMing
-  * Describe:测试布局
+  * Describe:这里仅仅是测试，实际应以业务需求为主，可以是任意得组件视图
   */
   @Builder
-  testLayout() {
+  testLayout(arr: number[]) {
     ListView({
-      items: this.arr,
+      items: arr,
       itemLayout: this.itemLayout,
       controller: this.controller,
       onRefresh: () => {
