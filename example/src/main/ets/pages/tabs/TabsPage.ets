@@ -8,35 +8,15 @@ import { ListView, RefreshController } from '@abner/refresh'
  * INTRODUCE:结合Tabs使用
  * */
 
-@Entry
 @Component
-struct TabsPage {
+struct ListTabsPage {
   @State array: Array<number> = []
-  @State listRefreshController: Array<RefreshController> = []
+  mRefreshController: RefreshController = new RefreshController
 
   aboutToAppear() {
     for (let i = 0; i < 50; i++) {
       this.array.push(i)
     }
-
-    for (let i = 0; i < 4; i++) {
-      this.listRefreshController.push(new RefreshController())
-    }
-  }
-
-  @Builder
-  itemPage(_this: TabsPage, index: number, item: string) {
-    ListView({
-      items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
-      itemLayout: (item: Object, index: number) => {
-        this.itemLayout(item as number, index) //转成你需要的对象
-      },
-      controller: this.listRefreshController[index], //控制器，负责关闭下拉和上拉
-      onRefresh: () => {
-        //下拉刷新
-        this.listRefreshController[index].finishRefresh()
-      }
-    })
   }
 
   /**
@@ -53,6 +33,37 @@ struct TabsPage {
       .margin(10)
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
+  }
+
+  build() {
+    ListView({
+      items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
+      itemLayout: (item: Object, index: number) => {
+        this.itemLayout(item as number, index) //转成你需要的对象
+      },
+      controller: this.mRefreshController, //控制器，负责关闭下拉和上拉
+      onRefresh: () => {
+        //下拉刷新 模拟耗时
+        setTimeout(() => {
+          this.mRefreshController.finishRefresh()
+        }, 3000)
+      },
+      onLoadMore: () => {
+        //上拉加载 模拟耗时
+        setTimeout(() => {
+          this.mRefreshController.finishLoadMore()
+        }, 3000)
+      }
+    })
+  }
+}
+
+@Entry
+@Component
+struct TabsPage {
+  @Builder
+  itemPage(_this: TabsPage, index: number, item: string) {
+    ListTabsPage()
   }
 
   build() {

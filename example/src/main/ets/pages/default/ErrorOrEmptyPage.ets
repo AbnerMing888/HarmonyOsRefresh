@@ -10,7 +10,7 @@ import { ActionBar } from '../ActionBar'
 @Entry
 @Component
 struct ErrorOrEmptyPage {
-  @State controller: RefreshController = new RefreshController() //刷新控制器
+  controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
   @State showEmptyLayout: boolean = false
   @State showErrorLayout: boolean = false
@@ -91,14 +91,16 @@ struct ErrorOrEmptyPage {
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
+            //模拟耗时
             this.controller.finishRefresh()
-          }, 1000)
+          }, 3000)
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
+            //模拟耗时
             this.controller.finishLoadMore()
-          }, 1000)
+          }, 3000)
         }
       })
     }

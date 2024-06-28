@@ -1,6 +1,6 @@
-import { ViewPager } from  '@abner/tab'
+import { ViewPager } from '@abner/tab'
 import { CommunityView } from './CommunityView'
-import { RefreshLayoutStatus,RefreshArcView } from '@abner/refresh'
+import { RefreshLayoutStatus, RefreshArcView } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing

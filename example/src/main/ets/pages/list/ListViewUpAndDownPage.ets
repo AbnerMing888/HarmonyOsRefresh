@@ -40,6 +40,7 @@ struct ListViewUpAndDownPage {
       ActionBar({ title: "刷新加载列表ListView" })
       ListView({
         items: this.array,
+        isScrollSpring: false,
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉
         onRefresh: () => {
@@ -52,8 +53,9 @@ struct ListViewUpAndDownPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
+            this.array.push(80)
             this.controller.finishLoadMore()
-          }, 2000)
+          }, 3000)
         }
       })
     }

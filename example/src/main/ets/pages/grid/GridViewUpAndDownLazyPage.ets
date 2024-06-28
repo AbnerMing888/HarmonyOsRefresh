@@ -1,5 +1,5 @@
-import { ActionBar } from '../ActionBar'
-import { GridView, RefreshController, RefreshDataSource } from '@abner/refresh'
+import { ActionBar } from '../ActionBar';
+import { GridView, RefreshController, RefreshDataSource } from '@abner/refresh';
 
 /**
  * AUTHOR:AbnerMing
@@ -9,16 +9,14 @@ import { GridView, RefreshController, RefreshDataSource } from '@abner/refresh'
 
 @Entry
 @Component
-struct GridViewUpAndDownPage {
+struct GridViewUpAndDownLazyPage {
   controller: RefreshController = new RefreshController() //刷新控制器
-  lazyDataSource: RefreshDataSource = new RefreshDataSource() //懒加载数据
+  array: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+  array2: Array<number> = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+  lazyDataSource: RefreshDataSource = new RefreshDataSource()
 
   aboutToAppear() {
-    let array: Array<number> = []
-    for (let i = 0; i < 50; i++) {
-      array.push(i)
-    }
-    this.lazyDataSource.initData(array)
+    this.lazyDataSource.pushDataArray(this.array)
   }
 
   /**
@@ -31,7 +29,7 @@ struct GridViewUpAndDownPage {
   itemLayout(_: Object, index: number): void {
     Text("测试数据" + index)
       .width("95%")
-      .height(50)
+      .height(150)
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
       .margin({ top: 10 })
@@ -41,21 +39,21 @@ struct GridViewUpAndDownPage {
     Column() {
       ActionBar({ title: "刷新加载列表GridView" })
       GridView({
-        itemLayout: (item, index) => this.itemLayout(item, index),
-        controller: this.controller, //控制器，负责关闭下拉和上拉，
         lazyDataSource: this.lazyDataSource,
-        gridAttribute: (g) => {
-          g.rowsGap = 10 //设置行间距
-        },
+        itemLayout: this.itemLayout,
+        controller: this.controller,
+        lazyCachedCount:10,
         onRefresh: () => {
-          //下拉刷新
           setTimeout(() => {
+            this.lazyDataSource.deleteAll(() => {
+              this.lazyDataSource.pushDataArray([500, 501, 502, 503, 504])
+            })
             this.controller.finishRefresh()
           }, 3000)
         },
         onLoadMore: () => {
-          //上拉加载
           setTimeout(() => {
+            this.lazyDataSource.pushDataArray(this.array2)
             this.controller.finishLoadMore()
           }, 3000)
         }

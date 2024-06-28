@@ -12,6 +12,7 @@ import { ListView, RefreshController } from '@abner/refresh'
 struct ListViewHeaderPage {
   controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
+  @State _privateRefreshContentHeight: Length = "100%" //内容视图的高度
 
   aboutToAppear() {
     for (let i = 0; i < 50; i++) {
@@ -48,6 +49,7 @@ struct ListViewHeaderPage {
   build() {
     Column() {
       ActionBar({ title: "带有头的ListView" })
+
       ListView({
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),
@@ -56,14 +58,17 @@ struct ListViewHeaderPage {
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
+            //模拟耗时
             this.controller.finishRefresh();
-          }, 1000)
+          }, 3000)
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.controller.finishLoadMore(true);
-          }, 1000)
+            //模拟耗时
+            this.array.push(90)
+            this.controller.finishLoadMore();
+          }, 3000)
         }
       })
     }

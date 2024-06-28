@@ -2,18 +2,23 @@
   "src": [
     "pages/Index",
     "pages/list/ListViewPage",
+    "pages/list/ListViewLazyPage",
     "pages/list/ListViewRefreshPage",
     "pages/list/ListViewUpAndDownPage",
+    "pages/list/ListViewUpAndDownLazyPage",
     "pages/list/ListViewHeaderPage",
     "pages/grid/GridViewPage",
     "pages/grid/GridViewRefreshPage",
     "pages/grid/GridViewUpAndDownPage",
+    "pages/grid/GridViewUpAndDownLazyPage",
     "pages/grid/GridViewHeaderPage",
     "pages/layout/LayoutViewPage",
+    "pages/layout/ListLayoutViewPage",
+    "pages/layout/StickLayoutViewPage",
     "pages/staggered/StaggeredPage",
     "pages/staggered/StaggeredHeadPage",
+    "pages/staggered/StaggeredLazyPage",
     "pages/list/SlideMenuListViewPage",
-    "pages/floor/SecondFloorPage",
     "pages/data/DataOperationPage",
     "pages/data/LazyDataOperationPage",
     "pages/sticky/StickyTopPage",
@@ -24,6 +29,8 @@
     "pages/group/ListItemGroupPage",
     "pages/group/GridItemGroupPage",
     "pages/floor/example/SecondFloorExample",
-    "pages/list/SlideDeleteListViewPage"
+    "pages/list/SlideDeleteListViewPage",
+    "pages/list/sort/ListViewSortPage",
+    "pages/floor/SecondFloorPage"
   ]
 }

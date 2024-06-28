@@ -40,7 +40,10 @@ struct GridViewPage {
       ActionBar({ title: "普通的列表GridView" })
       GridView({
         items: this.array, //数据源 数组
-        itemLayout: (item, index) => this.itemLayout(item, index)
+        itemLayout: (item, index) => this.itemLayout(item, index),
+        gridAttribute:(attr)=>{
+          attr.edgeEffect = EdgeEffect.Spring
+        }
       })
     }
   }

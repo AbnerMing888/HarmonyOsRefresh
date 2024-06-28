@@ -1,11 +1,12 @@
 import { ActionBar } from '../ActionBar'
-import { GridView, RefreshController } from '@abner/refresh'
+import { DataController, GridView, RefreshController } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
  * DATE:2023/10/14
- * INTRODUCE:下拉上下列表GridView页面
+ * INTRODUCE:下拉上下列表GridView页面 普通
  * */
+
 
 @Entry
 @Component
@@ -48,14 +49,16 @@ struct GridViewUpAndDownPage {
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
+            //模拟耗时
             this.controller.finishRefresh()
-          }, 3000)
+          }, 1000)
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
+            //模拟耗时
             this.controller.finishLoadMore()
-          }, 3000)
+          }, 1000)
         }
       })
     }

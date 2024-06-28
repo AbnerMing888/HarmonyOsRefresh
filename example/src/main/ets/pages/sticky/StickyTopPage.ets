@@ -1,4 +1,4 @@
-import { ListView, RefreshController } from '@abner/refresh'
+import { ListView, RefreshController, RefreshPositionEnum } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
@@ -9,10 +9,70 @@ import { ListView, RefreshController } from '@abner/refresh'
 @Entry
 @Component
 struct StickyTopPage {
-  @State controller: RefreshController = new RefreshController() //刷新控制器
+  @State listPosition: RefreshPositionEnum = RefreshPositionEnum.BOTTOM
+
+  build() {
+    Scroll() {
+      Column() {
+        Text("头View")
+          .fontColor(Color.White)
+          .width("100%")
+          .height("40%")
+          .backgroundColor(Color.Red)
+          .textAlign(TextAlign.Center)
+
+        Tabs({ barPosition: BarPosition.Start }) {
+          TabContent() {
+            this.testLayout(0)
+          }.tabBar("Tab1")
+
+          TabContent() {
+            this.testLayout(1)
+          }.tabBar("Tab2")
+        }
+        .vertical(false)
+        .height("100%")
+      }.width("100%")
+    }
+    .scrollBar(BarState.Off)
+    .width('100%')
+    .height('100%')
+    .onReachStart(() => {
+      //在底部
+      this.listPosition = RefreshPositionEnum.BOTTOM
+    })
+    .onScrollFrameBegin((offset: number, _: ScrollState) => {
+      if (this.listPosition == RefreshPositionEnum.BOTTOM && offset <= 0) {
+        return { offsetRemain: 0 }
+      }
+      //不在底部
+      this.listPosition = RefreshPositionEnum.CENTER
+      return { offsetRemain: offset }
+    })
+
+  }
+
+  /*
+  * Author:AbnerMing
+  * Describe:这里仅仅是测试，实际应以业务需求为主，可以是任意得组件视图
+  */
+  @Builder
+  testLayout(type: number) {
+    StickyListView({ pageType: type, listPosition: this.listPosition })
+  }
+}
+
+/*
+* Author:AbnerMing
+* Describe:吸顶列表
+*/
+@Component
+struct StickyListView {
+  @State pageType: number = 0
+  controller: RefreshController = new RefreshController() //刷新控制器
   @State arr1: number[] = [] //实际情况当以tab指示器对应得数据为主，这里仅仅是测试
   @State arr2: number[] = []
-  @State listPosition: number = 0
+  @Prop listPosition: RefreshPositionEnum = RefreshPositionEnum.TOP
 
   aboutToAppear() {
     for (let i = 0; i < 30; i++) {
@@ -25,83 +85,32 @@ struct StickyTopPage {
 
   @Builder
   itemLayout(item: Object, _: number) {
-    Text("item" + item)
-      .fontSize(16)
-      .width("100%")
-      .height(60)
+    Text("测试数据" + item)
+      .width("95%")
+      .height(50)
+      .margin(10)
+      .textAlign(TextAlign.Center)
+      .border({ width: 1, color: Color.Pink })
   }
 
   build() {
-    Scroll() {
-      Column() {
-        Text("头View")
-          .fontColor(Color.White)
-          .width("100%")
-          .height("40%")
-          .backgroundColor(Color.Red)
-          .textAlign(TextAlign.Center)
-        Tabs({ barPosition: BarPosition.Start }) {
-          TabContent() {
-            this.testLayout(this.arr1)
-          }.tabBar("Tab1")
-
-          TabContent() {
-            this.testLayout(this.arr2)
-          }.tabBar("Tab2")
-        }
-        .vertical(false)
-        .height("100%")
-      }.width("100%")
-    }
-    .friction(0.6)
-    .scrollBar(BarState.Off)
-    .width('100%')
-    .height('100%')
-    // 下拉刷新相关
-    .onReachStart(() => {
-      this.listPosition = 0
-    })
-    .onScrollFrameBegin((offset: number, _: ScrollState) => {
-      //设置起始位置，保障在顶部时，才能执行下拉刷新
-      this.controller.markStartLocation(this.listPosition == 0)
-      if (this.listPosition == 0 && offset <= 0) {
-        return { offsetRemain: 0 }
-      }
-      this.listPosition = 1
-      return { offsetRemain: offset }
-    })
-
-  }
-
-  /*
-  * Author:AbnerMing
-  * Describe:这里仅仅是测试，实际应以业务需求为主，可以是任意得组件视图
-  */
-  @Builder
-  testLayout(arr: number[]) {
     ListView({
-      items: arr,
+      items: this.pageType == 0 ? this.arr1 : this.arr2,
       itemLayout: this.itemLayout,
       controller: this.controller,
+      isRefreshSticky: true,
+      refreshStickyPosition: this.listPosition,
       onRefresh: () => {
-        //下拉刷新
-        //模拟耗时
+        //下拉刷新 模拟耗时
         setTimeout(() => {
           this.controller.finishRefresh()
-        }, 1000)
+        }, 3000)
       },
       onLoadMore: () => {
-        // 上拉加载
-        //模拟耗时
+        // 上拉加载 模拟耗时
         setTimeout(() => {
           this.controller.finishLoadMore()
-        }, 1000)
-      },
-      listAttribute: (attr) => {
-        attr.nestedScroll = {
-          scrollForward: NestedScrollMode.PARENT_FIRST,
-          scrollBackward: NestedScrollMode.SELF_FIRST
-        }
+        }, 3000)
       }
     })
   }

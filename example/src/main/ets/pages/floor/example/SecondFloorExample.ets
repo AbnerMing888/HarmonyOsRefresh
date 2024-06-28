@@ -4,7 +4,7 @@ import {
   SecondFloorLayout,
   SfRefreshController,
   WindowFullScreenUtil
-} from '@abner/refresh/Index'
+} from '@abner/refresh'
 import window from '@ohos.window'
 import { FirstFloorView } from './FirstFloorView'
 import { SecondFloorView } from './SecondFloorView'
@@ -28,6 +28,7 @@ struct SecondFloorExample {
   @State isScrollSecondFloor?: boolean = true //默认滑动
   @State firstScrollDistance?: number = 0 //一楼滑动距离
   @State isActionStart: number = 0
+  @State isSecondFloorLayoutEnabled: boolean = true
 
   onPageShow(): void {
 
@@ -156,10 +157,16 @@ struct SecondFloorExample {
           //下拉刷新
           setTimeout(() => {
             this.sfController.finishRefresh()
-          }, 2000)
+          }, 5000)
         },
         onScrollStatus: (status) => {
           //当前的滑动状态
+          //这里判断，如果是刷新中，可以禁止页面滑动
+          if (status == RefreshLayoutStatus.Refreshing) {
+            this.isSecondFloorLayoutEnabled = false
+          } else {
+            this.isSecondFloorLayoutEnabled = true
+          }
           if (status == RefreshLayoutStatus.ReleaseHalfFloor) {
             this.showSecondFloorStatus = true
           } else {
@@ -182,5 +189,6 @@ struct SecondFloorExample {
     }
     .height('100%')
     .width('100%')
+    .enabled(this.isSecondFloorLayoutEnabled)
   }
 }

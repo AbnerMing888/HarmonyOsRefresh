@@ -10,4 +10,5 @@
 /.clang-tidy
 **/.test
 /refresh
+/list
 /build-profile.json5

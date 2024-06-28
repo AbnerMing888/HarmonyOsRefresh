@@ -29,10 +29,16 @@ struct LayoutViewPage {
       RefreshLayout({
         controller: this.controller,
         onRefresh: () => {
-          this.controller.finishRefresh()
+          setTimeout(() => {
+            //模拟耗时
+            this.controller.finishRefresh()
+          }, 3000)
         },
         onLoadMore: () => {
-          this.controller.finishLoadMore()
+          setTimeout(() => {
+            //模拟耗时
+            this.controller.finishLoadMore()
+          }, 3000)
         },
         itemLayout: this.itemLayout
       })

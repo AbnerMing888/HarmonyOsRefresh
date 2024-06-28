@@ -1,21 +1,23 @@
 import { ActionBar } from '../ActionBar'
-import { ListView } from '@abner/refresh'
+import { ListView, RefreshDataSource } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
  * DATE:2023/10/14
- * INTRODUCE:普通的列表ListView
+ * INTRODUCE:普通的列表懒加载ListView
  * */
 
 @Entry
 @Component
-struct ListViewPage {
-  @State array: number[] = []
+struct ListViewLazyPage {
+  lazyDataSource?: RefreshDataSource = new RefreshDataSource()
 
   aboutToAppear() {
+    let array: number[] = []
     for (let i = 0; i < 20; i++) {
-      this.array.push(i)
+      array.push(i)
     }
+    this.lazyDataSource?.initData(array)
   }
 
   /**
@@ -36,9 +38,9 @@ struct ListViewPage {
 
   build() {
     Column() {
-      ActionBar({ title: "普通的列表ListView" })
+      ActionBar({ title: "普通的懒加载ListView" })
       ListView({
-        items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
+        lazyDataSource: this.lazyDataSource,
         itemLayout: this.itemLayout, //转成你需要的对象
         listAttribute: (attr) => {
           attr.edgeEffect = EdgeEffect.Spring

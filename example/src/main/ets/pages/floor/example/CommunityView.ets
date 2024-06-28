@@ -1,4 +1,4 @@
-import { RefreshController, RefreshLayoutStatus, StaggeredGridView } from '@abner/refresh'
+import { RefreshController, RefreshLayoutStatus, FloorStaggeredGridView, RefreshPositionEnum } from '@abner/refresh'
 
 
 /**
@@ -9,7 +9,7 @@ import { RefreshController, RefreshLayoutStatus, StaggeredGridView } from '@abne
 
 @Component
 export struct CommunityView {
-  @State @Watch("refreshStatusListener") controller: RefreshController = new RefreshController() //刷新控制器
+  @State controller: RefreshController = new RefreshController() //刷新控制器
   private itemHeightArray: number[] = []
   @State array: Array<number> = []
   @State colors: number[] = [0xFFC0CB, 0xDA70D6, 0x6B8E23, 0x6A5ACD, 0x00FFFF, 0x00FF7F]
@@ -27,12 +27,6 @@ export struct CommunityView {
   */
   firstScrollListener() {
     this.enableScrollInteraction = this.firstScrollDistance! < 1
-  }
-
-  refreshStatusListener() {
-    if (this.onScrollStart != undefined) {
-      this.onScrollStart(this.controller.isRefreshStart)
-    }
   }
 
   // 计算FlowItem宽/高
@@ -77,13 +71,18 @@ export struct CommunityView {
 
   build() {
     Column() {
-      StaggeredGridView({
+      FloorStaggeredGridView({
         items: this.array,
         itemLayout: (item: Object, index: number) => this.itemLayout(item, index),
         controller: this.controller,
         itemHeaderLayout: this.itemHeaderLayout,
         isParentControlInteraction: true, //是否父类拦截
         enableScrollInteraction: this.enableScrollInteraction,
+        reachPosition: (refreshPosition: RefreshPositionEnum) => {
+          if (this.onScrollStart != undefined) {
+            this.onScrollStart(refreshPosition == RefreshPositionEnum.TOP)
+          }
+        },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
