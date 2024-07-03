@@ -16,9 +16,11 @@ struct ErrorOrEmptyPage {
   @State showErrorLayout: boolean = false
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
-      this.array.push(i)
-    }
+
+    setTimeout(() => {
+      this.showEmptyLayout = true
+    }, 3000)
+
   }
 
   /**

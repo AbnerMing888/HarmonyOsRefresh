@@ -31,6 +31,7 @@
     "pages/floor/example/SecondFloorExample",
     "pages/list/SlideDeleteListViewPage",
     "pages/list/sort/ListViewSortPage",
-    "pages/floor/SecondFloorPage"
+    "pages/floor/SecondFloorPage",
+    "pages/layout/SystemListViewPage"
   ]
 }

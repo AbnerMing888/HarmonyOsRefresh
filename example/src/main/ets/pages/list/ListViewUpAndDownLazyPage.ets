@@ -15,7 +15,6 @@ struct ListViewUpAndDownLazyPage {
 
   aboutToAppear() {
     this.lazyDataSource.initData(this.getArray())
-
     this.controller.isFooterNothing = true
   }
 
@@ -43,11 +42,6 @@ struct ListViewUpAndDownLazyPage {
       .border({ width: 1, color: Color.Pink })
   }
 
-  @Builder
-  emptyLayout() {
-    Text("我是空")
-  }
-
   build() {
     Column() {
       ActionBar({ title: "刷新加载列表ListView【懒加载】" })
@@ -55,12 +49,9 @@ struct ListViewUpAndDownLazyPage {
         lazyDataSource: this.lazyDataSource,
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉
-        emptyLayout: this.emptyLayout,
-        showEmptyLayout: this.lazyDataSource.totalCount() > 0 ? false : true,
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
-            this.lazyDataSource.deleteAll()
             this.controller.finishRefresh()
           }, 1000)
         },

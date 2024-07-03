@@ -60,11 +60,12 @@ struct StickLayoutViewPage {
     .scrollBar(BarState.Off)
     .friction(0.6)
     .onReachStart(() => {
-      this.listPosition = RefreshPositionEnum.TOP
+      this.listPosition = RefreshPositionEnum.BOTTOM
+
     })
     .onScrollFrameBegin((offset: number, _: ScrollState) => {
       //设置起始位置，保障在顶部时，才能执行下拉刷新
-      if (this.listPosition == 0 && offset <= 0) {
+      if (this.listPosition == RefreshPositionEnum.BOTTOM && offset <= 0) {
         return { offsetRemain: 0 }
       }
       this.listPosition = RefreshPositionEnum.CENTER

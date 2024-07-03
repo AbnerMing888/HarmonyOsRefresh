@@ -2,7 +2,7 @@
 
 基于ArkUI封装的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新，支持侧滑删除、条目吸顶，下滑二楼等功能。
 
-截至2024年6月28日，功能点如下
+主要功能点如下
 
 - 1、**支持ListView列表/下拉刷新/上拉加载**
 - 2、**支持GridView网格列表/下拉刷新/上拉加载**
@@ -89,14 +89,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.1.9"}
+"dependencies": { "@abner/refresh": "^1.2.0"}
 ```
 
 <p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.1.9.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.2.0.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
@@ -252,8 +252,8 @@ itemLayout(item: Object, index: number): void {
 lazyDataSource:this.lazyDataSource
 //第二种方式，需要设置items对象
 onLazyDataSource: (dataSource: RefreshDataSource) => {
-  this.dataSource = dataSource
-}
+          this.dataSource = dataSource
+        }
 ```
 
 **相关属性介绍**
@@ -397,19 +397,19 @@ itemLayout(item: Object, index: number): void {
 @State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
 
 GridView({
-  items: this.array, //数据源 数组,任意类型
-  itemLayout: (item, index) => this.itemLayout(item, index),
-  controller: this.controller, //控制器，负责关闭下拉和上拉
-  isLazyData: false,//禁止懒加载，也就是使用ForEach进行数据加载
-  onRefresh: () => {
-    //下拉刷新
-    this.controller.finishRefresh();
-  },
-  onLoadMore: () => {
-    //上拉加载
-    this.controller.finishLoadMore();
-  }
-})
+        items: this.array, //数据源 数组,任意类型
+        itemLayout: (item, index) => this.itemLayout(item, index),
+        controller: this.controller, //控制器，负责关闭下拉和上拉
+        isLazyData: false,//禁止懒加载，也就是使用ForEach进行数据加载
+        onRefresh: () => {
+          //下拉刷新
+          this.controller.finishRefresh();
+        },
+        onLoadMore: () => {
+          //上拉加载
+          this.controller.finishLoadMore();
+        }
+      })
 
 /**
  * Author:AbnerMing
@@ -473,8 +473,8 @@ itemLayout(item: Object, index: number): void {
 
 ```typescript
 onLazyDataSource: (dataSource: RefreshDataSource) => {
-  this.dataSource = dataSource
-}
+          this.dataSource = dataSource
+        }
 ```
 
 **相关属性介绍**
@@ -574,19 +574,19 @@ itemLayout(item: Object, index: number): void {
 @State controller: RefreshController = new RefreshController() //刷新控制器，声明全局变量
 
 StaggeredGridView({
-  items: this.array, //数据源 数组,任意类型
-  itemLayout: (item, index) => this.itemLayout(item, index),
-  controller: this.controller, //控制器，负责关闭下拉和上拉
-  isLazyData: false,//禁止懒加载，也就是使用ForEach进行数据加载
-  onRefresh: () => {
-    //下拉刷新
-    this.controller.finishRefresh();
-  },
-  onLoadMore: () => {
-    //上拉加载
-    this.controller.finishLoadMore();
-  }
-})
+        items: this.array, //数据源 数组,任意类型
+        itemLayout: (item, index) => this.itemLayout(item, index),
+        controller: this.controller, //控制器，负责关闭下拉和上拉
+        isLazyData: false,//禁止懒加载，也就是使用ForEach进行数据加载
+        onRefresh: () => {
+          //下拉刷新
+          this.controller.finishRefresh();
+        },
+        onLoadMore: () => {
+          //上拉加载
+          this.controller.finishLoadMore();
+        }
+      })
 
 /**
  * Author:AbnerMing
@@ -655,8 +655,8 @@ itemLayout(item: Object, index: number): void {
 
 ```typescript
 onLazyDataSource: (dataSource: RefreshDataSource) => {
-  this.dataSource = dataSource
-}
+          this.dataSource = dataSource
+        }
 ```
 
 **相关属性介绍**
@@ -848,12 +848,12 @@ dataController: DataController = new DataController() //数据控制器
 
 ```typescript
  //增加一个数据
-this.dataController.add(100)
+ this.dataController.add(100)
 //指定位置增加一个数据
 this.dataController.addPosition(2, 999)
 //数组添加
-this.dataController.addArray([200, 300, 400])
-//可变参数形式添加
+ this.dataController.addArray([200, 300, 400])
+ //可变参数形式添加
 this.dataController.addVariable(600, 700)
 //删除第一个
 this.dataController.deleteFirst()
@@ -979,7 +979,6 @@ this.dataSource.changeData(3, 9999)
 - 3、涉及到我的开源库，您提的业务需求，率先第一时间满足，并及时针对性开发。
 - 4、未来我的鸿蒙开源库，可先遣体验。
 - 5、鸿蒙脚手架，正在研发中，可首批次体验使用。
-
 
 
 
