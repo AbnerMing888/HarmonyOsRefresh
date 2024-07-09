@@ -15,7 +15,10 @@ struct StickLayoutViewPage {
   @State listPosition: RefreshPositionEnum = RefreshPositionEnum.TOP
   @State refreshPosition: RefreshPositionEnum = RefreshPositionEnum.TOP
   scroller?: Scroller = new Scroller()
-  @State listNestedScroll?: NestedScrollOptions = undefined
+  @State listNestedScroll?: NestedScrollOptions = {
+    scrollForward: NestedScrollMode.PARENT_FIRST,
+    scrollBackward: NestedScrollMode.SELF_FIRST
+  }
 
   aboutToAppear() {
     for (let i = 0; i < 30; i++) {
@@ -39,7 +42,7 @@ struct StickLayoutViewPage {
           .fontColor(Color.White)
           .width("100%")
           .height("30%")
-          .backgroundColor(Color.Red)
+          .backgroundColor(Color.Pink)
           .textAlign(TextAlign.Center)
 
         Tabs({ barPosition: BarPosition.Start }) {
@@ -58,10 +61,8 @@ struct StickLayoutViewPage {
     .width('100%')
     .height('100%')
     .scrollBar(BarState.Off)
-    .friction(0.6)
     .onReachStart(() => {
       this.listPosition = RefreshPositionEnum.BOTTOM
-
     })
     .onScrollFrameBegin((offset: number, _: ScrollState) => {
       //设置起始位置，保障在顶部时，才能执行下拉刷新
@@ -75,6 +76,7 @@ struct StickLayoutViewPage {
       scrollForward: NestedScrollMode.PARENT_FIRST,
       scrollBackward: NestedScrollMode.PARENT_FIRST
     })
+
   }
 
   /*
@@ -118,7 +120,7 @@ struct StickLayoutViewPage {
         isRefreshSticky: true, //是否吸顶
         refreshStickyPosition: this.listPosition, //吸顶位置
         childScroller: this.scroller,
-        onNestedScroll: (nestedScroll: NestedScrollOptions) => {
+        onStickyNestedScroll: (nestedScroll: NestedScrollOptions) => {
           this.listNestedScroll = nestedScroll
         },
         onRefresh: () => {
