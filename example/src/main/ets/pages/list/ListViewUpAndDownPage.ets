@@ -26,8 +26,8 @@ struct ListViewUpAndDownPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(_: Object, index: number): void {
-    Text("测试数据" + index)
+  itemLayout(item: Object, _: number): void {
+    Text("测试数据" + item)
       .width("95%")
       .height(50)
       .margin(10)
@@ -53,7 +53,6 @@ struct ListViewUpAndDownPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
-            this.array.push(80)
             this.controller.finishLoadMore()
           }, 3000)
         }

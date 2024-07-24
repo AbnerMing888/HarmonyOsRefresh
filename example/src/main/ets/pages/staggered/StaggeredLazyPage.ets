@@ -10,14 +10,15 @@ import { RefreshController, RefreshDataSource, StaggeredGridView } from '@abner/
 @Entry
 @Component
 struct StaggeredLazyPage {
-  array: Array<number> = [100, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  array2: Array<number> = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-  array3: Array<number> = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
   @State lazyDataSource: RefreshDataSource = new RefreshDataSource()
   refreshController: RefreshController = new RefreshController()
 
   aboutToAppear() {
-    this.lazyDataSource.initData(this.array)
+    let array: Array<number> = []
+    for (let i = 0; i < 50; i++) {
+      array.push(i)
+    }
+    this.lazyDataSource.initData(array)
   }
 
   /**
@@ -27,12 +28,12 @@ struct StaggeredLazyPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(item: number, index: number): void {
+  itemLayout(item: number, _: number): void {
     Text("测试数据" + item)
       .width("95%")
       .height(50)
-      .margin(10)
-      .height(150)
+      .height(80)
+      .margin({ left: "2.5%", top: 10 })
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
   }
@@ -45,22 +46,21 @@ struct StaggeredLazyPage {
         itemLayout: (item: Object, index: number) => {
           this.itemLayout(item as number, index) //转成你需要的对象
         },
-        lazyCachedCount: 8,
+        lazyCachedCount: 8, //缓存数量
         controller: this.refreshController, //控制器，负责关闭下拉和上拉
         onRefresh: () => {
           //下拉刷新 模拟耗时
           setTimeout(() => {
-            this.lazyDataSource.deleteAll()
-            this.lazyDataSource.pushDataArray(this.array2)
+            //模拟耗时
             this.refreshController.finishRefresh()
-          }, 1000)
+          }, 3000)
         },
         onLoadMore: () => {
           //上拉加载 模拟耗时
           setTimeout(() => {
-            this.lazyDataSource.pushDataArray(this.array3)
+            //模拟耗时
             this.refreshController.finishLoadMore()
-          }, 1000)
+          }, 3000)
         }
       })
     }.width("100%")

@@ -48,6 +48,7 @@ struct SwipeActionListViewPage {
           this.slideRightMenuLayout(this, index)
         }, //侧滑视图
         swipeLeftMenuLayout: (index: number) => {
+          //这里仅用于测试，可以设置不同的视图
           this.slideRightMenuLayout(this, index)
         }, //侧滑视图
         onRefresh: () => {

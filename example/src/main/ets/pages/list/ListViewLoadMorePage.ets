@@ -1,21 +1,20 @@
 import { ActionBar } from '../ActionBar'
-import { GridView, RefreshController } from '@abner/refresh'
+import { ListView, RefreshController } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
  * DATE:2023/10/14
- * INTRODUCE:下拉上下列表GridView页面 普通
+ * INTRODUCE:上拉加载列表ListView
  * */
-
 
 @Entry
 @Component
-struct GridViewUpAndDownPage {
+struct ListViewLoadMorePage {
   controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
@@ -27,32 +26,26 @@ struct GridViewUpAndDownPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(_: Object, index: number): void {
+  itemLayout(_: number, index: number): void {
     Text("测试数据" + index)
       .width("95%")
       .height(50)
+      .margin(10)
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
-      .margin({ top: 10 })
   }
+
+  @State bool?: boolean = false
 
   build() {
     Column() {
-      ActionBar({ title: "刷新加载列表GridView" })
+      ActionBar({ title: "上拉加载列表ListView" })
 
-      GridView({
-        items: this.array, //数据源 数组
-        itemLayout: (item, index) => this.itemLayout(item, index),
-        controller: this.controller, //控制器，负责关闭下拉和上拉，
-        gridAttribute: (g) => {
-          g.rowsGap = 10 //设置行间距
-        },
-        onRefresh: () => {
-          //下拉刷新
-          setTimeout(() => {
-            //模拟耗时
-            this.controller.finishRefresh()
-          }, 3000)
+      ListView({
+        controller: this.controller, //控制器，负责关闭下拉和上拉
+        items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
+        itemLayout: (item: Object, index: number) => {
+          this.itemLayout(item as number, index) //转成你需要的对象
         },
         onLoadMore: () => {
           //上拉加载

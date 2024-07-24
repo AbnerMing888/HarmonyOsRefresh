@@ -1,15 +1,21 @@
 import { ActionBar } from '../ActionBar'
-import { ListView, RefreshController, RefreshDataSource } from '@abner/refresh'
+import {
+  ListView,
+  LoadMoreLayoutStatusModel,
+  RefreshController,
+  RefreshDataSource,
+  RefreshLayoutStatusModel
+} from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
- * DATE:2023/10/14
- * INTRODUCE:下拉上下列表ListView 懒加载模式
+ * DATE:2024/7/3
+ * INTRODUCE:自定义刷新头和加载尾部
  * */
 
 @Entry
 @Component
-struct ListViewUpAndDownLazyPage {
+struct ListRefreshHeaderFooterPage {
   controller: RefreshController = new RefreshController() //刷新控制器
   lazyDataSource: RefreshDataSource = new RefreshDataSource() //懒加载数据
 
@@ -41,25 +47,54 @@ struct ListViewUpAndDownLazyPage {
       .border({ width: 1, color: Color.Pink })
   }
 
+  /**
+   * Author:AbnerMing
+   * Describe:自定义刷新头
+   */
+  @Builder
+  headerRefreshLayout(model: RefreshLayoutStatusModel) {
+    Text("当前状态：" + model.status)
+      .width("100%")
+      .textAlign(TextAlign.Center)
+      .height(80)
+      .backgroundColor(Color.Pink)
+  }
+
+  /**
+   * Author:AbnerMing
+   * Describe:自定义加载尾部
+   */
+  @Builder
+  footerLoadLayout(model: LoadMoreLayoutStatusModel) {
+    Text("当前状态：" + model.status)
+      .width("100%")
+      .textAlign(TextAlign.Center)
+      .height(80)
+      .backgroundColor(Color.Pink)
+  }
+
   build() {
     Column() {
-      ActionBar({ title: "刷新加载列表ListView【懒加载】" })
-
+      ActionBar({ title: "自定义刷新头和加载尾部" })
       ListView({
         lazyDataSource: this.lazyDataSource,
         itemLayout: (item, index) => this.itemLayout(item, index),
+        headerRefreshLayout: this.headerRefreshLayout, //刷新头
+        footerLoadLayout: this.footerLoadLayout, //加载尾
         controller: this.controller, //控制器，负责关闭下拉和上拉
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
+            //模拟耗时
             this.controller.finishRefresh()
-          }, 1000)
+          }, 2000)
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
+            //模拟耗时
             this.controller.finishLoadMore()
-          }, 1000)
+          }, 2000)
         }
       })
     }

@@ -1,4 +1,4 @@
-import { SecondFloorLayout, SfRefreshController, WindowFullScreenUtil } from '@abner/refresh'
+import { RefreshHeaderType, SecondFloorLayout, SfRefreshController, WindowFullScreenUtil } from '@abner/refresh'
 import { window } from '@kit.ArkUI'
 
 @Entry
@@ -56,6 +56,7 @@ struct SecondFloorPage {
     }
     .width("100%")
     .height("100%")
+    .scrollBar(BarState.Off)
     .onReachStart(() => {
       _this.listPosition = 0
     })
@@ -124,6 +125,7 @@ struct SecondFloorPage {
           //刷新头及二楼滑动属性配置
           attr.fontColor = Color.White
           attr.timeFontColor = Color.White
+          attr.headerType = RefreshHeaderType.POINTS
         },
         onRefresh: () => {
           //下拉刷新
@@ -133,7 +135,6 @@ struct SecondFloorPage {
         },
         onScrollStatus: (status) => {
           //当前的滑动状态
-
         }
       })
         .id('SecondFloorView')

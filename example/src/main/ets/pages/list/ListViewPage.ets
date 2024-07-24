@@ -13,7 +13,7 @@ struct ListViewPage {
   @State array: number[] = []
 
   aboutToAppear() {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 50; i++) {
       this.array.push(i)
     }
   }
@@ -41,7 +41,8 @@ struct ListViewPage {
         items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
         itemLayout: this.itemLayout, //转成你需要的对象
         listAttribute: (attr) => {
-          attr.edgeEffect = EdgeEffect.Spring
+          attr.edgeEffect = EdgeEffect.Spring //设置阻尼效果
+          attr.contentEndOffset = 20 //设置内容区末尾偏移量，目的为了可见
         }
       })
     }

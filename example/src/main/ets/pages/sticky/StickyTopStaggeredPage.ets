@@ -40,16 +40,22 @@ struct StickyTopStaggeredPage {
     .height('100%')
     // 下拉刷新相关
     .onReachStart(() => {
+      this.listPosition = RefreshPositionEnum.TOP
+    })
+    .onReachEnd(() => {
       this.listPosition = RefreshPositionEnum.BOTTOM
     })
     .onScrollFrameBegin((offset: number, _: ScrollState) => {
-      if (this.listPosition == RefreshPositionEnum.BOTTOM && offset <= 0) {
+      if ((this.listPosition == RefreshPositionEnum.TOP && offset <= 0) || (
+        this.listPosition == RefreshPositionEnum.BOTTOM && offset >= 0
+      )
+      ) {
         return { offsetRemain: 0 }
       }
+      //不在底部
       this.listPosition = RefreshPositionEnum.CENTER
       return { offsetRemain: offset }
     })
-
   }
 
   /*
@@ -69,8 +75,8 @@ struct StickyTopStaggeredPage {
 @Component
 struct StickyStaggeredView {
   @State pageType: number = 0
-  @Prop listPosition: RefreshPositionEnum = RefreshPositionEnum.BOTTOM
-  @State controller: RefreshController = new RefreshController() //刷新控制器
+  @Prop listPosition: RefreshPositionEnum = RefreshPositionEnum.TOP
+  controller: RefreshController = new RefreshController() //刷新控制器
   @State arr1: number[] = [] //实际情况当以tab指示器对应得数据为主，这里仅仅是测试
   @State arr2: number[] = []
   private itemHeightArray: number[] = []
@@ -130,10 +136,6 @@ struct StickyStaggeredView {
         setTimeout(() => {
           this.controller.finishLoadMore()
         }, 1000)
-      },
-      nestedScroll: {
-        scrollForward: NestedScrollMode.PARENT_FIRST,
-        scrollBackward: NestedScrollMode.SELF_FIRST
       }
     })
   }

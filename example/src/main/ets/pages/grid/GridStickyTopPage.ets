@@ -1,14 +1,14 @@
-import { ListView, RefreshController, RefreshPositionEnum } from '@abner/refresh'
+import { GridView, RefreshController, RefreshPositionEnum } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
- * DATE:2024/5/14
- * INTRODUCE:吸顶页面
+ * DATE:2024/7/16
+ * INTRODUCE:网格吸顶页面 案例
  * */
 
 @Entry
 @Component
-struct StickyTopPage {
+struct GridStickyTopPage {
   @State listPosition: RefreshPositionEnum = RefreshPositionEnum.BOTTOM
 
   build() {
@@ -62,7 +62,7 @@ struct StickyTopPage {
   */
   @Builder
   testLayout(type: number) {
-    StickyListView({ pageType: type, listPosition: this.listPosition })
+    StickyGridView({ pageType: type, listPosition: this.listPosition })
   }
 }
 
@@ -71,7 +71,7 @@ struct StickyTopPage {
 * Describe:吸顶列表
 */
 @Component
-struct StickyListView {
+struct StickyGridView {
   @State pageType: number = 0
   controller: RefreshController = new RefreshController() //刷新控制器
   @State arr1: number[] = [] //实际情况当以tab指示器对应得数据为主，这里仅仅是测试
@@ -98,7 +98,7 @@ struct StickyListView {
   }
 
   build() {
-    ListView({
+    GridView({
       items: this.pageType == 0 ? this.arr1 : this.arr2,
       itemLayout: this.itemLayout,
       controller: this.controller,

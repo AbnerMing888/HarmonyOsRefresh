@@ -3,15 +3,15 @@ import { ActionBar } from '../ActionBar'
 
 /**
  * AUTHOR:AbnerMing
- * DATE:2024/5/24
- * INTRODUCE:listView分组吸顶
+ * DATE:2024/7/12
+ * INTRODUCE:listView只分组不吸顶
  * */
 
 @Entry
 @Component
-struct ListItemGroupPage {
+struct ListItemGroupNoStickyPage {
   controller: RefreshController = new RefreshController() //刷新控制器
-  @State private itemGroupModelArray?: Array<ItemGroupModel> = [
+  private itemGroupModelArray?: Array<ItemGroupModel> = [
     {
       title: "星期一",
       items: ["语文", "数学", "英语", "物理"]
@@ -67,9 +67,6 @@ struct ListItemGroupPage {
   build() {
     Column() {
       ActionBar({ title: "列表分组吸顶" })
-        .onClick(() => {
-          this.itemGroupModelArray?.push({ title: "我是测试", items: ["语0文", "数学", "英语", "物理"] })
-        })
       ListView({
         controller: this.controller, //刷新控制器
         itemGroupHeader: this.itemGroupHeader, //分组头

@@ -4,7 +4,7 @@ import { ListView, RefreshController, RefreshDataSource } from '@abner/refresh'
 /**
  * AUTHOR:AbnerMing
  * DATE:2024/5/6
- * INTRODUCE:侧滑右侧展示按钮
+ * INTRODUCE:侧滑直接删除
  * */
 
 @Entry

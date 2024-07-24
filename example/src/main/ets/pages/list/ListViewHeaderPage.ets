@@ -18,6 +18,7 @@ struct ListViewHeaderPage {
     for (let i = 0; i < 50; i++) {
       this.array.push(i)
     }
+
   }
 
   /**
@@ -66,7 +67,6 @@ struct ListViewHeaderPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
-            this.array.push(90)
             this.controller.finishLoadMore();
           }, 3000)
         }

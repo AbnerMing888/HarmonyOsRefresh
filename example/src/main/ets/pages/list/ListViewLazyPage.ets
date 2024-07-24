@@ -4,7 +4,7 @@ import { ListView, RefreshDataSource } from '@abner/refresh'
 /**
  * AUTHOR:AbnerMing
  * DATE:2023/10/14
- * INTRODUCE:普通的列表懒加载ListView
+ * INTRODUCE:懒加载数据ListView
  * */
 
 @Entry
@@ -38,12 +38,13 @@ struct ListViewLazyPage {
 
   build() {
     Column() {
-      ActionBar({ title: "普通的懒加载ListView" })
+      ActionBar({ title: "懒加载数据ListView" })
       ListView({
         lazyDataSource: this.lazyDataSource,
         itemLayout: this.itemLayout, //转成你需要的对象
         listAttribute: (attr) => {
           attr.edgeEffect = EdgeEffect.Spring
+          attr.contentEndOffset = 20 //设置内容区末尾偏移量，目的为了可见
         }
       })
     }

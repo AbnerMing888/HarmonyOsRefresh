@@ -209,7 +209,7 @@ itemLayout(item: Object, index: number): void {
 | lazyCachedCount         | number                                      | 懒加载缓存数据量，默认为1                                    |
 | onLazyDataSource        | 回调                                          | 懒加载数据回调                                          |
 | lazyDataSource          | RefreshDataSource                           | 懒加载数据操作对象                                        |
-| itemHeaderLayout        | @BuilderParam                               | 传递的头组件                                           |
+| itemHeaderLayout        | @BuilderParam                               | 传递的头部组件                                          |
 | itemFooterLayout        | @BuilderParam                               | 传递的尾部组件                                          |
 | headerRefreshLayout     | @BuilderParam                               | 自定义刷新头组件                                         |
 | footerLoadLayout        | @BuilderParam                               | 自定义加载尾组件                                         |

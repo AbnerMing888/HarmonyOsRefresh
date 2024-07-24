@@ -16,11 +16,9 @@ struct ErrorOrEmptyPage {
   @State showErrorLayout: boolean = false
 
   aboutToAppear() {
-
-    setTimeout(() => {
-      this.showEmptyLayout = true
-    }, 3000)
-
+    for (let i = 0; i < 50; i++) {
+      this.array.push(i)
+    }
   }
 
   /**
@@ -84,10 +82,10 @@ struct ErrorOrEmptyPage {
       ListView({
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),
-        emptyLayout: this.emptyLayout,
-        errorLayout: this.errorLayout,
-        showEmptyLayout: this.showEmptyLayout,
-        showErrorLayout: this.showErrorLayout,
+        emptyLayout: this.emptyLayout, //空布局
+        errorLayout: this.errorLayout, //错误布局
+        showEmptyLayout: this.showEmptyLayout, //控制空布局展示
+        showErrorLayout: this.showErrorLayout, //控制错误布局展示
         controller: this.controller, //控制器，负责关闭下拉和上拉
         isLazyData: false,
         onRefresh: () => {

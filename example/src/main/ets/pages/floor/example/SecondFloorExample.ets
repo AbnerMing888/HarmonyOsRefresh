@@ -124,7 +124,6 @@ struct SecondFloorExample {
         isScrollSecondFloor: (this.currentIndex == 0 && this.isScrollSecondFloor) ? true : false,
         isNeedHalfFloor: true, //是否需要半楼功能
         showSecondFloorStatus: this.showSecondFloorStatus,
-        refreshHeaderHeight: 30,
         secondFloorView: () => {
           this.secondFloorView()
         }, //二楼视图

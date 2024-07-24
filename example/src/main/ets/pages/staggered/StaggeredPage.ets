@@ -50,19 +50,7 @@ struct StaggeredPage {
       StaggeredGridView({
         items: this.array,
         itemLayout: (item: Object, index: number) => this.itemLayout(item, index),
-        controller: this.controller,
-        onRefresh: () => {
-          //下拉刷新
-          setTimeout(() => {
-            this.controller.finishRefresh()
-          }, 3000)
-        },
-        onLoadMore: () => {
-          //上拉加载
-          setTimeout(() => {
-            this.controller.finishLoadMore()
-          }, 3000)
-        }
+        controller: this.controller
       })
     }
   }

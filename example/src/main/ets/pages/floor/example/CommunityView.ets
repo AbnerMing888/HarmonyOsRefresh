@@ -18,8 +18,8 @@ export struct CommunityView {
   scroller: Scroller = new Scroller()
   onScrollStart?: (isRefreshStart: boolean) => void
   @State enableScrollInteraction?: boolean = true
-  @Prop @Watch("firstScrollListener") firstScrollDistance?: number = 0 //一楼滑动距离
   @Prop refreshLayoutStatus?: RefreshLayoutStatus = RefreshLayoutStatus.Pulling //当前的刷新状态
+  @Prop @Watch("firstScrollListener") firstScrollDistance?: number = 0 //一楼滑动距离
 
   /*
   * Author:AbnerMing
@@ -62,11 +62,10 @@ export struct CommunityView {
   */
   @Builder
   itemHeaderLayout() {
-    Scroll() {
+    Column() {
 
     }.width("100%")
     .height(200)
-    .enableScrollInteraction(this.enableScrollInteraction)
   }
 
   build() {
