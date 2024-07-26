@@ -81,6 +81,7 @@ struct ListRefreshHeaderFooterPage {
         itemLayout: (item, index) => this.itemLayout(item, index),
         headerRefreshLayout: this.headerRefreshLayout, //刷新头
         footerLoadLayout: this.footerLoadLayout, //加载尾
+
         controller: this.controller, //控制器，负责关闭下拉和上拉
         onRefresh: () => {
           //下拉刷新

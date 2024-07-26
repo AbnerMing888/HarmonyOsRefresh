@@ -8,6 +8,7 @@ struct SecondFloorPage {
   @State topViewHeight: number = 44
   @State statusBarHeight: number = 0
   @State mScrollInteraction: boolean = true
+  scroller: Scroller = new Scroller()
 
   onPageShow(): void {
 
@@ -46,30 +47,16 @@ struct SecondFloorPage {
   * Author:AbnerMing
   * Describe:一楼视图
   */
-  @State listPosition: number = 0; // 0代表滚动到List顶部，1代表中间值，2代表滚动到List底部。
-
   @Builder
   firstFloorView(_this: SecondFloorPage) {
-    Scroll() {
+    Scroll(_this.scroller) {
       Image($r("app.media.taobao_index"))
         .width("100%")
     }
     .width("100%")
     .height("100%")
     .scrollBar(BarState.Off)
-    .onReachStart(() => {
-      _this.listPosition = 0
-    })
     .enableScrollInteraction(_this.mScrollInteraction)
-    .onScrollFrameBegin((offset: number, _: ScrollState) => {
-      _this.sfController.markStartLocation(_this.listPosition == 0)
-      if (_this.listPosition == 0 && offset <= 0) {
-        return { offsetRemain: 0 }
-      }
-      _this.listPosition = 1
-      return { offsetRemain: offset }
-    })
-
   }
 
   /*
@@ -107,6 +94,7 @@ struct SecondFloorPage {
   build() {
     RelativeContainer() {
       SecondFloorLayout({
+        childScroller: this.scroller,
         firstFloorView: () => { //一楼视图
           this.firstFloorView(this)
         },

@@ -9,6 +9,8 @@ import { ActionBar } from '../ActionBar'
 @Entry
 @Component
 struct GridDropPage {
+  @State items: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
   /**
    * Author:AbnerMing
    * Describe:条目视图
@@ -41,14 +43,17 @@ struct GridDropPage {
     Column() {
       ActionBar({ title: "网格拖拽" })
       GridDropView({
-        items: ["0", "1", "2", "3", "4", "5", "6", "7"],
+        items: this.items,
         itemLayout: this.itemLayout,
         dropLayout: this.dropLayout,
         rowsGap: 10,
         columnsGap: 10,
         isEditMode: true,
         prohibitDrop: [0, 1], //禁止拖拽的索引
-        prohibitMaxSwap: 4//禁止交换
+        prohibitMaxSwap: 0, //禁止交换
+        onDropData: (items) => {
+          console.log("拖拽结束：" + JSON.stringify(items))
+        }
       })
     }.width("100%")
     .height("100%")

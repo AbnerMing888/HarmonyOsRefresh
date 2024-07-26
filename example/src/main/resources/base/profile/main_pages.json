@@ -32,6 +32,7 @@
     "pages/data/LazyDataOperationPage",
     "pages/sticky/StickyTopPage",
     "pages/sticky/StickyTopStaggeredPage",
+    "pages/sticky/ArbitrarilyStickyTopPage",
     "pages/default/ErrorOrEmptyPage",
     "pages/tabs/TabsPage",
     "pages/list/SwipeActionListViewPage",

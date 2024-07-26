@@ -1,5 +1,7 @@
 import { ListView, RefreshController } from '@abner/refresh/Index'
 import { ActionBar } from '../ActionBar'
+import vibrator from '@ohos.vibrator'
+import { BusinessError } from '@ohos.base'
 
 /**
  * AUTHOR:AbnerMing
@@ -14,6 +16,7 @@ struct ErrorOrEmptyPage {
   @State array: Array<number> = []
   @State showEmptyLayout: boolean = false
   @State showErrorLayout: boolean = false
+  @State showLoadingLayout: boolean = false
 
   aboutToAppear() {
     for (let i = 0; i < 50; i++) {
@@ -59,7 +62,23 @@ struct ErrorOrEmptyPage {
   errorLayout() {
     Column() {
       Text("我是一个错误布局")
-    }.width("100%")
+    }
+    .width("100%")
+    .height("100%")
+    .backgroundColor(Color.Pink)
+    .justifyContent(FlexAlign.Center)
+  }
+
+  /*
+* Author:AbnerMing
+* Describe:错误布局
+*/
+  @Builder
+  loadingLayout() {
+    Column() {
+      Text("我是一个Loading布局")
+    }
+    .width("100%")
     .height("100%")
     .backgroundColor(Color.Pink)
     .justifyContent(FlexAlign.Center)
@@ -77,6 +96,10 @@ struct ErrorOrEmptyPage {
           .onClick(() => {
             this.showErrorLayout = !this.showErrorLayout
           })
+        Button("加载布局")
+          .onClick(() => {
+            this.showLoadingLayout = !this.showLoadingLayout
+          })
       }
 
       ListView({
@@ -84,8 +107,10 @@ struct ErrorOrEmptyPage {
         itemLayout: (item, index) => this.itemLayout(item, index),
         emptyLayout: this.emptyLayout, //空布局
         errorLayout: this.errorLayout, //错误布局
+        loadingLayout: this.loadingLayout, //loading布局
         showEmptyLayout: this.showEmptyLayout, //控制空布局展示
         showErrorLayout: this.showErrorLayout, //控制错误布局展示
+        showLoadingLayout: this.showLoadingLayout, //控制loadingLayout
         controller: this.controller, //控制器，负责关闭下拉和上拉
         isLazyData: false,
         onRefresh: () => {

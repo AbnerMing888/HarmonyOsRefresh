@@ -15,7 +15,7 @@ struct GridStickLayoutViewPage {
   @State gridPosition: RefreshPositionEnum = RefreshPositionEnum.TOP
   @State gridNestedScroll?: NestedScrollOptions = {
     scrollForward: NestedScrollMode.PARENT_FIRST,
-    scrollBackward: NestedScrollMode.PARENT_FIRST
+    scrollBackward: NestedScrollMode.SELF_FIRST
   }
   @State enableScrollInteraction: boolean = true
 
@@ -76,6 +76,7 @@ struct GridStickLayoutViewPage {
       enableScrollInteraction: _this.enableScrollInteraction,
       items: arr, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
       itemLayout: _this.listItemLayout,
+      prohibitRefresh: true,
       gridNestedScroll: _this.gridNestedScroll,
       onGridRefreshPosition: (position) => {
         //获取ListView的位置

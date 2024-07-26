@@ -66,12 +66,13 @@ struct ListItemGroupNoStickyPage {
 
   build() {
     Column() {
-      ActionBar({ title: "列表分组吸顶" })
+      ActionBar({ title: "列表分组不吸顶" })
       ListView({
         controller: this.controller, //刷新控制器
         itemGroupHeader: this.itemGroupHeader, //分组头
         itemGroupData: this.itemGroupModelArray, //分组数据
         itemLayout: this.itemLayout, //内容视图
+        groupNoSticky: true, //分组不吸顶
         onRefresh: () => {
           setTimeout(() => {
             //模拟耗时

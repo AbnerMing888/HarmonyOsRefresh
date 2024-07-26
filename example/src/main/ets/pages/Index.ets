@@ -18,7 +18,7 @@ struct Index {
     let listName = [
       "普通数据模式", "懒加载数据模式", "下拉刷新", "上拉加载", "刷新&加载",
       "添加头组件", "添加尾组件", "自定义刷新头加载尾", "侧滑按钮", "侧滑直接删除", "列表分组吸顶",
-      "列表分组不吸顶", "页面吸顶", "页面顶部吸顶刷新", "结合Tabs使用", "自动刷新"
+      "列表分组不吸顶", "页面吸顶", "页面顶部吸顶刷新", "任意布局吸顶", "结合Tabs使用", "自动刷新"
     ]
     let listUrl = [
       "pages/list/ListViewPage", //普通数据模式
@@ -35,8 +35,9 @@ struct Index {
       "pages/group/ListItemGroupNoStickyPage", //列表分组不吸顶
       "pages/sticky/StickyTopPage", //列表页面吸顶
       "pages/layout/StickLayoutViewPage", //列表顶部吸顶刷新
+      "pages/sticky/ArbitrarilyStickyTopPage", //任意布局吸顶刷新
       "pages/tabs/TabsPage", //结合Tabs使用
-      "pages/list/ListAutoRefreshPage", //自动刷新
+      "pages/list/ListAutoRefreshPage",//自动刷新
     ]
     let listDataArray: GridData[] = []
     for (let i = 0; i < listName.length; i++) {

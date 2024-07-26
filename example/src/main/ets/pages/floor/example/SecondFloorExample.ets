@@ -143,6 +143,7 @@ struct SecondFloorExample {
           attr.halfFloorText = "继续下拉查看更多↓"
           attr.releaseSecondFloorText = "继续下拉查看更多↓"
           attr.secondFloorText = ""
+          attr.marginBottom = 0
           if (attr.headerPointsAttr != undefined) {
             attr.headerPointsAttr.secondFloorStatusText = "二楼可以访问品牌专区"
             attr.headerPointsAttr.fontColor = Color.White

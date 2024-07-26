@@ -35,23 +35,15 @@ struct GridViewPage {
 
   }
 
-  @Builder
-  itemHeaderLayout(): void {
-    Column() {
-      Text("我是头View")
-    }.height(100)
-    .width("100%")
-    .backgroundColor(Color.Pink)
-    .justifyContent(FlexAlign.Center)
-  }
-
   build() {
     Column() {
       ActionBar({ title: "普通的列表GridView" })
       GridView({
         items: this.array, //数据源 数组
         itemLayout: (item, index) => this.itemLayout(item, index),
-        itemHeaderLayout: this.itemHeaderLayout,
+        gridAttribute: (attr) => {
+          attr.edgeEffect = EdgeEffect.Spring //设置阻尼效果
+        }
       })
     }
   }
