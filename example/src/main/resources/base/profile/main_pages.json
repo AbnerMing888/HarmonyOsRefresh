@@ -33,6 +33,7 @@
     "pages/sticky/StickyTopPage",
     "pages/sticky/StickyTopStaggeredPage",
     "pages/sticky/ArbitrarilyStickyTopPage",
+    "pages/sticky/StickTopRefreshViewPage",
     "pages/default/ErrorOrEmptyPage",
     "pages/tabs/TabsPage",
     "pages/list/SwipeActionListViewPage",
@@ -45,6 +46,8 @@
     "pages/layout/SystemListViewPage",
     "pages/list/ListRefreshHeaderFooterPage",
     "pages/list/ListViewFooterPage",
-    "pages/group/ListItemGroupNoStickyPage"
+    "pages/group/ListItemGroupNoStickyPage",
+    "pages/sticky/StickyTopActionBarPage",
+    "pages/staggered/ArbitrarilyStaggeredStickyTopPage"
   ]
 }

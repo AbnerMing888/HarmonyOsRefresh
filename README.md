@@ -89,14 +89,14 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.3.3"}
+"dependencies": { "@abner/refresh": "^1.3.4"}
 ```
 
 <p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>
 
 ### 2、本地静态共享包har包使用【不推荐】
 
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.3.3.har">点击下载</a></p>
+<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.3.4.har">点击下载</a></p>
 <p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
 <p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_refresh_har.jpg"></p>
 <p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>

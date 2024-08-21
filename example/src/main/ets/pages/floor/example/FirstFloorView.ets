@@ -14,7 +14,7 @@ export struct FirstFloorView {
   onScrollStart?: (isRefreshStart: boolean) => void
   @Prop firstScrollDistance?: number = 0 //一楼滑动距离
   @Prop refreshLayoutStatus?: RefreshLayoutStatus = RefreshLayoutStatus.Pulling //当前的刷新状态
-  private arcMaxHeight: number = 20
+  private arcMaxHeight: number = 40
 
   @Builder
   itemLayout(position: number, _this: FirstFloorView) {

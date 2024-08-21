@@ -113,6 +113,9 @@ struct SecondFloorExample {
       .height(_this.topViewHeight)
       .padding({ top: _this.statusBarHeight })
       .backgroundColor(Color.Pink)
+      .onClick(() => {
+        _this.sfController.autoRefresh()
+      })
   }
 
   build() {
@@ -159,7 +162,11 @@ struct SecondFloorExample {
             this.sfController.finishRefresh()
           }, 5000)
         },
+        onChangeScrollStatus: (status) => {
+
+        },
         onScrollStatus: (status) => {
+          console.log("===================" + status)
           //当前的滑动状态
           //这里判断，如果是刷新中，可以禁止页面滑动
           if (status == RefreshLayoutStatus.Refreshing) {

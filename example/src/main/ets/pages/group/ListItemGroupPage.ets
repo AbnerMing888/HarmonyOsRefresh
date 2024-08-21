@@ -56,7 +56,7 @@ struct ListItemGroupPage {
   }
 
   @Builder
-  itemGroupHeader(item: Object) {
+  itemGroupHeader(item: Object, position: number) {
     Text((item as ItemGroupModel).title)
       .width("100%")
       .height(50)
@@ -67,9 +67,6 @@ struct ListItemGroupPage {
   build() {
     Column() {
       ActionBar({ title: "列表分组吸顶" })
-        .onClick(() => {
-          this.itemGroupModelArray?.push({ title: "我是测试", items: ["语0文", "数学", "英语", "物理"] })
-        })
       ListView({
         controller: this.controller, //刷新控制器
         itemGroupHeader: this.itemGroupHeader, //分组头

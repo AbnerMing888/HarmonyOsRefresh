@@ -27,6 +27,7 @@ export struct CommunityView {
   */
   firstScrollListener() {
     this.enableScrollInteraction = this.firstScrollDistance! < 1
+
   }
 
   // 计算FlowItem宽/高
@@ -54,6 +55,7 @@ export struct CommunityView {
     }.width("100%")
     .height(this.itemHeightArray[index % 100])
     .backgroundColor(this.colors[index % 5])
+
   }
 
   /*
@@ -61,11 +63,17 @@ export struct CommunityView {
   * Describe:头部组件，可以作为轮播、金刚位等
   */
   @Builder
-  itemHeaderLayout() {
+  itemHeaderLayout(_this: CommunityView) {
     Column() {
 
     }.width("100%")
     .height(200)
+    .onClick(() => {
+      //未滑动时执行点击
+      if (_this.firstScrollDistance == 0) {
+        console.log("===============我点击了")
+      }
+    })
   }
 
   build() {
@@ -74,8 +82,10 @@ export struct CommunityView {
         items: this.array,
         itemLayout: (item: Object, index: number) => this.itemLayout(item, index),
         controller: this.controller,
-        itemHeaderLayout: this.itemHeaderLayout,
-        isParentControlInteraction: true, //是否父类拦截
+        itemHeaderLayout: () => {
+          this.itemHeaderLayout(this)
+        },
+        isParentControlInteraction: false, //是否父类拦截
         enableScrollInteraction: this.enableScrollInteraction,
         reachPosition: (refreshPosition: RefreshPositionEnum) => {
           if (this.onScrollStart != undefined) {

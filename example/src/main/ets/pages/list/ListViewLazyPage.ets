@@ -27,8 +27,8 @@ struct ListViewLazyPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(_: Object, index: number): void {
-    Text("测试数据" + index)
+  itemLayout(item: Object, index: number): void {
+    Text("测试数据" + item.toString())
       .width("95%")
       .height(50)
       .margin(10)

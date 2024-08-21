@@ -60,7 +60,9 @@ export struct SecondFloorView {
         .width("100%")
         .height(120)
         .borderRadius(8)
-    }
+    }.onClick(() => {
+      console.log("================" + index)
+    })
   }
 
   build() {
