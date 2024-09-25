@@ -113,6 +113,7 @@ struct StickyGridView {
       onLoadMore: () => {
         // 上拉加载 模拟耗时
         setTimeout(() => {
+          this.arr1.push(300)
           this.controller.finishLoadMore()
         }, 3000)
       }

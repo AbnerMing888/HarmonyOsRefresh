@@ -44,11 +44,11 @@ struct GridStickLayoutViewPage {
         .textAlign(TextAlign.Center)
       Tabs({ barPosition: BarPosition.Start }) {
         TabContent() {
-          this.testLayout(this, this.arr1)
+          this.testLayout(this, 0)
         }.tabBar("Tab1")
 
         TabContent() {
-          this.testLayout(this, this.arr2)
+          this.testLayout(this, 1)
         }.tabBar("Tab2")
       }.vertical(false)
     }
@@ -70,16 +70,17 @@ struct GridStickLayoutViewPage {
   }
 
   @Builder
-  testLayout(_this: GridStickLayoutViewPage, arr: number[]) {
+  testLayout(_this: GridStickLayoutViewPage, type: number) {
     //可以是任意的列表等组件
     GridView({
       enableScrollInteraction: _this.enableScrollInteraction,
-      items: arr, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
+      items: type == 0 ? _this.arr1 : _this.arr2, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
       itemLayout: _this.listItemLayout,
       prohibitRefresh: true,
+      isRefreshSticky: true,
       gridNestedScroll: _this.gridNestedScroll,
       onGridRefreshPosition: (position) => {
-        //获取ListView的位置
+        //获取GridView的位置
         _this.gridPosition = position
       }
     })
@@ -109,6 +110,7 @@ struct GridStickLayoutViewPage {
         onLoadMore: () => {
           setTimeout(() => {
             //模拟耗时
+            this.arr1.push(1000)
             this.controller.finishLoadMore()
           }, 3000)
         }

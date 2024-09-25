@@ -16,8 +16,9 @@ struct Index {
 
   aboutToAppear(): void {
     let listName = [
-      "普通数据模式", "懒加载数据模式", "下拉刷新", "上拉加载", "刷新&加载",
+      "普通数据模式", "懒加载数据模式", "下拉刷新", "上拉加载", "刷新&加载", "加载无数据固定",
       "添加头组件", "添加尾组件", "自定义刷新头加载尾", "侧滑按钮", "侧滑直接删除", "列表分组吸顶",
+      "分组吸顶(带分组索引)",
       "列表分组不吸顶", "页面吸顶", "页面顶部吸顶刷新", "任意布局吸顶", "顶部吸顶效果2", "结合Tabs使用", "自动刷新"
     ]
     let listUrl = [
@@ -26,12 +27,14 @@ struct Index {
       "pages/list/ListViewRefreshPage", //下拉刷新
       "pages/list/ListViewLoadMorePage", //上拉加载
       "pages/list/ListViewUpAndDownPage", //普通的列表下拉刷新和上拉加载
+      "pages/list/ListViewFixedBottomLoadPage", //底部加载无数据固定
       "pages/list/ListViewHeaderPage", //带有头的ListView
       "pages/list/ListViewFooterPage", //带有尾的ListView
       "pages/list/ListRefreshHeaderFooterPage", //自定义刷新头加载尾
       "pages/list/SwipeActionListViewPage", //侧滑按钮
       "pages/list/SlideDeleteListViewPage", //侧滑删除
       "pages/group/ListItemGroupPage", //列表分组吸顶
+      "pages/group/ListItemGroupIndexPage", //列表分组吸顶,布局带有分组索引
       "pages/group/ListItemGroupNoStickyPage", //列表分组不吸顶
       "pages/sticky/StickyTopPage", //列表页面吸顶
       "pages/layout/StickLayoutViewPage", //列表顶部吸顶刷新
@@ -113,6 +116,7 @@ struct Index {
     }
 
     this.itemArray.push(new ListData("其他常见功能", otherDataArray))
+
   }
 
   /**

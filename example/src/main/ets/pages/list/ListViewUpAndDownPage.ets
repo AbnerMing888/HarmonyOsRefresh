@@ -14,11 +14,9 @@ struct ListViewUpAndDownPage {
   @State array: Array<number> = []
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       this.array.push(i)
     }
-
-
   }
 
   /**
@@ -37,8 +35,6 @@ struct ListViewUpAndDownPage {
       .border({ width: 1, color: Color.Pink })
   }
 
-  private mContentScroller: Scroller = new Scroller()
-
   build() {
     Column() {
       ActionBar({ title: "刷新加载列表ListView" })
@@ -46,13 +42,9 @@ struct ListViewUpAndDownPage {
         items: this.array,
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉
-        onContentScroller: (scroller) => {
-          this.mContentScroller = scroller
-        },
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
-            this.controller.isNothingFixedBottom = false
             this.controller.finishRefresh()
           }, 3000)
         },
@@ -60,7 +52,10 @@ struct ListViewUpAndDownPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
-            this.controller.finishLoadMoreFixedBottom(true)
+            this.array.push(2000)
+            this.array.push(2000)
+            this.array.push(2000)
+            this.controller.finishLoadMore()
           }, 3000)
         }
       })

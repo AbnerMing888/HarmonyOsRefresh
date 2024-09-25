@@ -88,9 +88,6 @@ struct SystemListViewPage {
         controller: this.controller,
         refreshPosition: this.refreshPosition, //定位位置
         childScroller: this.scroller,
-        onNestedScroll: (nestedScroll: NestedScrollOptions) => {
-          this.listNestedScroll = nestedScroll
-        },
         onRefresh: () => {
           setTimeout(() => {
             //模拟耗时

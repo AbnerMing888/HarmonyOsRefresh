@@ -66,7 +66,7 @@
 
 ## 开发环境
 
-DevEco Studio NEXT Developer Beta1,Build Version: 5.0.3.403
+DevEco Studio NEXT Developer Beta1,Build Version: 5.0.3.706
 
 Api版本：**11**
 
@@ -76,7 +76,7 @@ modelVersion：5.0.0
 
 有多种使用方式，比如远程依赖、本地静态共享包依赖,源码方式依赖，推荐使用**远程依赖**，方便快捷，有最新修改可以及时生效。
 
-### 1、远程依赖方式使用【推荐】
+### 远程依赖方式使用
 
 方式一：在Terminal窗口中，执行如下命令安装三方包，DevEco Studio会自动在工程的oh-package.json5中自动添加三方包依赖。
 
@@ -89,20 +89,11 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.3.4"}
+"dependencies": { "@abner/refresh": "^1.3.7"}
 ```
 
 <p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>
 
-### 2、本地静态共享包har包使用【不推荐】
-
-<p>首先，下载har包，<a href="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/refresh-1.3.4.har">点击下载</a></p>
-<p>下载之后，把har包复制项目中，目录自己创建，如下，我创建了一个libs目录，复制进去</p>
-<p><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_refresh_har.jpg"></p>
-<p>引入之后，进行同步项目，点击Sync Now即可，当然了你也可以，将鼠标放置在报错处会出现提示，在提示框中点击Run 'ohpm install'。</p>
-<p>需要注意，<strong>@abner/refresh</strong>，是用来区分目录的，可以自己定义，比如@aa/bb等，关于静态共享包的创建和使用，请查看如下我的介绍，这里就不过多介绍</p>
-
-[HarmonyOS开发：走进静态共享包的依赖与使用](https://juejin.cn/post/7274982412245876776)
 
 ### 查看是否引用成功
 
@@ -117,6 +108,9 @@ ohpm install @abner/refresh
 
 需要注意，目前ListView、GridView、StaggeredGridView是自带刷新的，当然了您也可以当作普通的列表进行使用。
 还有一点需要注意，目前默认情况下是**懒加载数据模式**。
+
+**需要注意**：默认列表是没有高度的，如果你要实现定位或者获取滑动位置，必须要设置高度,100%或者其它，目前上拉加载是带有缩回的，如果
+你要直接加载数据，请设置slideDisplayLoadData为true，关于禁止阻尼效果，isScrollSpring为false即可。
 
 ### 1、ListView
 
@@ -305,34 +299,49 @@ onLazyDataSource: (dataSource: RefreshDataSource) => {
 
 默认的刷新头属性
 
-| 属性              | 类型                                        | 概述                                    |
-|-----------------|-------------------------------------------|---------------------------------------|
-| width           | Length                                    | 刷新控件的宽度                               |
-| height          | Length                                    | 刷新头的高度 默认高度 80                        |
-| timeFormat      | RefreshHeaderTimeFormat                   | 刷新头的时间格式,默认月日时分                       |
-| timeLabel       | RefreshHeaderTimeLabel                    | 刷新头的标签格式                              |
-| hideTime        | boolean                                   | 是否隐藏刷新头时间，默认展示                        |
-| fontSize        | number / string / Resource                | 刷新头的文字大小                              |
-| fontColor       | ResourceColor                             | 刷新头的文字颜色                              |
-| timeFontSize    | number / string / Resource                | 刷新头的时间文字大小                            |
-| timeFontColor   | ResourceColor                             | 刷新头的时间文字颜色                            |
-| marginIconLeft  | Length                                    | 刷新文字距离左边的距离                           |
-| iconDown        | PixelMap/ResourceStr/DrawableDescriptor   | 刷新的下拉箭头                               |
-| iconUpLoad      | PixelMap / ResourceStr/DrawableDescriptor | 下拉刷新icon                              |
-| pullingText     | string /Resource                          | 下拉可以刷新文本                              |
-| releaseText     | string /Resource                          | 释放立即刷新文本                              |
-| refreshingText  | string /Resource                          | 正在刷新中文本                               |
-| finishText      | string /Resource                          | 刷新结束文本                                |
-| backgroundColor | ResourceColor                             | 刷新头背景颜色                               |
-| headerType      | RefreshHeaderType                         | 默认刷新头样式，默认是RefreshHeaderType.DEFAULT  |
+| 属性              | 类型                                        | 概述                                   |
+|-----------------|-------------------------------------------|--------------------------------------|
+| width           | Length                                    | 刷新控件的宽度                              |
+| height          | Length                                    | 刷新头的高度 默认高度 80                       |
+| timeFormat      | RefreshHeaderTimeFormat                   | 刷新头的时间格式,默认月日时分                      |
+| timeLabel       | RefreshHeaderTimeLabel                    | 刷新头的标签格式                             |
+| hideTime        | boolean                                   | 是否隐藏刷新头时间，默认展示                       |
+| fontSize        | number / string / Resource                | 刷新头的文字大小                             |
+| fontColor       | ResourceColor                             | 刷新头的文字颜色                             |
+| timeFontSize    | number / string / Resource                | 刷新头的时间文字大小                           |
+| timeFontColor   | ResourceColor                             | 刷新头的时间文字颜色                           |
+| marginIconLeft  | Length                                    | 刷新文字距离左边的距离                          |
+| iconDown        | PixelMap/ResourceStr/DrawableDescriptor   | 刷新的下拉箭头                              |
+| iconUpLoad      | PixelMap / ResourceStr/DrawableDescriptor | 下拉刷新icon                             |
+| pullingText     | string /Resource                          | 下拉可以刷新文本                             |
+| releaseText     | string /Resource                          | 释放立即刷新文本                             |
+| refreshingText  | string /Resource                          | 正在刷新中文本                              |
+| finishText      | string /Resource                          | 刷新结束文本                               |
+| backgroundColor | ResourceColor                             | 刷新头背景颜色                              |
+| headerType      | RefreshHeaderType                         | 默认刷新头样式，默认是RefreshHeaderType.DEFAULT |
+| iconWidth       | Length                                    | 下拉和Loading的宽度                        |
+| iconHeight      | Length                                    | 下拉和Loading的高度                        |
 
 ##### LoadMoreFooterAttr
 
-| 属性               | 类型             | 概述     |
-|------------------|----------------|--------|
-| width            | Length         | 控件的宽度  |
-| height           | Length         | 高度     |
-| backgroundColor  | ResourceColor  | 尾部背景颜色 |
+| 属性                 | 类型                                      | 概述         |
+|--------------------|-----------------------------------------|------------|
+| width              | Length                                  | 控件的宽度      |
+| height             | Length                                  | 高度         |
+| backgroundColor    | ResourceColor                           | 尾部背景颜色     |
+| loadingSrc         | PixelMap/ResourceStr/DrawableDescriptor | 加载资源       |
+| loadingIconWidth   | Length                                  | Loading的宽度 |
+| loadingIconHeight  | Length                                  | Loading的高度 |
+| loadingMarginRight | Length                                  | 距离右边文字的距离  |
+| fontColor          | ResourceColor                           | 文字颜色       |
+| fontSize           | number / string / Resource              | 文字大小       |
+| fontWeight         | number / FontWeight/ string             | 文字权重       |
+| fontFamily         | string / Resource                       | 字体         |
+| footerPullingText  | string / Resource                       | 下拉提示       |
+| footerReleaseText  | string / Resource                       | 释放提示       |
+| footerLoadingText  | string / Resource                       | 加载提示       |
+| footerFinishText   | string / Resource                       | 完成提示       |
+| footerNothingText  | string / Resource                       | 无数据        |
 
 ##### RefreshHeaderTimeFormat
 

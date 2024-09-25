@@ -27,6 +27,7 @@ struct LayoutViewPage {
     Column() {
       ActionBar({ title: "任意组件" })
       RefreshLayout({
+        itemLayout: this.itemLayout,
         controller: this.controller,
         onRefresh: () => {
           setTimeout(() => {
@@ -39,8 +40,7 @@ struct LayoutViewPage {
             //模拟耗时
             this.controller.finishLoadMore()
           }, 3000)
-        },
-        itemLayout: this.itemLayout
+        }
       })
     }
   }

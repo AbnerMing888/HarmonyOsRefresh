@@ -166,7 +166,6 @@ struct SecondFloorExample {
 
         },
         onScrollStatus: (status) => {
-          console.log("===================" + status)
           //当前的滑动状态
           //这里判断，如果是刷新中，可以禁止页面滑动
           if (status == RefreshLayoutStatus.Refreshing) {

@@ -6,7 +6,6 @@ import { RefreshController, RefreshPositionEnum, StaggeredGridView } from '@abne
  * INTRODUCE:吸顶页面-瀑布流方式
  * */
 
-
 @Entry
 @Component
 struct StickyTopStaggeredPage {
@@ -34,10 +33,8 @@ struct StickyTopStaggeredPage {
         .height("100%")
       }.width("100%")
     }
-    .friction(0.6)
     .scrollBar(BarState.Off)
     .width('100%')
-    .height('100%')
     // 下拉刷新相关
     .onReachStart(() => {
       this.listPosition = RefreshPositionEnum.TOP
@@ -134,6 +131,7 @@ struct StickyStaggeredView {
       onLoadMore: () => {
         // 上拉加载 模拟耗时
         setTimeout(() => {
+          this.arr1.push(300)
           this.controller.finishLoadMore()
         }, 1000)
       }

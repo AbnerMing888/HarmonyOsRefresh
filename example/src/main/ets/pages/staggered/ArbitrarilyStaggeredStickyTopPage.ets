@@ -1,4 +1,4 @@
-import { RefreshController, RefreshPositionEnum, StaggeredGridView } from '@abner/refresh'
+import { RefreshController, RefreshDataSource, RefreshPositionEnum, StaggeredGridView } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
@@ -36,9 +36,7 @@ struct ArbitrarilyStaggeredStickyTopPage {
     })
     .onScrollFrameBegin((offset: number, _: ScrollState) => {
       if ((this.listPosition == RefreshPositionEnum.TOP && offset <= 0) || (
-        this.listPosition == RefreshPositionEnum.BOTTOM && offset >= 0
-      )
-      ) {
+        this.listPosition == RefreshPositionEnum.BOTTOM && offset >= 0)) {
         return { offsetRemain: 0 }
       }
       //不在底部
@@ -58,11 +56,11 @@ struct ArbitrarilyStaggeredStickyTopPage {
 struct StickyStaggeredView {
   @Prop listPosition: RefreshPositionEnum = RefreshPositionEnum.TOP
   controller: RefreshController = new RefreshController() //刷新控制器
-  @State arr1: number[] = [] //这里仅仅是测试
   private itemHeightArray: number[] = []
   @State colors: number[] = [0xFFC0CB, 0xDA70D6, 0x6B8E23, 0x6A5ACD, 0x00FFFF, 0x00FF7F]
   @State minSize: number = 80
   @State maxSize: number = 180
+  lazyDataSource?: RefreshDataSource = new RefreshDataSource()
 
   // 计算FlowItem宽/高
   getSize() {
@@ -79,7 +77,7 @@ struct StickyStaggeredView {
 
   aboutToAppear() {
     for (let i = 0; i < 30; i++) {
-      this.arr1.push(i)
+      this.lazyDataSource?.pushData(i)
     }
     this.setItemSizeArray()
   }
@@ -95,11 +93,11 @@ struct StickyStaggeredView {
 
   build() {
     StaggeredGridView({
-      items: this.arr1,
       itemLayout: (item: Object, index: number) => {
         this.itemLayout(this, item, index)
       },
       controller: this.controller,
+      lazyDataSource: this.lazyDataSource,
       isRefreshSticky: true,
       refreshStickyPosition: this.listPosition,
       onRefresh: () => {
@@ -111,6 +109,7 @@ struct StickyStaggeredView {
       onLoadMore: () => {
         // 上拉加载 模拟耗时
         setTimeout(() => {
+          this.lazyDataSource?.pushData(100)
           this.controller.finishLoadMore()
         }, 1000)
       }

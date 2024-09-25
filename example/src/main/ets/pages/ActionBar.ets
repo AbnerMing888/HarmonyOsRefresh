@@ -10,8 +10,11 @@ export struct ActionBar {
   @State title: string = "标题"
   @State hiddenBack: boolean = false
 
+
   build() {
+
     Stack() {
+
       Row() {
         Text(this.title)
           .fontColor(Color.White)

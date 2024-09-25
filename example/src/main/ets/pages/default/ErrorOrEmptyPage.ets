@@ -1,7 +1,5 @@
 import { ListView, RefreshController } from '@abner/refresh/Index'
 import { ActionBar } from '../ActionBar'
-import vibrator from '@ohos.vibrator'
-import { BusinessError } from '@ohos.base'
 
 /**
  * AUTHOR:AbnerMing

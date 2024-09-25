@@ -3,7 +3,7 @@
  * DATE:2024/2/23
  * INTRODUCE:普通的交错布局页面
  * */
-import { RefreshController, RefreshDataSource, StaggeredGridView } from '@abner/refresh'
+import { RefreshController, StaggeredGridView } from '@abner/refresh'
 import { ActionBar } from '../ActionBar'
 
 @Entry
