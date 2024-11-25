@@ -68,6 +68,7 @@ export struct CommunityView {
 
     }.width("100%")
     .height(200)
+    .backgroundColor(Color.Pink)
     .onClick(() => {
       //未滑动时执行点击
       if (_this.firstScrollDistance == 0) {

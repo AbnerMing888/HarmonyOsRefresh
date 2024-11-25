@@ -58,6 +58,9 @@ struct GridViewUpAndDownPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
+            for (let i = 100; i < 110; i++) {
+              this.array.push(i)
+            }
             this.controller.finishLoadMore()
           }, 3000)
         }

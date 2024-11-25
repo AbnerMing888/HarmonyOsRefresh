@@ -121,7 +121,7 @@ export struct SecondFloorView {
       .width("100%")
       .height("100%")
       .opacity(0.3)
-      .backgroundColor("#ffffff")
+      .backgroundColor("#000000")
       .visibility(this.isHideTopLayer ? Visibility.None : Visibility.Visible)
 
     }.width("100%")

@@ -55,6 +55,7 @@ struct ListViewUpAndDownPage {
             this.array.push(2000)
             this.array.push(2000)
             this.array.push(2000)
+
             this.controller.finishLoadMore()
           }, 3000)
         }

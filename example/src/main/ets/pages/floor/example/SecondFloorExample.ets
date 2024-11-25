@@ -127,6 +127,7 @@ struct SecondFloorExample {
         isScrollSecondFloor: (this.currentIndex == 0 && this.isScrollSecondFloor) ? true : false,
         isNeedHalfFloor: true, //是否需要半楼功能
         showSecondFloorStatus: this.showSecondFloorStatus,
+        releaseDistance: 50, //释放的距离
         secondFloorView: () => {
           this.secondFloorView()
         }, //二楼视图
@@ -150,7 +151,8 @@ struct SecondFloorExample {
           if (attr.headerPointsAttr != undefined) {
             attr.headerPointsAttr.secondFloorStatusText = "二楼可以访问品牌专区"
             attr.headerPointsAttr.fontColor = Color.White
-            attr.headerPointsAttr.fontSize = 12 //文字大小
+            attr.headerPointsAttr.fontSize = 14 //文字大小
+            attr.headerPointsAttr.secondFloorStatusFontWeight = FontWeight.Bold
           }
         },
         onScrollDistance: (distance) => {

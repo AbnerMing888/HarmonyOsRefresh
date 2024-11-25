@@ -35,21 +35,14 @@ struct ListViewRefreshPage {
       .border({ width: 1, color: Color.Pink })
   }
 
-  @State bool?: boolean = false
 
   build() {
     Column() {
       ActionBar({ title: "下拉刷新列表ListView" })
-        .onClick(() => {
-          this.bool = !this.bool
-        })
 
       ListView({
         controller: this.controller, //控制器，负责关闭下拉和上拉
         items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
-        refreshHeaderAttribute: (attr) => {
-          attr.height = 100
-        },
         itemLayout: (item: Object, index: number) => {
           this.itemLayout(item as number, index) //转成你需要的对象
         },
