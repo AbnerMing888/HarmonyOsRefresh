@@ -79,10 +79,10 @@ struct StickyListView {
   @Prop listPosition: RefreshPositionEnum = RefreshPositionEnum.TOP
 
   aboutToAppear() {
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 6; i++) {
       this.arr1.push(i)
     }
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 6; i++) {
       this.arr2.push(i)
     }
   }
@@ -113,9 +113,13 @@ struct StickyListView {
       onLoadMore: () => {
         // 上拉加载 模拟耗时
         setTimeout(() => {
+          for (let i = 6; i < 20; i++) {
+            this.arr1.push(i)
+          }
           this.controller.finishLoadMore()
         }, 3000)
       }
     })
   }
+
 }

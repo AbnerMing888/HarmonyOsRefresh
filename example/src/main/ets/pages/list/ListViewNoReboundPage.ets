@@ -3,13 +3,13 @@ import { ListView, RefreshController } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
- * DATE:2023/10/14
- * INTRODUCE:下拉上下列表ListView 普通模式
+ * DATE:2025/01/14
+ * INTRODUCE:上拉加载直接显示数据，不回弹
  * */
 
 @Entry
 @Component
-struct ListViewUpAndDownPage {
+struct ListViewNoReboundPage {
   controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
 
@@ -37,11 +37,12 @@ struct ListViewUpAndDownPage {
 
   build() {
     Column() {
-      ActionBar({ title: "刷新加载列表ListView" })
+      ActionBar({ title: "上拉加载不回弹" })
       ListView({
         items: this.array,
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉
+        slideDisplayLoadData: true,//设置此参数，可以让上拉完成后，不回弹，直接显示数据
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
@@ -52,7 +53,9 @@ struct ListViewUpAndDownPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
-            this.array.push(100)
+            for (let i = 0; i < 10; i++) {
+              this.array.push(i)
+            }
             this.controller.finishLoadMore()
           }, 3000)
         }

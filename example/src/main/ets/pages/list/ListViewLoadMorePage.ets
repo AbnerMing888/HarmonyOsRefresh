@@ -35,8 +35,6 @@ struct ListViewLoadMorePage {
       .border({ width: 1, color: Color.Pink })
   }
 
-  @State bool?: boolean = false
-
   build() {
     Column() {
       ActionBar({ title: "上拉加载列表ListView" })
@@ -46,6 +44,9 @@ struct ListViewLoadMorePage {
         items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
         itemLayout: (item: Object, index: number) => {
           this.itemLayout(item as number, index) //转成你需要的对象
+        },
+        listAttribute: (list) => {
+          list.height = "100%"
         },
         onLoadMore: () => {
           //上拉加载

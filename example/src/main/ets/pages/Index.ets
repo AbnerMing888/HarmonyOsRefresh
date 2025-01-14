@@ -16,7 +16,8 @@ struct Index {
 
   aboutToAppear(): void {
     let listName = [
-      "普通数据模式", "懒加载数据模式", "下拉刷新", "上拉加载", "刷新&加载", "加载无数据固定",
+      "普通数据模式", "懒加载数据模式", "自适应高度", "下拉刷新", "上拉加载", "刷新&加载",
+      "上拉加载不回弹", "加载无数据固定",
       "添加头组件", "添加尾组件", "自定义刷新头加载尾", "侧滑按钮", "侧滑直接删除", "列表分组吸顶",
       "分组吸顶(带分组索引)",
       "列表分组不吸顶", "页面吸顶", "页面顶部吸顶刷新", "任意布局吸顶", "顶部吸顶效果2", "结合Tabs使用", "自动刷新"
@@ -24,9 +25,11 @@ struct Index {
     let listUrl = [
       "pages/list/ListViewPage", //普通数据模式
       "pages/list/ListViewLazyPage", //懒加载数据模式
+      "pages/list/ListAdaptiveViewPage", //自适应高度
       "pages/list/ListViewRefreshPage", //下拉刷新
       "pages/list/ListViewLoadMorePage", //上拉加载
       "pages/list/ListViewUpAndDownPage", //普通的列表下拉刷新和上拉加载
+      "pages/list/ListViewNoReboundPage", //上拉加载不回弹
       "pages/list/ListViewFixedBottomLoadPage", //底部加载无数据固定
       "pages/list/ListViewHeaderPage", //带有头的ListView
       "pages/list/ListViewFooterPage", //带有尾的ListView
@@ -50,13 +53,14 @@ struct Index {
     this.itemArray.push(new ListData("List列表功能相关", listDataArray))
 
     let gridName = [
-      "普通数据模式", "懒加载数据模式", "下拉刷新", "上拉加载", "刷新&加载", "模拟网络数据(懒加载)",
+      "普通数据模式", "懒加载数据模式", "自适应高度", "下拉刷新", "上拉加载", "刷新&加载", "模拟网络数据(懒加载)",
       "带有头", "带有尾", "页面吸顶刷新", "页面顶部吸顶刷新", "自定义刷新头加载尾", "网格拖拽"
     ]
 
     let gridUrl = [
       "pages/grid/GridViewPage", //普通的网格列表
       "pages/grid/GridViewLazyPage", //普通的网格列表
+      "pages/grid/GridAdaptiveViewPage", //自适应高度
       "pages/grid/GridViewRefreshPage", //下拉刷新网格列表
       "pages/grid/GridViewLoadMorePage", //上拉加载
       "pages/grid/GridViewUpAndDownPage", //刷新加载网格列表
