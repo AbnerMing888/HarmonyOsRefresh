@@ -7,6 +7,7 @@
     "pages/list/ListViewRefreshPage",
     "pages/list/ListViewLoadMorePage",
     "pages/list/ListViewUpAndDownPage",
+    "pages/list/ListViewNoSpringPage",
     "pages/list/ListViewNoReboundPage",
     "pages/list/ListViewFixedBottomLoadPage",
     "pages/list/ListViewUpAndDownLazyPage",

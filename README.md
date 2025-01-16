@@ -1,10 +1,5 @@
 ## 介绍
 
-**刷新组件已上架元服务**
-
-鸿蒙应用商店，搜索：**刷新组件**，即可到达元服务页面，本身带有效果和代码，奈何审核非常严格，只能把效果去掉，不过大家可以一键复制代码，还是非常的方便的,希望大家多多支持！
-
-
 一款简单，高效的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新，支持侧滑删除、条目吸顶，下滑二楼等功能。
 
 如果您只想简单的下拉刷新和上拉加载，并且耦合度低，建议您使用我的另一款**轻盈的刷新组件**，点击直达：[lithe_refresh](https://ohpm.openharmony.cn/#/cn/detail/@abner%2Flithe_refresh)
@@ -96,7 +91,7 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.4.0"}
+"dependencies": { "@abner/refresh": "^1.4.1"}
 ```
 
 <p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>
