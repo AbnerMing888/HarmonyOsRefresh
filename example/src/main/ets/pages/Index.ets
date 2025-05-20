@@ -20,7 +20,8 @@ struct Index {
       "无阻尼状态", "上拉加载不回弹", "加载无数据固定",
       "添加头组件", "添加尾组件", "自定义刷新头加载尾", "侧滑按钮", "侧滑直接删除", "列表分组吸顶",
       "分组吸顶(带分组索引)",
-      "列表分组不吸顶", "页面吸顶", "页面顶部吸顶刷新", "任意布局吸顶", "顶部吸顶效果2", "结合Tabs使用", "自动刷新"
+      "列表分组不吸顶", "页面吸顶", "页面顶部吸顶刷新", "任意布局吸顶", "顶部吸顶效果2", "结合Tabs使用", "自动刷新",
+      "位置定位", "禁止后带阻尼"
     ]
     let listUrl = [
       "pages/list/ListViewPage", //普通数据模式
@@ -45,7 +46,9 @@ struct Index {
       "pages/sticky/ArbitrarilyStickyTopPage", //任意布局吸顶刷新
       "pages/sticky/StickTopRefreshViewPage", //吸顶刷新，上拉顶部不动
       "pages/tabs/TabsPage", //结合Tabs使用
-      "pages/list/ListAutoRefreshPage",//自动刷新
+      "pages/list/ListAutoRefreshPage", //自动刷新
+      "pages/list/ListViewPositioningPage", //位置定位
+      "pages/list/ListViewEnableSpringPage",//刷新加载禁止后带阻尼
     ]
     let listDataArray: GridData[] = []
     for (let i = 0; i < listName.length; i++) {
@@ -102,12 +105,13 @@ struct Index {
 
 
     let otherName = [
-      "任意组件", "下滑进入二楼", "二楼应用场景",
+      "任意组件", "Web组件", "下滑进入二楼", "二楼应用场景",
       "普通加载数据操作", "懒加载数据操作", "缺省页"
     ]
 
     let otherUrl = [
       "pages/layout/LayoutViewPage", //任意组件
+      "pages/layout/WebViewPage", //web组件
       "pages/floor/SecondFloorPage", //下滑进入二楼
       "pages/floor/example/SecondFloorExample", //二楼应用场景
       "pages/data/DataOperationPage", //普通加载数据操作

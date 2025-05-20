@@ -32,6 +32,7 @@ struct ListViewPage {
       .margin(10)
       .textAlign(TextAlign.Center)
       .border({ width: 1, color: Color.Pink })
+
   }
 
   build() {
@@ -45,6 +46,7 @@ struct ListViewPage {
           attr.contentEndOffset = 20 //设置内容区末尾偏移量，目的为了可见
         }
       })
-    }
+    }.width("100%")
+    .height("100%")
   }
 }

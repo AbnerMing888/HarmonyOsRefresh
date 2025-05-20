@@ -2,11 +2,14 @@
 
 refresh是一款简单，高效的上拉下拉刷新组件，支持列表、网格、瀑布流、支持各种任意组件刷新，支持侧滑删除、条目吸顶，下滑二楼等功能。
 
-目前refresh已适配V2装饰器，可点击直达：[refresh_v2](https://ohpm.openharmony.cn/#/cn/detail/@abner%2Frefresh_v2)
+V2装饰器版本，可点击直达：[refresh_v2](https://ohpm.openharmony.cn/#/cn/detail/@abner%2Frefresh_v2)
 
 **v1和V2使用方式完全一样，大家可无缝切换，只需修改下依赖即可。**
 
-如果您只想简单的下拉刷新和上拉加载，并且耦合度低，建议您使用我的另一款**轻盈的刷新组件**，点击直达：[lithe_refresh](https://ohpm.openharmony.cn/#/cn/detail/@abner%2Flithe_refresh)
+如果您只想简单的下拉刷新和上拉加载，并且耦合度低，建议您使用我的另一款**轻盈的刷新组件**，
+
+v1版本：点击直达：[lithe_refresh](https://ohpm.openharmony.cn/#/cn/detail/@abner%2Flithe_refresh)
+v2版本：点击直达：[lithe_refresh_v2](https://ohpm.openharmony.cn/#/cn/detail/@abner%2Flithe_refresh_v2)
 
 主要功能点如下
 
@@ -72,7 +75,7 @@ refresh是一款简单，高效的上拉下拉刷新组件，支持列表、网�
 
 ## 开发环境
 
-DevEco Studio NEXT Developer Beta1,Build Version: 5.0.3.900
+DevEco Studio NEXT Developer Beta1,Build Version: 5.0.11.100
 
 Api版本：**12**
 
@@ -95,7 +98,7 @@ ohpm install @abner/refresh
 方式二：在工程的oh-package.json5中设置三方包依赖，配置示例如下：
 
 ```
-"dependencies": { "@abner/refresh": "^1.4.3"}
+"dependencies": { "@abner/refresh": "^1.4.4"}
 ```
 
 <p align="center"><img src="https://vipandroid-image.oss-cn-beijing.aliyuncs.com/harmony/refresh/harmonyos_log_module.jpg" width="300"></p>

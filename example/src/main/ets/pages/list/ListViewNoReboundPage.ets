@@ -42,7 +42,7 @@ struct ListViewNoReboundPage {
         items: this.array,
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉
-        slideDisplayLoadData: true,//设置此参数，可以让上拉完成后，不回弹，直接显示数据
+        slideDisplayLoadData: true, //设置此参数，可以让上拉完成后，不回弹，直接显示数据
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {

@@ -3,22 +3,20 @@ import { ListView, RefreshController } from '@abner/refresh'
 
 /**
  * AUTHOR:AbnerMing
- * DATE:2023/10/14
- * INTRODUCE:带有头的ListView
+ * DATE:2025/5/20
+ * INTRODUCE:定位位置
  * */
 
 @Entry
 @Component
-struct ListViewHeaderPage {
+struct ListViewPositioningPage {
   controller: RefreshController = new RefreshController() //刷新控制器
   @State array: Array<number> = []
-  @State _privateRefreshContentHeight: Length = "100%" //内容视图的高度
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       this.array.push(i)
     }
-
   }
 
   /**
@@ -28,8 +26,8 @@ struct ListViewHeaderPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(_: Object, index: number): void {
-    Text("测试数据" + index)
+  itemLayout(item: Object, _: number): void {
+    Text("测试数据" + item)
       .width("95%")
       .height(50)
       .margin(10)
@@ -37,39 +35,43 @@ struct ListViewHeaderPage {
       .border({ width: 1, color: Color.Pink })
   }
 
-  @Builder
-  itemHeaderLayout(_this:ListViewHeaderPage): void {
-    Column() {
-      Text("我是头View")
-    }.height(100)
-    .width("100%")
-    .backgroundColor(Color.Pink)
-    .justifyContent(FlexAlign.Center)
-  }
-
   build() {
     Column() {
-      ActionBar({ title: "带有头的ListView" })
+      ActionBar({ title: "位置定位" })
+      Row() {
+        Button("定位顶部")
+          .onClick(() => {
+            this.controller.scrollEdge(Edge.Top)
+          })
+        Button("定位底部")
+          .onClick(() => {
+            this.controller.scrollEdge(Edge.Bottom)
+          })
+        Button("定位某一个条目")
+          .onClick(() => {
+            this.controller.scrollToIndex(2)
+          })
+      }
 
       ListView({
-        items: this.array, //数据源 数组
+        items: this.array,
         itemLayout: (item, index) => this.itemLayout(item, index),
         controller: this.controller, //控制器，负责关闭下拉和上拉
-        itemHeaderLayout: () => {
-          this.itemHeaderLayout(this)
-        },
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {
-            //模拟耗时
-            this.controller.finishRefresh();
+            this.controller.finishRefresh()
           }, 3000)
+        },
+        listAttribute: (list) => {
+          list.height = "100%"
         },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
-            this.controller.finishLoadMore();
+            this.array.push(100)
+            this.controller.finishLoadMore()
           }, 3000)
         }
       })

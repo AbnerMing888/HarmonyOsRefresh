@@ -12,5 +12,10 @@
       "name": "ExampleAbility_label",
       "value": "刷新组件"
     }
+  ,
+    {
+      "name": "reason",
+      "value": "测试web加载"
+    }
   ]
 }

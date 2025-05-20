@@ -75,10 +75,15 @@ struct ErrorOrEmptyPage {
   loadingLayout() {
     Column() {
       Text("我是一个Loading布局")
+        .width(200)
+        .height(200)
+        .borderRadius(10)
+        .textAlign(TextAlign.Center)
+        .backgroundColor(Color.Pink)
+
     }
     .width("100%")
     .height("100%")
-    .backgroundColor(Color.Pink)
     .justifyContent(FlexAlign.Center)
   }
 

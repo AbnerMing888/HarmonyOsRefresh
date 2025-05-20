@@ -93,6 +93,9 @@ export struct CommunityView {
             this.onScrollStart(refreshPosition == RefreshPositionEnum.TOP)
           }
         },
+        onScrollIndex: () => {
+          console.log("====" + this.controller.getLoadMoreLayoutStatus())
+        },
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {

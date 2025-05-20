@@ -7,7 +7,7 @@
   "main": "",
   "version": "1.0.0",
   "dependencies": {
-    "@abner/refresh": "file:./libs/refresh-1.4.1.har",
+    "@abner/refresh": "file:./libs/refresh-signed-1.4.4.har",
     "@abner/tab": "file:libs/tab.har"
   }
 }
