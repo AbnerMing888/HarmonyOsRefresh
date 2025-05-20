@@ -44,10 +44,6 @@
           ]
         }
       ]
-    },
-    {
-      "name": "refresh",
-      "srcPath": "./refresh",
     }
   ]
 }
