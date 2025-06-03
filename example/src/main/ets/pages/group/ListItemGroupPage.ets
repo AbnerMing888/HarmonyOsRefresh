@@ -11,7 +11,7 @@ import { ActionBar } from '../ActionBar'
 @Component
 struct ListItemGroupPage {
   controller: RefreshController = new RefreshController() //刷新控制器
-  @State private itemGroupModelArray?: Array<ItemGroupModel> = [
+  @State itemGroupModelArray?: Array<ItemGroupModel> = [
     {
       title: "星期一",
       items: ["语文", "数学", "英语", "物理"]
@@ -81,6 +81,10 @@ struct ListItemGroupPage {
         onLoadMore: () => {
           setTimeout(() => {
             //模拟耗时
+            this.itemGroupModelArray?.push({
+              title: "星期日",
+              items: ["语文", "数学", "英语", "物理"]
+            })
             this.controller.finishLoadMore()
           }, 2000)
         }

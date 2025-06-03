@@ -84,7 +84,7 @@ struct Index {
     this.itemArray.push(new ListData("Grid网格列表功能相关", gridDataArray))
 
     let waterFlowName = [
-      "普通数据模式", "懒加载数据模式", "带有头的瀑布流列表", "瀑布流页面吸顶", "固定标题栏吸顶", "任意布局吸顶"
+      "普通数据模式", "懒加载数据模式", "带有头的瀑布流列表", "瀑布流页面吸顶", "固定标题栏吸顶", "任意布局吸顶","顶部吸顶刷新"
     ]
 
     let waterFlowUrl = [
@@ -94,6 +94,7 @@ struct Index {
       "pages/sticky/StickyTopStaggeredPage", //瀑布流页面吸顶
       "pages/sticky/StickyTopActionBarPage", //瀑布流页面吸顶固定标题栏
       "pages/staggered/ArbitrarilyStaggeredStickyTopPage",//顶部任意位置吸顶
+      "pages/sticky/StickTopWaterPage", //顶部吸顶刷新
     ]
 
     let waterFlowDataArray: GridData[] = []

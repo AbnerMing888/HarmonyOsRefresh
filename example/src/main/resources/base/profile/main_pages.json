@@ -57,6 +57,7 @@
     "pages/sticky/StickyTopActionBarPage",
     "pages/staggered/ArbitrarilyStaggeredStickyTopPage",
     "pages/list/ListViewPositioningPage",
-    "pages/list/ListViewEnableSpringPage"
+    "pages/list/ListViewEnableSpringPage",
+    "pages/sticky/StickTopWaterPage"
   ]
 }
