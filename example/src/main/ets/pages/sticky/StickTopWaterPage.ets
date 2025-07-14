@@ -1,4 +1,5 @@
 import { RefreshController, RefreshLayout, RefreshPositionEnum, WaterFlowView } from '@abner/refresh'
+import window from '@ohos.window'
 
 /**
  * AUTHOR:AbnerMing
@@ -19,6 +20,16 @@ struct StickTopWaterPage {
   @State listNestedScroll?: NestedScrollOptions = {
     scrollForward: NestedScrollMode.PARENT_FIRST,
     scrollBackward: NestedScrollMode.SELF_FIRST
+  }
+  @State navHeight: number = 0
+
+  aboutToAppear(): void {
+    window.getLastWindow(getContext(), (_, win) => {
+      const avoidAreaType = window.AvoidAreaType.TYPE_SYSTEM
+      const avoidArea = win.getWindowAvoidArea(avoidAreaType)
+      const height = avoidArea.topRect.height
+      this.navHeight = px2vp(height)
+    })
   }
 
   @Builder
@@ -46,10 +57,10 @@ struct StickTopWaterPage {
           Text("头View")
             .fontColor(Color.White)
             .width("100%")
-            .height(200)
+            .height(250)
             .backgroundColor(Color.Red)
             .textAlign(TextAlign.Center)
-            .margin({ top: -50 })
+            .margin({ top: -(50+this.navHeight) })
 
           Tabs({ barPosition: BarPosition.Start }) {
             TabContent() {
@@ -68,7 +79,7 @@ struct StickTopWaterPage {
           })
         }.width("100%")
       }
-      .padding({ top: 50 })
+      .padding({ top: 50 + this.navHeight })
       .scrollBar(BarState.Off)
       .width('100%')
       .height('100%')
@@ -90,11 +101,13 @@ struct StickTopWaterPage {
       // })
 
       Column() {
+        Blank()
+          .height(this.navHeight)
         Text("顶部标题栏")
       }
-      .width("100%")
-      .height(50)
       .backgroundColor(Color.Transparent)
+      .width("100%")
+      .height(50 + this.navHeight)
       .justifyContent(FlexAlign.Center)
 
     }.alignContent(Alignment.TopStart)
@@ -103,6 +116,7 @@ struct StickTopWaterPage {
   build() {
 
     Column() {
+
       RefreshLayout({
         itemLayout: () => {
           this.childView()
@@ -130,7 +144,10 @@ struct StickTopWaterPage {
           }, 3000)
         }
       })
+        .margin({ top: -this.navHeight })
     }
+    .width("100%")
+    .height("100%")
 
   }
 
