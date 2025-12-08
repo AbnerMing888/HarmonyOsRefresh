@@ -50,7 +50,7 @@ struct StaggeredPage {
       StaggeredGridView({
         items: this.array,
         itemLayout: (item: Object, index: number) => this.itemLayout(item, index),
-        controller: this.controller
+        controller: this.controller,
       })
     }
   }

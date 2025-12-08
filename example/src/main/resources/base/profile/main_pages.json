@@ -14,6 +14,7 @@
     "pages/list/ListViewUpAndDownLazyPage",
     "pages/list/ListViewHeaderPage",
     "pages/list/ListAutoRefreshPage",
+    "pages/list/AutoLoadMoreListViewPage",
     "pages/grid/GridViewPage",
     "pages/grid/GridViewRefreshPage",
     "pages/grid/GridAdaptiveViewPage",

@@ -68,7 +68,9 @@ struct TabsPage {
 
   build() {
     Column() {
+
       ActionBar({ title: "结合Tabs使用" })
+
       TabLayout({
         tabBar: ["条目一", "条目二", "条目三", "条目四"],
         barMode: BarMode.Fixed, //均分

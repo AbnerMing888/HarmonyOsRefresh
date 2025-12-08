@@ -17,11 +17,11 @@ struct Index {
   aboutToAppear(): void {
     let listName = [
       "普通数据模式", "懒加载数据模式", "自适应高度", "下拉刷新", "上拉加载", "刷新&加载",
-      "无阻尼状态","最大阻尼", "上拉加载不回弹", "加载无数据固定",
+      "无阻尼状态", "最大阻尼", "上拉加载不回弹", "加载无数据固定",
       "添加头组件", "添加尾组件", "自定义刷新头加载尾", "侧滑按钮", "侧滑直接删除", "列表分组吸顶",
       "分组吸顶(带分组索引)",
       "列表分组不吸顶", "页面吸顶", "页面顶部吸顶刷新", "任意布局吸顶", "顶部吸顶效果2", "结合Tabs使用", "自动刷新",
-      "位置定位", "禁止后带阻尼"
+      "位置定位", "禁止后带阻尼", "自动加载数据"
     ]
     let listUrl = [
       "pages/list/ListViewPage", //普通数据模式
@@ -49,7 +49,8 @@ struct Index {
       "pages/tabs/TabsPage", //结合Tabs使用
       "pages/list/ListAutoRefreshPage", //自动刷新
       "pages/list/ListViewPositioningPage", //位置定位
-      "pages/list/ListViewEnableSpringPage",//刷新加载禁止后带阻尼
+      "pages/list/ListViewEnableSpringPage", //刷新加载禁止后带阻尼
+      "pages/list/AutoLoadMoreListViewPage",//滑动到底部，自动加载更多
     ]
     let listDataArray: GridData[] = []
     for (let i = 0; i < listName.length; i++) {
@@ -85,7 +86,8 @@ struct Index {
     this.itemArray.push(new ListData("Grid网格列表功能相关", gridDataArray))
 
     let waterFlowName = [
-      "普通数据模式", "懒加载数据模式", "带有头的瀑布流列表", "瀑布流页面吸顶", "固定标题栏吸顶", "任意布局吸顶","顶部吸顶刷新"
+      "普通数据模式", "懒加载数据模式", "带有头的瀑布流列表", "瀑布流页面吸顶", "固定标题栏吸顶", "任意布局吸顶",
+      "顶部吸顶刷新"
     ]
 
     let waterFlowUrl = [
@@ -94,10 +96,9 @@ struct Index {
       "pages/staggered/StaggeredHeadPage", //带有头的瀑布流列表
       "pages/sticky/StickyTopStaggeredPage", //瀑布流页面吸顶
       "pages/sticky/StickyTopActionBarPage", //瀑布流页面吸顶固定标题栏
-      "pages/staggered/ArbitrarilyStaggeredStickyTopPage",//顶部任意位置吸顶
-      "pages/sticky/StickTopWaterPage", //顶部吸顶刷新
+      "pages/staggered/ArbitrarilyStaggeredStickyTopPage", //顶部任意位置吸顶
+      "pages/sticky/StickTopWaterPage",//顶部吸顶刷新
     ]
-
     let waterFlowDataArray: GridData[] = []
     for (let i = 0; i < waterFlowName.length; i++) {
       waterFlowDataArray.push(new GridData(waterFlowName[i], waterFlowUrl[i]))

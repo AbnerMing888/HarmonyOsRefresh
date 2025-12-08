@@ -60,7 +60,7 @@ struct StickTopWaterPage {
             .height(250)
             .backgroundColor(Color.Red)
             .textAlign(TextAlign.Center)
-            .margin({ top: -(50+this.navHeight) })
+            .margin({ top: -(50 + this.navHeight) })
 
           Tabs({ barPosition: BarPosition.Start }) {
             TabContent() {
@@ -89,16 +89,16 @@ struct StickTopWaterPage {
         this.listPosition = RefreshPositionEnum.TOP
       })
 
-      // .onScrollFrameBegin((offset: number, _: ScrollState) => {
-      //   if ((this.listPosition == RefreshPositionEnum.TOP && offset <= 0) ||
-      //     (this.listPosition == RefreshPositionEnum.BOTTOM && offset >= 0)
-      //   ) {
-      //     return { offsetRemain: 0 }
-      //   }
-      //   //不在底部
-      //   this.listPosition = RefreshPositionEnum.CENTER
-      //   return { offsetRemain: offset }
-      // })
+      .onScrollFrameBegin((offset: number, _: ScrollState) => {
+        if ((this.listPosition == RefreshPositionEnum.TOP && offset <= 0) ||
+          (this.listPosition == RefreshPositionEnum.BOTTOM && offset >= 0)
+        ) {
+          return { offsetRemain: 0 }
+        }
+        //不在底部
+        this.listPosition = RefreshPositionEnum.CENTER
+        return { offsetRemain: offset }
+      })
 
       Column() {
         Blank()

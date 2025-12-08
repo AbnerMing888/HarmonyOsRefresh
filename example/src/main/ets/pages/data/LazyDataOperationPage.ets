@@ -40,40 +40,40 @@ struct LazyDataOperationPage {
   }
 
   @Builder
-  gridViewItemLayout(_this: LazyDataOperationPage, item: Object, index: number): void {
+  gridViewItemLayout(item: Object, index: number): void {
     Button(item.toString())
       .margin({ top: 10 })
       .onClick(() => {
         switch (index) {
           case 0: //增加一个
-            _this.dataSource.pushData(100)
+            this.dataSource.pushData(100)
             break;
           case 1: //指定位置增加一个
-            _this.dataSource.pushDataPosition(2, 200)
+            this.dataSource.pushDataPosition(2, 200)
             break;
           case 2: //指定位置增加多个
-            _this.dataSource.pushDataPositionArray(2, [300, 301])
+            this.dataSource.pushDataPositionArray(2, [300, 301])
             break;
           case 3: //数组添加
-            _this.dataSource.pushDataArray([300, 301, 302])
+            this.dataSource.pushDataArray([300, 301, 302])
             break;
           case 4: //可变参数形式添加
-            _this.dataSource.pushDataVariable(400, 401, 402)
+            this.dataSource.pushDataVariable(400, 401, 402)
             break;
           case 5: //删除第一个
-            _this.dataSource.deleteFirst()
+            this.dataSource.deleteFirst()
             break;
           case 6: //删除最后一个
-            _this.dataSource.deleteLast()
+            this.dataSource.deleteLast()
             break;
           case 7: //删除指定一个
-            _this.dataSource.deleteData(0)
+            this.dataSource.deleteData(0)
             break;
           case 8: //删除全部
-            _this.dataSource.deleteAll()
+            this.dataSource.deleteAll()
             break;
           case 9: //修改数据
-            _this.dataSource.changeData(3, 9999)
+            this.dataSource.changeData(3, 9999)
             break;
         }
       })
@@ -88,7 +88,7 @@ struct LazyDataOperationPage {
           "删除指定一个", "删除全部",
           "修改数据"],
         itemLayout: (item: Object, index: number) => {
-          this.gridViewItemLayout(this, item, index)
+          this.gridViewItemLayout(item, index)
         },
         gridAttribute: (attr) => {
           attr.columnsTemplate = "1fr 1fr 1fr"
