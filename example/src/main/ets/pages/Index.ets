@@ -1,6 +1,8 @@
-import router from '@ohos.router';
-import { ActionBar } from './ActionBar';
-import { GridView, ListView, RefreshController } from '@abner/refresh';
+import { TitleBar } from '@abner/bar';
+import { GridView } from '@abner/refresh';
+import { MainView, replacePage, startPage } from '@abner/router';
+import display from '@ohos.display';
+import window from '@ohos.window';
 
 /**
  * AUTHOR:AbnerMing
@@ -11,210 +13,135 @@ import { GridView, ListView, RefreshController } from '@abner/refresh';
 @Entry
 @Component
 struct Index {
-  private itemArray: ListData[] = [] //数据对象
-  @State controller: RefreshController = new RefreshController() //刷新控制器
+  @State refreshMenus: string[] =
+    ["List列表", "Grid网格", "WaterFlow瀑布流", "下滑进入二楼", "二楼案例(瀑布流)",
+      "二楼案例(列表)", "普通数据操作", "懒加载数据操作"]
+  @State refreshRouters: string[] = [
+    "example_ListIndex", "example_GridIndex", "example_FlowIndex", "example_SecondFloorPage",
+    "example_SecondFloorExample",
+    "example_SecondFloorExample2", "example_ListViewDataOperationPage", "example_ListViewLazyDataOperationPage"
+  ]
+  @State private isWideFold: boolean = false
+  private windowWidth: number = 0
+  private windowHeight: number = 0
 
   aboutToAppear(): void {
-    let listName = [
-      "普通数据模式", "懒加载数据模式", "自适应高度", "下拉刷新", "上拉加载", "刷新&加载",
-      "无阻尼状态", "最大阻尼", "上拉加载不回弹", "加载无数据固定",
-      "添加头组件", "添加尾组件", "自定义刷新头加载尾", "侧滑按钮", "侧滑直接删除", "列表分组吸顶",
-      "分组吸顶(带分组索引)",
-      "列表分组不吸顶", "页面吸顶", "页面顶部吸顶刷新", "任意布局吸顶", "顶部吸顶效果2", "结合Tabs使用", "自动刷新",
-      "位置定位", "禁止后带阻尼", "自动加载数据"
-    ]
-    let listUrl = [
-      "pages/list/ListViewPage", //普通数据模式
-      "pages/list/ListViewLazyPage", //懒加载数据模式
-      "pages/list/ListAdaptiveViewPage", //自适应高度
-      "pages/list/ListViewRefreshPage", //下拉刷新
-      "pages/list/ListViewLoadMorePage", //上拉加载
-      "pages/list/ListViewUpAndDownPage", //普通的列表下拉刷新和上拉加载
-      "pages/list/ListViewNoSpringPage", //无阻尼
-      "pages/list/ListViewMaxSpringPage", //最大阻尼
-      "pages/list/ListViewNoReboundPage", //上拉加载不回弹
-      "pages/list/ListViewFixedBottomLoadPage", //底部加载无数据固定
-      "pages/list/ListViewHeaderPage", //带有头的ListView
-      "pages/list/ListViewFooterPage", //带有尾的ListView
-      "pages/list/ListRefreshHeaderFooterPage", //自定义刷新头加载尾
-      "pages/list/SwipeActionListViewPage", //侧滑按钮
-      "pages/list/SlideDeleteListViewPage", //侧滑删除
-      "pages/group/ListItemGroupPage", //列表分组吸顶
-      "pages/group/ListItemGroupIndexPage", //列表分组吸顶,布局带有分组索引
-      "pages/group/ListItemGroupNoStickyPage", //列表分组不吸顶
-      "pages/sticky/StickyTopPage", //列表页面吸顶
-      "pages/layout/StickLayoutViewPage", //列表顶部吸顶刷新
-      "pages/sticky/ArbitrarilyStickyTopPage", //任意布局吸顶刷新
-      "pages/sticky/StickTopRefreshViewPage", //吸顶刷新，上拉顶部不动
-      "pages/tabs/TabsPage", //结合Tabs使用
-      "pages/list/ListAutoRefreshPage", //自动刷新
-      "pages/list/ListViewPositioningPage", //位置定位
-      "pages/list/ListViewEnableSpringPage", //刷新加载禁止后带阻尼
-      "pages/list/AutoLoadMoreListViewPage",//滑动到底部，自动加载更多
-    ]
-    let listDataArray: GridData[] = []
-    for (let i = 0; i < listName.length; i++) {
-      listDataArray.push(new GridData(listName[i], listUrl[i]))
-    }
-    this.itemArray.push(new ListData("List列表功能相关", listDataArray))
-
-    let gridName = [
-      "普通数据模式", "懒加载数据模式", "自适应高度", "下拉刷新", "上拉加载", "刷新&加载", "模拟网络数据(懒加载)",
-      "带有头", "带有尾", "页面吸顶刷新", "页面顶部吸顶刷新", "自定义刷新头加载尾", "网格拖拽"
-    ]
-
-    let gridUrl = [
-      "pages/grid/GridViewPage", //普通的网格列表
-      "pages/grid/GridViewLazyPage", //普通的网格列表
-      "pages/grid/GridAdaptiveViewPage", //自适应高度
-      "pages/grid/GridViewRefreshPage", //下拉刷新网格列表
-      "pages/grid/GridViewLoadMorePage", //上拉加载
-      "pages/grid/GridViewUpAndDownPage", //刷新加载网格列表
-      "pages/grid/GridViewNetLazyPage", //刷新加载网格列表 -模拟网络
-      "pages/grid/GridViewHeaderPage", //带有头的网格列表
-      "pages/grid/GridViewFooterPage", //带有尾的网格列表
-      "pages/grid/GridStickyTopPage", //页面吸顶
-      "pages/grid/GridStickLayoutViewPage", //页面顶部吸顶
-      "pages/grid/GridRefreshHeaderFooterPage", // 自定义刷新头加载尾
-      "pages/grid/GridDropPage"
-    ]
-
-    let gridDataArray: GridData[] = []
-    for (let i = 0; i < gridName.length; i++) {
-      gridDataArray.push(new GridData(gridName[i], gridUrl[i]))
-    }
-    this.itemArray.push(new ListData("Grid网格列表功能相关", gridDataArray))
-
-    let waterFlowName = [
-      "普通数据模式", "懒加载数据模式", "带有头的瀑布流列表", "瀑布流页面吸顶", "固定标题栏吸顶", "任意布局吸顶",
-      "顶部吸顶刷新"
-    ]
-
-    let waterFlowUrl = [
-      "pages/staggered/StaggeredPage", //普通的瀑布流列表
-      "pages/staggered/StaggeredLazyPage", //懒加载瀑布流列表
-      "pages/staggered/StaggeredHeadPage", //带有头的瀑布流列表
-      "pages/sticky/StickyTopStaggeredPage", //瀑布流页面吸顶
-      "pages/sticky/StickyTopActionBarPage", //瀑布流页面吸顶固定标题栏
-      "pages/staggered/ArbitrarilyStaggeredStickyTopPage", //顶部任意位置吸顶
-      "pages/sticky/StickTopWaterPage",//顶部吸顶刷新
-    ]
-    let waterFlowDataArray: GridData[] = []
-    for (let i = 0; i < waterFlowName.length; i++) {
-      waterFlowDataArray.push(new GridData(waterFlowName[i], waterFlowUrl[i]))
-    }
-
-    this.itemArray.push(new ListData("WaterFlow瀑布流列表功能相关", waterFlowDataArray))
-
-
-    let otherName = [
-      "任意组件", "Web组件", "下滑进入二楼", "二楼应用场景",
-      "普通加载数据操作", "懒加载数据操作", "缺省页"
-    ]
-
-    let otherUrl = [
-      "pages/layout/LayoutViewPage", //任意组件
-      "pages/layout/WebViewPage", //web组件
-      "pages/floor/SecondFloorPage", //下滑进入二楼
-      "pages/floor/example/SecondFloorExample", //二楼应用场景
-      "pages/data/DataOperationPage", //普通加载数据操作
-      "pages/data/LazyDataOperationPage", //懒加载数据操作
-      "pages/default/ErrorOrEmptyPage",//缺省页
-    ]
-
-    let otherDataArray: GridData[] = []
-    for (let i = 0; i < otherName.length; i++) {
-      otherDataArray.push(new GridData(otherName[i], otherUrl[i]))
-    }
-
-    this.itemArray.push(new ListData("其他常见功能", otherDataArray))
-
-  }
-
-  /**
-   * Author:AbnerMing
-   * Describe:条目布局
-   * @param item  数据对象
-   * @param index  数据索引
-   */
-  @Builder
-  itemLayout(item: ListData, _: number): void {
-    Column() {
-      Text(item.name)
-        .width("100%")
-        .height(50)
-        .fontWeight(FontWeight.Bold)
-        .textAlign(TextAlign.Center)
-        .fontColor(Color.White)
-        .margin({ bottom: 10 })
-        .backgroundColor("#CD5C5C")
-
-      GridView({
-        items: item.items, //数据源 数组
-        prohibitRefresh: true,
-        itemLayout: (item, index) => {
-          this.gridItemLayout(item as GridData, index)
-        },
-        controller: this.controller, //控制器，负责关闭下拉和上拉
+    try {
+      let isFoldable = display.isFoldable()
+      // 2. 监听窗口尺寸变化
+      window.getLastWindow(this.getUIContext().getHostContext(), (_, win) => {
+        this.windowWidth = this.getUIContext().px2vp(win.getWindowProperties().windowRect.width)
+        this.windowHeight = this.getUIContext().px2vp(win.getWindowProperties().windowRect.height)
+        if (isFoldable) {
+          this.isWideFold = this.initWideFold()
+        }
       })
-    }
-  }
+    } catch (error) {
 
-  @Builder
-  gridItemLayout(item: GridData, _: number): void {
-    Text(item.name)
-      .width("95%")
-      .height(50)
-      .margin({ left: "2.5%", bottom: 10 })
-      .textAlign(TextAlign.Center)
-      .border({ width: 1, color: Color.Pink })
-      .onClick(() => {
-        router.pushUrl({ url: item.url })
-      })
+    }
   }
 
   build() {
-    Column() {
-      ActionBar({ title: "首页", hiddenBack: true })
-      ListView({
-        items: this.itemArray, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
-        prohibitRefresh: true,
-        itemLayout: (item: Object, index: number) => {
-          this.itemLayout(item as ListData, index)
-        }, //转成你需要的对象
-        listAttribute: (attr) => {
-          attr.edgeEffect = EdgeEffect.Spring
+    RelativeContainer() {
+      MainView() {
+        Column() {
+          TitleBar({ title: "刷新组件库(v1装饰器)", hideLeftMenu: true })
+          Row() {
+            Column() {
+              Text("RefreshView")
+                .fontSize(14)
+                .fontColor(Color.White)
+              Text("基于系统Refresh封装的刷新加载组件")
+                .fontSize(13)
+                .fontColor(Color.White)
+                .margin({ top: 10 })
+                .textAlign(TextAlign.Center)
+            }
+            .height("100%")
+            .layoutWeight(1)
+            .backgroundColor($r("app.color.tab_select_color"))
+            .justifyContent(FlexAlign.Center)
+            .borderRadius(10)
+            .margin({ right: 10 })
+            .padding({ left: 10, right: 10 })
+            .onClick(() => {
+              startPage("example_Rv1Index")
+            })
+
+            Column() {
+              Text("LitheView")
+                .fontColor(Color.White)
+                .fontSize(14)
+                .fontColor(Color.White)
+              Text("一个完全自定义的刷新加载组件")
+                .fontSize(13)
+                .fontColor(Color.White)
+                .margin({ top: 10 })
+                .textAlign(TextAlign.Center)
+            }
+            .padding({ left: 10, right: 10 })
+            .height("100%")
+            .layoutWeight(1)
+            .backgroundColor($r("app.color.tab_select_color"))
+            .justifyContent(FlexAlign.Center)
+            .borderRadius(10)
+            .margin({ left: 10 })
+            .onClick(() => {
+              startPage("example_LitheV1Index")
+            })
+
+          }.width("100%")
+          .height(120)
+          .padding({ left: 20, right: 20 })
+
+          this.refreshItem("常见列表封装案例", this.refreshMenus)
         }
+        .height('100%')
+        .width('100%')
+        .alignItems(HorizontalAlign.Start)
+      }
+    }
+  }
+
+  @Builder
+  refreshItem(name: string, menus: string[]) {
+    Text(name)
+      .margin({ top: 20, left: 20, bottom: 20 })
+      .fontSize(15)
+      .fontColor($r("app.color.tab_select_color"))
+
+    GridView({
+      items: menus,
+      itemLayout: (item: Object, index: number) => {
+        this.GridViewItem(item as string, index)
+      },
+      columnSize: this.isWideFold ? 3 : 2, //如果是折叠，三
+      gridAttribute: (attr) => {
+        attr.columnsGap = 10
+        attr.rowsGap = 10
+        attr.padding = { left: 20, right: 20 }
+      }
+    })
+  }
+
+  @Builder
+  GridViewItem(item: string, index: number) {
+    Text(item)
+      .width("100%")
+      .height(50)
+      .fontSize(13)
+      .border({ width: 1, color: $r("app.color.tab_select_color"), radius: 5 })
+      .textAlign(TextAlign.Center)
+      .onClick(() => {
+        startPage(this.refreshRouters[index])
       })
-    }.width('100%')
-    .height('100%')
   }
-}
 
-/**
- * AUTHOR:AbnerMing
- * INTRODUCE:List数据对象
- * */
-class ListData {
-  name?: string
-  items?: GridData[]
-
-  constructor(name?: string, items?: GridData[]) {
-    this.name = name
-    this.items = items
-  }
-}
-
-/**
- * AUTHOR:AbnerMing
- * INTRODUCE:Grid数据对象
- * */
-class GridData {
-  name?: string
-  url?: string
-
-  constructor(name?: string, url?: string) {
-    this.name = name
-    this.url = url
+  // 推断是否为阔折叠的示例方法
+  private initWideFold(): boolean {
+    const aspectRatio = this.windowWidth / this.windowHeight;
+    const isOuterScreen = aspectRatio > 0.6 && aspectRatio < 0.75 && this.windowHeight <= 700;
+    const isInnerScreen = aspectRatio > 1.3 && aspectRatio < 1.5 && this.windowWidth >= 900;
+    return isOuterScreen || isInnerScreen;
   }
 }

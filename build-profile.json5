@@ -1,14 +1,32 @@
 {
   "app": {
     "signingConfigs": [
-
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/abnerming/.ohos/config/default_HarmonyOsRefresh_mTGzz8l3NiW1R7yfZiYtU8xToOBrBcBqoarIbvUzj_I=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B605BB2D66EAB88FFA77C622E6F0E82EE8D760F067BF4097C3F28262CB5E62D415F1382C0023F17",
+          "profile": "/Users/abnerming/.ohos/config/default_HarmonyOsRefresh_mTGzz8l3NiW1R7yfZiYtU8xToOBrBcBqoarIbvUzj_I=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/abnerming/.ohos/config/default_HarmonyOsRefresh_mTGzz8l3NiW1R7yfZiYtU8xToOBrBcBqoarIbvUzj_I=.p12",
+          "storePassword": "0000001BFB9B47847A95165C8BFB947C221104B5C27C005FDD0104F3AF7A5A6CA76D81DEBFC24420938907"
+        }
+      }
     ],
     "products": [
       {
         "name": "default",
         "signingConfig": "default",
         "compatibleSdkVersion": "5.0.0(12)",
-        "runtimeOS": "HarmonyOS"
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
       }
     ],
     "buildModeSet": [

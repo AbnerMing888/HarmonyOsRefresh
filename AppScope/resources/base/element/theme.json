@@ -1,0 +1,112 @@
+{
+  "color": [
+    {
+      "name": "color_fecf01",
+      "value": "#FEA101"
+    },
+    {
+      "name": "color_222222",
+      "value": "#222222"
+    },
+    {
+      "name": "color_666666",
+      "value": "#666666"
+    },
+    {
+      "name": "color_999999",
+      "value": "#999999"
+    },
+    {
+      "name": "color_B6D1FE",
+      "value": "#B6D1FE"
+    },
+    {
+      "name": "color_458CFE",
+      "value": "#458CFE"
+    },
+    {
+      "name": "color_42424A",
+      "value": "#42424A"
+    },
+    {
+      "name": "color_282831",
+      "value": "#282831"
+    },
+    {
+      "name": "color_292A2E",
+      "value": "#292A2E"
+    },
+    {
+      "name": "color_f2f6f9",
+      "value": "#f2f6f9"
+    },
+    {
+      "name": "color_EEF9FF",
+      "value": "#EEF9FF"
+    },
+    {
+      "name": "title_color",
+      "value": "#222222"
+    },
+    {
+      "name": "switch_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "author_color",
+      "value": "#42424A"
+    },
+    {
+      "name": "desc_color",
+      "value": "#282831"
+    },
+    {
+      "name": "action_bar_color",
+      "value": "#292A2E"
+    },
+    {
+      "name": "home_menu_color",
+      "value": "#333333"
+    },
+    {
+      "name": "home_select_color",
+      "value": "#f2f6f9"
+    },
+    {
+      "name": "dialog_color",
+      "value": "#90000000"
+    },
+    {
+      "name": "tab_normal_color",
+      "value": "#9BAFDB"
+    },
+    {
+      "name": "author_info_bg",
+      "value": "#ffffff"
+    },
+    {
+      "name": "top_bg_icon_1",
+      "value": "#F8F7E5"
+    },
+    {
+      "name": "top_bg_icon_2",
+      "value": "#FEECF8"
+    },
+    {
+      "name": "option_select_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "color_7866F4",
+      "value": "#7866F4"
+    },
+    {
+      "name": "color_e8e8e8",
+      "value": "#e8e8e8"
+    },
+    {
+      "name": "tab_select_color",
+      "value": "#324065"
+    }
+  ]
+}

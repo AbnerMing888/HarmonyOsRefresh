@@ -1,0 +1,93 @@
+import { TitleBar } from '@abner/bar';
+import {
+  GridLayout, LoadMoreLayoutStatusModel, RefreshController, RefreshDataSource,
+  RefreshLayoutStatusModel } from '@abner/refresh';
+import { RouterPath } from '@abner/router';
+import { ListItemView } from '../../../../view/ListItemView';
+
+/**
+ * AUTHOR:AbnerMing
+ * DATE:2023/10/14
+ * INTRODUCE:自定义刷新头和加载尾部
+ * */
+
+@RouterPath("example_GridLayoutRefreshHeaderFooterPage")
+@Component
+export struct GridLayoutRefreshHeaderFooterPage {
+  controller: RefreshController = new RefreshController() //刷新控制器
+  lazyDataSource: RefreshDataSource = new RefreshDataSource()
+
+  aboutToAppear() {
+    let array: Array<number> = []
+    for (let i = 0; i < 50; i++) {
+      array.push(i)
+    }
+    this.lazyDataSource.pushDataArray(array)
+  }
+
+  /**
+   * Author:AbnerMing
+   * Describe:条目布局
+   * @param item  数据对象
+   * @param index  数据索引
+   */
+  @Builder
+  itemLayout(_: Object, index: number): void {
+    ListItemView({ index: index })
+  }
+
+
+  /**
+   * Author:AbnerMing
+   * Describe:自定义刷新头
+   */
+  @Builder
+  headerRefreshLayout(model: RefreshLayoutStatusModel) {
+    Text("当前状态：" + model.status)
+      .width("100%")
+      .textAlign(TextAlign.Center)
+      .height(80)
+      .fontColor(Color.White)
+      .backgroundColor($r("app.color.tab_select_color"))
+  }
+
+  /**
+   * Author:AbnerMing
+   * Describe:自定义加载尾部
+   */
+  @Builder
+  footerLoadLayout(model: LoadMoreLayoutStatusModel) {
+    Text("当前状态：" + model.status)
+      .width("100%")
+      .textAlign(TextAlign.Center)
+      .height(80)
+      .fontColor(Color.White)
+      .backgroundColor($r("app.color.tab_select_color"))
+  }
+
+  build() {
+    Column() {
+      TitleBar({ title: "自定义刷新头加载尾" })
+      GridLayout({
+        lazyDataSource: this.lazyDataSource,
+        itemLayout: this.itemLayout,
+        controller: this.controller,
+        lazyCachedCount: 25, //缓存数量
+        headerRefreshLayout: this.headerRefreshLayout, //刷新头
+        footerLoadLayout: this.footerLoadLayout, //加载尾
+        onRefresh: () => {
+          setTimeout(() => {
+            this.controller.finishRefresh()
+          }, 3000)
+        },
+        onLoadMore: () => {
+          //模拟耗时
+          setTimeout(() => {
+            this.lazyDataSource.pushDataArray([0, 1, 2, 3, 4, 5, 6])
+            this.controller.finishLoadMore()
+          }, 3000)
+        }
+      })
+    }
+  }
+}

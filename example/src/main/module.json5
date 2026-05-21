@@ -1,5 +1,6 @@
 {
   "module": {
+    "srcEntry": "./ets/App.ets",
     "name": "example",
     "type": "entry",
     "description": "$string:module_desc",

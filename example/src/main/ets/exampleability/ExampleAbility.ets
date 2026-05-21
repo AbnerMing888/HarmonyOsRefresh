@@ -18,7 +18,13 @@ export default class ExampleAbility extends UIAbility {
 
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
-
+    let windowClass: window.Window = windowStage.getMainWindowSync(); // 获取应用主窗口
+    let isLayoutFullScreen = true;
+    windowClass.setWindowLayoutFullScreen(isLayoutFullScreen).then(() => {
+      console.info('Succeeded in setting the window layout to full-screen mode.');
+    }).catch((err: BusinessError<void>) => {
+      console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+    });
     windowStage.loadContent('pages/Index', (err, data) => {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
