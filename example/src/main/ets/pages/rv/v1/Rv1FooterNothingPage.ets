@@ -36,7 +36,7 @@ export struct Rv1FooterNothingPage {
     .edgeEffect(EdgeEffect.None)
     .width("100%")
     .height("100%")
-    .padding({ left: 20, right: 20 })
+    .padding({ left: 10, right: 10 })
     .nestedScroll({
       scrollForward: NestedScrollMode.PARENT_FIRST,
       scrollBackward: NestedScrollMode.PARENT_FIRST
@@ -66,7 +66,7 @@ export struct Rv1FooterNothingPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            for (let i = 10; i < 20; i++) {
+            for (let i = 0; i < 20; i++) {
               this.testArray.push(i)
             }
             this.controller.finishLoadMore(true) //设置为true，显示暂无更多数据

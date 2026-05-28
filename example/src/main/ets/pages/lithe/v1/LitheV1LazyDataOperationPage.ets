@@ -1,7 +1,6 @@
 import { TitleBar } from '@abner/bar'
 import { RefreshDataSource } from '@abner/refresh'
 import { RouterPath } from '@abner/router'
-import router from '@ohos.router'
 
 /**
  * AUTHOR:AbnerMing
@@ -19,13 +18,23 @@ export struct LitheV1LazyDataOperationPage {
       "修改数据"]
 
   aboutToAppear(): void {
-    this.dataSource.initData([0, 1, 2, 3])
+    let array: number[] = []
+    for (let i = 0; i < 10; i++) {
+      array.push(i)
+    }
+    this.dataSource.initData(array)
   }
 
   @Builder
   gridViewItemLayout(item: Object, index: number): void {
-    Button(item.toString())
-      .margin({ top: 10 })
+    Text(item.toString())
+      .width("100%")
+      .height(40)
+      .textAlign(TextAlign.Center)
+      .border({ color: $r("app.color.tab_select_color"), width: 1 })
+      .borderRadius(5)
+      .fontColor($r("app.color.tab_select_color"))
+      .fontSize(13)
       .onClick(() => {
         switch (index) {
           case 0: //增加一个
@@ -66,11 +75,7 @@ export struct LitheV1LazyDataOperationPage {
     Column() {
 
       TitleBar({
-        title: "懒加载数据使用",
-        leftText: "返回",
-        onLeftClick: () => {
-          router.back()
-        },
+        title: "懒加载数据使用"
       })
 
 
@@ -80,15 +85,17 @@ export struct LitheV1LazyDataOperationPage {
             this.gridViewItemLayout(item, index)
           }
         })
-      }.columnsTemplate("1fr 1fr 1fr")
-      .height(240)
+      }
+      .columnsTemplate("1fr 1fr 1fr")
+      .height(200)
       .columnsGap(10)
       .rowsGap(10)
+      .padding({ left: 10, right: 10 })
 
-      List({ space: 20 }) {
-        LazyForEach(this.dataSource, (_: number, index: number) => {
+      List({ space: 10 }) {
+        LazyForEach(this.dataSource, (item: number, _: number) => {
           ListItem() {
-            Text('列表数据:' + index)
+            Text('列表数据:' + item)
               .width('100%')
               .height(50)
               .fontSize(14)
@@ -102,7 +109,7 @@ export struct LitheV1LazyDataOperationPage {
       .edgeEffect(EdgeEffect.None)
       .width("100%")
       .layoutWeight(1)
-      .padding({ left: 20, right: 20 })
+      .padding({ left: 10, right: 10 })
     }
   }
 }

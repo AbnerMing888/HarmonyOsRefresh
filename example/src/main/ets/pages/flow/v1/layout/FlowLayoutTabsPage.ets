@@ -1,25 +1,24 @@
 import { TabLayout } from '@abner/tab'
-import { ListView, RefreshController } from '@abner/refresh'
+import { RefreshController, StaggeredGridView, WaterFlowLayout } from '@abner/refresh'
 import { RouterPath } from '@abner/router'
 import { TitleBar } from '@abner/bar'
-import { ListItemView } from '../../../../view/ListItemView'
 
 /**
  * AUTHOR:AbnerMing
  * DATE:2024/5/24
  * INTRODUCE:结合Tabs使用
  * */
-@RouterPath("example_ListViewTabsPage")
+@RouterPath("example_FlowLayoutTabsPage")
 @Component
-export struct ListViewTabsPage {
+export struct FlowLayoutTabsPage {
   @Builder
   itemPage(index: number, item: string) {
-    ListTabsPage()
+    FlowTabsPage()
   }
 
   build() {
     Column() {
-      TitleBar({ title: "结合Tabs使用" })
+      TitleBar({ title: "结合Tabs使用(WaterFlowLayout)" })
       TabLayout({
         tabBar: ["条目一", "条目二", "条目三", "条目四"],
         barMode: BarMode.Fixed, //均分
@@ -45,13 +44,24 @@ export struct ListViewTabsPage {
 }
 
 @Component
-export struct ListTabsPage {
+export struct FlowTabsPage {
   @State array: Array<number> = []
   mRefreshController: RefreshController = new RefreshController
+  private itemHeightArray: number[] = []
+  @State colors: ResourceColor[] = ["#ee6d82", "#e5682f", "#eeb272", "#cbb41b", "#d86fea", "#5f97ea"]
+  @State minSize: number = 80
+  @State maxSize: number = 180
+
+  // 计算FlowItem宽/高
+  getSize() {
+    let ret = Math.floor(Math.random() * this.maxSize)
+    return (ret > this.minSize ? ret : this.minSize)
+  }
 
   aboutToAppear() {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 50; i++) {
       this.array.push(i)
+      this.itemHeightArray.push(this.getSize())
     }
   }
 
@@ -63,11 +73,18 @@ export struct ListTabsPage {
    */
   @Builder
   itemLayout(_: number, index: number): void {
-    ListItemView({ index: index })
+    Column() {
+      Text("列表数据:" + index)
+        .fontColor(Color.White)
+    }
+    .justifyContent(FlexAlign.Center)
+    .width("100%")
+    .height(this.itemHeightArray[index % 100])
+    .backgroundColor(this.colors[index % 5])
   }
 
   build() {
-    ListView({
+    WaterFlowLayout({
       items: this.array, //数据源 数组，可以任意类型，自定义对象[],number[],string[]……
       itemLayout: (item: Object, index: number) => {
         this.itemLayout(item as number, index) //转成你需要的对象
@@ -83,6 +100,10 @@ export struct ListTabsPage {
       onLoadMore: () => {
         //上拉加载 模拟耗时
         setTimeout(() => {
+          for (let i = 0; i < 20; i++) {
+            this.array.push(i)
+            this.itemHeightArray.push(this.getSize())
+          }
           this.mRefreshController.finishLoadMore()
         }, 3000)
       }

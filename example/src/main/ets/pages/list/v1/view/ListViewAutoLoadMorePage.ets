@@ -59,7 +59,7 @@ export struct ListViewAutoLoadMorePage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.lazyDataSource.pushDataArray([1000, 1001, 1002])
+            this.lazyDataSource.pushDataArray(this.getArray())
             this.controller.finishLoadMore()
           }, 3000)
         }

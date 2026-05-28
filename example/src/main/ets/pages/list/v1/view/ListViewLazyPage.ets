@@ -15,7 +15,7 @@ export struct ListViewLazyPage {
 
   aboutToAppear() {
     let array: number[] = []
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       array.push(i)
     }
     this.lazyDataSource?.initData(array)

@@ -21,7 +21,7 @@ export struct ListViewUpAndDownLazyPage {
 
   private getArray(): Array<number> {
     let array: Array<number> = []
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       array.push(i)
     }
     return array
@@ -59,7 +59,7 @@ export struct ListViewUpAndDownLazyPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.lazyDataSource.pushDataArray([1000, 1001, 1002])
+            this.lazyDataSource.pushDataArray(this.getArray())
             this.controller.finishLoadMore()
           }, 1000)
         }

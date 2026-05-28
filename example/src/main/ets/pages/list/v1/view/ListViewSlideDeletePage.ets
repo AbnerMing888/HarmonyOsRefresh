@@ -17,7 +17,7 @@ export struct ListViewSlideDeletePage {
 
   aboutToAppear() {
     let array: Array<number> = []
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 20; i++) {
       array.push(i)
     }
 

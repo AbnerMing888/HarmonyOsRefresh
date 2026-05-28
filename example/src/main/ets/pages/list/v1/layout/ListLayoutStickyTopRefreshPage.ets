@@ -88,10 +88,10 @@ struct StickyListView {
   onLoadMore?: (isLoad:boolean) => void
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       this.arr1.push(i)
     }
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       this.arr2.push(i)
     }
   }
@@ -121,7 +121,7 @@ struct StickyListView {
           this.onLoadMore(false)
         }
         setTimeout(() => {
-          for (let i = 0; i < 10; i++) {
+          for (let i = 0; i < 20; i++) {
             this.arr1.push(i)
           }
           this.controller.finishLoadMore()

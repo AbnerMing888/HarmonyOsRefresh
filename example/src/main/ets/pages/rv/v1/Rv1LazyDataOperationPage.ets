@@ -19,7 +19,11 @@ export struct Rv1LazyDataOperationPage {
       "修改数据"]
 
   aboutToAppear(): void {
-    this.dataSource.initData([0, 1, 2, 3, 4, 5, 6])
+    let array:number[] = []
+    for (let i = 0; i < 20; i++) {
+      array.push(i)
+    }
+    this.dataSource.initData(array)
   }
 
   @Builder
@@ -90,9 +94,9 @@ export struct Rv1LazyDataOperationPage {
       .padding({ left: 10, right: 10 })
 
       List() {
-        LazyForEach(this.dataSource, (_: number, index: number) => {
+        LazyForEach(this.dataSource, (item: number, _: number) => {
           ListItem() {
-            ListItemView({ index: index })
+            ListItemView({ index: item })
           }
         }, (item: string, index: number) => JSON.stringify(item) + "_" + index)
       }

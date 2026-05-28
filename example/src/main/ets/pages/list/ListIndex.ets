@@ -107,7 +107,9 @@ export struct ListIndex {
   build() {
     Column() {
       TitleBar({
-        title: "List列表组件"
+        title: "List列表组件(V1)", rightText: "查看文档", onRightClick: () => {
+          //查看文档
+        }
       })
       Text(this.listInfo)
         .fontColor($r("app.color.tab_normal_color"))

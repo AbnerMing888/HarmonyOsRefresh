@@ -1,7 +1,7 @@
 import webview from '@ohos.web.webview';
-import { ActionBar } from '@abner/bar'
 import { RefreshController, RefreshView } from '@abner/refresh';
 import { RouterPath } from '@abner/router';
+import { TitleBar } from '@abner/bar';
 
 /**
  * AUTHOR:AbnerMing
@@ -14,7 +14,7 @@ import { RouterPath } from '@abner/router';
 export struct Rv1WebViewPage {
   @State controller: RefreshController = new RefreshController() //刷新控制器
   webviewController: webview.WebviewController = new webview.WebviewController();
-  @State isWebTop: boolean = true //判断web是否到达了顶端
+  // @State isWebTop: boolean = true //判断web是否到达了顶端
 
   @Builder
   itemLayout() {
@@ -25,34 +25,32 @@ export struct Rv1WebViewPage {
         scrollForward: NestedScrollMode.SELF_FIRST,
         scrollBackward: NestedScrollMode.PARENT_FIRST
       })
-      .onScroll((event) => {
-        this.isWebTop = event.yOffset == 0 //判断web是否滑动到顶部
-      })
+      // .onScroll((event) => {
+      //   this.isWebTop = event.yOffset == 0 //判断web是否滑动到顶部
+      // })
       .onPageEnd(() => {
         //默认不可滑动
-        this.webviewController.setScrollable(false)
+        // this.webviewController.setScrollable(true)
       })
   }
 
   build() {
     Column() {
-      ActionBar({ title: "【Web组件】" })
-
+      TitleBar({ title: "【Web组件】" })
       RefreshView({
         controller: this.controller,
         itemLayout: () => {
           this.itemLayout()
         },
-        isWebTop: this.isWebTop,
-        onScrollDirection: (isDown: boolean) => {
-          if (this.isWebTop) {
-            //在顶部，需要判断手势是往下还是往上
-            this.webviewController.setScrollable(!isDown)
-          } else {
-            //不在顶部，一律可滑动
-            this.webviewController.setScrollable(true)
-          }
-        },
+        // onScrollDirection: (isDown: boolean) => {
+        //   if (this.isWebTop) {
+        //     //在顶部，需要判断手势是往下还是往上
+        //     this.webviewController.setScrollable(true)
+        //   } else {
+        //     //不在顶部，一律可滑动
+        //     this.webviewController.setScrollable(true)
+        //   }
+        // },
         onRefresh: () => {
           //下拉刷新
           setTimeout(() => {

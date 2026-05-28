@@ -91,7 +91,7 @@ struct StickyGridView {
   }
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
       this.arr1.push(i)
       this.itemHeightArray.push(this.getSize())
     }
@@ -132,11 +132,16 @@ struct StickyGridView {
         // 上拉加载 模拟耗时
         setTimeout(() => {
           if (this.pageType == 0) {
-            this.arr1.push(300)
-            this.itemHeightArray.push(this.getSize())
+            for (let i = 0; i < 20; i++) {
+              this.arr1.push(i)
+              this.itemHeightArray.push(this.getSize())
+            }
+
           } else {
-            this.arr2.push(300)
-            this.itemHeightArray2.push(this.getSize())
+            for (let i = 0; i < 20; i++) {
+              this.arr2.push(i)
+              this.itemHeightArray2.push(this.getSize())
+            }
           }
           this.controller.finishLoadMore()
         }, 3000)

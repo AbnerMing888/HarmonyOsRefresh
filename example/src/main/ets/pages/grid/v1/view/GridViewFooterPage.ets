@@ -53,7 +53,7 @@ export struct GridViewFooterPage {
         itemLayout: this.itemLayout,
         controller: this.controller,
         lazyCachedCount: 25, //缓存数量
-        itemFooterLayout:this.itemFooterLayout,
+        itemFooterLayout: this.itemFooterLayout,
         onRefresh: () => {
           setTimeout(() => {
             this.controller.finishRefresh()
@@ -62,7 +62,11 @@ export struct GridViewFooterPage {
         onLoadMore: () => {
           //模拟耗时
           setTimeout(() => {
-            this.lazyDataSource.pushDataArray([0, 1, 2, 3, 4, 5, 6])
+            let array: number[] = []
+            for (let i = 0; i < 20; i++) {
+              array.push(i)
+            }
+            this.lazyDataSource.pushDataArray(array)
             this.controller.finishLoadMore()
           }, 3000)
         }

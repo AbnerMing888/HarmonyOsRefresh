@@ -16,12 +16,13 @@ export struct Rv1Index {
     "example_Rv1LoadDataSpringBackPage",
     "example_Rv1FooterNothingPage", "example_Rv1FixedFooterPage", "example_Rv1RefreshScrollPage",
     "example_Rv1LazyDataOperationPage", "example_Rv1RefreshImmersivePage"
-    , "example_Rv1AdaptiveHeightPage", "example_Rv1MultiViewPage", "example_Rv1AutoListUpAndDownPage"
+    , "example_Rv1AdaptiveHeightPage", "example_Rv1MultiViewPage",
+    "example_Rv1AutoListUpAndDownPage"
   ]
 
   build() {
     Column() {
-      TitleBar({ title: "RefreshView(v1装饰器)" })
+      TitleBar({ title: "RefreshView(V1装饰器)" })
       GridView({
         items: this.mGridData,
         itemLayout: (item: Object, index: number) => {

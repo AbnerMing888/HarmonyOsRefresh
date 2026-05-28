@@ -33,7 +33,7 @@ export struct LitheV1Index {
 
   build() {
     Column() {
-      TitleBar({ title: "LitheView(v1装饰器)" })
+      TitleBar({ title: "LitheView(V1装饰器)" })
       GridView({
         items: this.mGridData,
         itemLayout: (item: Object, index: number) => {

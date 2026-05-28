@@ -21,11 +21,12 @@ export struct GridViewStickLayoutViewPage {
   }
   @State enableScrollInteraction: boolean = true
 
+
   aboutToAppear() {
     for (let i = 0; i < 30; i++) {
       this.arr1.push(i)
     }
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
       this.arr2.push(i)
     }
   }
@@ -94,6 +95,7 @@ export struct GridViewStickLayoutViewPage {
         isRefreshTopSticky: true, //是否顶部吸顶
         enableScrollInteraction: (isInteraction) => {
           this.enableScrollInteraction = isInteraction
+          console.log("===============[]:"+isInteraction)
         },
         onStickyNestedScroll: (nestedScroll: NestedScrollOptions) => {
           this.gridNestedScroll = nestedScroll
@@ -107,7 +109,9 @@ export struct GridViewStickLayoutViewPage {
         onLoadMore: () => {
           setTimeout(() => {
             //模拟耗时
-            this.arr1.push(1000)
+            for (let i = 0; i < 20; i++) {
+              this.arr1.push(i)
+            }
             this.controller.finishLoadMore()
           }, 3000)
         }

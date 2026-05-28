@@ -1,5 +1,5 @@
 import webview from '@ohos.web.webview';
-import { ActionBar, TitleBar } from '@abner/bar'
+import { TitleBar } from '@abner/bar'
 import { LitheRefresh, RefreshController } from '@abner/refresh';
 import { RouterPath } from '@abner/router';
 

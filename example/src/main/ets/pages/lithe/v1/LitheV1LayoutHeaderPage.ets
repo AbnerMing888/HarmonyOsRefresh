@@ -1,7 +1,6 @@
 import { TitleBar } from '@abner/bar'
 import { LitheRefresh, RefreshController } from '@abner/refresh'
 import { RouterPath } from '@abner/router'
-import router from '@ohos.router'
 
 /**
  * AUTHOR:AbnerMing
@@ -12,10 +11,14 @@ import router from '@ohos.router'
 @RouterPath("example_LitheV1LayoutHeaderPage")
 @Component
 export struct LitheV1LayoutHeaderPage {
-  @State testArray: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  @State testArray: number[] = []
   scroller: Scroller = new Scroller()
   controller: RefreshController = new RefreshController()
-
+  aboutToAppear(): void {
+    for (let i = 0; i < 20; i++) {
+      this.testArray.push(i)
+    }
+  }
   @Builder
   itemLayout() {
     List({ scroller: this.scroller, space: 20 }) {
@@ -55,11 +58,7 @@ export struct LitheV1LayoutHeaderPage {
     Column() {
 
       TitleBar({
-        title: "添加头组件",
-        leftText: "返回",
-        onLeftClick: () => {
-          router.back()
-        },
+        title: "添加头组件"
       })
 
       LitheRefresh({
@@ -78,8 +77,9 @@ export struct LitheV1LayoutHeaderPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.testArray.push(13)
-            this.testArray.push(14)
+            for (let i = 0; i < 20; i++) {
+              this.testArray.push(i)
+            }
             this.controller.finishLoadMore()
           }, 2000)
         }

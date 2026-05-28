@@ -100,6 +100,10 @@ export struct FlowTabsPage {
       onLoadMore: () => {
         //上拉加载 模拟耗时
         setTimeout(() => {
+          for (let i = 0; i < 20; i++) {
+            this.array.push(i)
+            this.itemHeightArray.push(this.getSize())
+          }
           this.mRefreshController.finishLoadMore()
         }, 3000)
       }

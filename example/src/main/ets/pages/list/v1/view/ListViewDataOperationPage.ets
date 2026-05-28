@@ -105,7 +105,7 @@ export struct ListViewDataOperationPage {
           attr.rowsGap = 10
           attr.padding = { left: 10, right: 10 }
         }
-      }).height(150)
+      }).height(200)
         .margin({ bottom: 10 })
 
       ListView({

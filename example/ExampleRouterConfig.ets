@@ -1,3 +1,5 @@
+import { FlowLayoutTabsPage } from './src/main/ets/pages/flow/v1/layout/FlowLayoutTabsPage';
+import { FlowLayoutAutoRefreshPage } from './src/main/ets/pages/flow/v1/layout/FlowLayoutAutoRefreshPage';
 import { ListIndex } from './src/main/ets/pages/list/ListIndex';
 import { GridIndex } from './src/main/ets/pages/grid/GridIndex';
 import { FlowIndex } from './src/main/ets/pages/flow/FlowIndex';
@@ -230,6 +232,12 @@ import { RouterConfig,routerGetBuilderType, routerInitBuilder,NavDestinationView
  * */
 function importPath(builderName: string) {
   switch (builderName) {
+    case "example_FlowLayoutTabsPage":
+      import("./src/main/ets/pages/flow/v1/layout/FlowLayoutTabsPage")
+      break
+    case "example_FlowLayoutAutoRefreshPage":
+      import("./src/main/ets/pages/flow/v1/layout/FlowLayoutAutoRefreshPage")
+      break
     case "example_ListIndex":
       import("./src/main/ets/pages/list/ListIndex")
       break
@@ -913,6 +921,12 @@ function importPath(builderName: string) {
 @Builder
 export function viewBuilder(params?:Object) {
   NavDestinationView() {
+    if (routerGetBuilderType() == "example_FlowLayoutTabsPage") {
+      FlowLayoutTabsPage()
+    } else 
+    if (routerGetBuilderType() == "example_FlowLayoutAutoRefreshPage") {
+      FlowLayoutAutoRefreshPage()
+    } else 
     if (routerGetBuilderType() == "example_ListIndex") {
       ListIndex()
     } else 

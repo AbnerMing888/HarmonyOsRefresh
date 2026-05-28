@@ -1,5 +1,4 @@
 import { TitleBar } from '@abner/bar';
-import router from '@ohos.router';
 import { LitheRefresh, RefreshController } from '@abner/refresh';
 import { RouterPath } from '@abner/router';
 
@@ -27,9 +26,7 @@ export struct LitheV1RefreshImmersivePage {
     Column() {
       Column() {
         TitleBar({
-          title: "任意组件刷新",
-          barBackgroundColor: Color.White,
-          leftText: "返回"
+          title: "沉浸式"
         })
       }.backgroundColor(Color.White)
       .width("100%")

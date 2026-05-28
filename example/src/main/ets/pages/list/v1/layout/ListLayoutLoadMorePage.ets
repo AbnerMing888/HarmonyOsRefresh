@@ -15,7 +15,7 @@ export struct ListLayoutLoadMorePage {
   @State array: number[] = []
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
@@ -42,7 +42,7 @@ export struct ListLayoutLoadMorePage {
           //下拉刷新
           setTimeout(() => {
             //模拟耗时
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 20; i++) {
               this.array.push(i)
             }
             this.controller.finishLoadMore()

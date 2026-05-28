@@ -1,5 +1,5 @@
 import { TabLayout } from '@abner/tab'
-import { GridLayout,RefreshController } from '@abner/refresh'
+import { GridLayout, RefreshController } from '@abner/refresh'
 import { RouterPath } from '@abner/router'
 import { TitleBar } from '@abner/bar'
 import { ListItemView } from '../../../../view/ListItemView'
@@ -83,6 +83,9 @@ export struct GridTabsPage {
       onLoadMore: () => {
         //上拉加载 模拟耗时
         setTimeout(() => {
+          for (let i = 0; i < 20; i++) {
+            this.array.push(i)
+          }
           this.mRefreshController.finishLoadMore()
         }, 3000)
       }

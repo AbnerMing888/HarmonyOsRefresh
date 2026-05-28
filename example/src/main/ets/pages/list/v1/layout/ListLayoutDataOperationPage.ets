@@ -27,8 +27,8 @@ export struct ListLayoutDataOperationPage {
    * @param index  数据索引
    */
   @Builder
-  itemLayout(_: Object, index: number): void {
-    ListItemView({ index: index })
+  itemLayout(item: Object, _: number): void {
+    ListItemView({ index: Number(item) })
   }
 
   @Builder
@@ -93,7 +93,7 @@ export struct ListLayoutDataOperationPage {
           attr.rowsGap = 10
           attr.padding = { left: 10, right: 10 }
         }
-      }).height(150)
+      }).height(200)
         .margin({ bottom: 10 })
 
       ListLayout({

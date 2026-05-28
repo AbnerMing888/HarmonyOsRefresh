@@ -18,7 +18,7 @@ export struct ListLayoutErrorOrEmptyPage {
   @State showLoadingLayout: boolean = false
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
@@ -144,6 +144,9 @@ export struct ListLayoutErrorOrEmptyPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
+            for (let i = 0; i < 20; i++) {
+              this.array.push(i)
+            }
             this.controller.finishLoadMore()
           }, 3000)
         }

@@ -1,5 +1,4 @@
-import { ActionBar, TitleBar } from '@abner/bar'
-import router from '@ohos.router'
+import { TitleBar } from '@abner/bar'
 import {
   LitheRefresh,
   LoadMoreLayoutStatusModel,
@@ -17,10 +16,14 @@ import { RouterPath } from '@abner/router'
 @RouterPath("example_LitheV1RefreshHeaderAndFooterPage")
 @Component
 export struct LitheV1RefreshHeaderAndFooterPage {
-  @State testArray: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  @State testArray: number[] = []
   scroller: Scroller = new Scroller()
   controller: RefreshController = new RefreshController()
-
+  aboutToAppear(): void {
+    for (let i = 0; i < 20; i++) {
+      this.testArray.push(i)
+    }
+  }
   @Builder
   itemLayout() {
     List({ scroller: this.scroller, space: 10 }) {
@@ -40,7 +43,7 @@ export struct LitheV1RefreshHeaderAndFooterPage {
     .edgeEffect(EdgeEffect.None)
     .width("100%")
     .height("100%")
-    .padding({ left: 20, right: 20 })
+    .padding({ left: 10, right: 10 })
     .nestedScroll({
       scrollForward: NestedScrollMode.PARENT_FIRST,
       scrollBackward: NestedScrollMode.PARENT_FIRST
@@ -80,8 +83,7 @@ export struct LitheV1RefreshHeaderAndFooterPage {
   build() {
     Column() {
       TitleBar({
-        title: "自定义刷新头和加载尾",
-        leftText: "返回"
+        title: "自定义刷新头和加载尾"
       })
 
       LitheRefresh({
@@ -101,8 +103,9 @@ export struct LitheV1RefreshHeaderAndFooterPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.testArray.push(13)
-            this.testArray.push(14)
+            for (let i = 0; i < 20; i++) {
+              this.testArray.push(i)
+            }
             this.controller.finishLoadMore()
           }, 2000)
         }

@@ -1,26 +1,38 @@
 import { TitleBar } from '@abner/bar';
-import { GridLayout, RefreshController, RefreshDataSource } from '@abner/refresh';
+import { RefreshController, RefreshDataSource, StaggeredGridView, WaterFlowLayout } from '@abner/refresh';
 import { RouterPath } from '@abner/router';
-import { ListItemView } from '../../../../view/ListItemView';
 
 /**
  * AUTHOR:AbnerMing
  * DATE:2023/10/14
- * INTRODUCE:头和尾都有组件
+ * INTRODUCE:刷新&加载(自动下拉刷新)
  * */
 
-@RouterPath("example_GridLayoutHeaderAndFooterPage")
+@RouterPath("example_FlowLayoutAutoRefreshPage")
 @Component
-export struct GridLayoutHeaderAndFooterPage {
+export struct FlowLayoutAutoRefreshPage {
   controller: RefreshController = new RefreshController() //刷新控制器
   lazyDataSource: RefreshDataSource = new RefreshDataSource()
+  private itemHeightArray: number[] = []
+  @State colors: ResourceColor[] = ["#ee6d82", "#e5682f", "#eeb272", "#cbb41b", "#d86fea", "#5f97ea"]
+  @State minSize: number = 80
+  @State maxSize: number = 180
+
+  // 计算FlowItem宽/高
+  getSize() {
+    let ret = Math.floor(Math.random() * this.maxSize)
+    return (ret > this.minSize ? ret : this.minSize)
+  }
 
   aboutToAppear() {
     let array: Array<number> = []
     for (let i = 0; i < 50; i++) {
       array.push(i)
+      this.itemHeightArray.push(this.getSize())
     }
     this.lazyDataSource.pushDataArray(array)
+
+    this.controller.autoRefresh()
   }
 
   /**
@@ -31,41 +43,24 @@ export struct GridLayoutHeaderAndFooterPage {
    */
   @Builder
   itemLayout(_: Object, index: number): void {
-    ListItemView({ index: index })
-  }
-
-  @Builder
-  itemHeaderLayout(): void {
     Column() {
-      Text("我是头View")
+      Text("列表数据:" + index)
         .fontColor(Color.White)
-    }.height(100)
-    .width("100%")
-    .backgroundColor($r("app.color.tab_select_color"))
+    }
     .justifyContent(FlexAlign.Center)
-  }
-
-  @Builder
-  itemFooterLayout(): void {
-    Column() {
-      Text("我是尾部View")
-        .fontColor(Color.White)
-    }.height(100)
     .width("100%")
-    .backgroundColor($r("app.color.tab_select_color"))
-    .justifyContent(FlexAlign.Center)
+    .height(this.itemHeightArray[index % 100])
+    .backgroundColor(this.colors[index % 5])
   }
 
   build() {
     Column() {
-      TitleBar({ title: "头和尾都有组件(GridLayout)" })
-      GridLayout({
+      TitleBar({ title: "自动刷新(WaterFlowLayout)" })
+      WaterFlowLayout({
         lazyDataSource: this.lazyDataSource,
-        itemLayout: this.itemLayout,
+        itemLayout: (item: Object, index: number) => this.itemLayout(item, index),
         controller: this.controller,
-        lazyCachedCount: 25, //缓存数量
-        itemHeaderLayout:this.itemHeaderLayout,
-        itemFooterLayout:this.itemFooterLayout,
+        lazyCachedCount: 10, //缓存数量
         onRefresh: () => {
           setTimeout(() => {
             this.controller.finishRefresh()
@@ -75,6 +70,7 @@ export struct GridLayoutHeaderAndFooterPage {
           //模拟耗时
           setTimeout(() => {
             for (let i = 0; i < 20; i++) {
+              this.itemHeightArray.push(this.getSize())
               this.lazyDataSource.pushData(i)
             }
             this.controller.finishLoadMore()

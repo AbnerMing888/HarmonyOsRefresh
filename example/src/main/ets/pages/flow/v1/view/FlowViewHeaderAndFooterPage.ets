@@ -13,7 +13,7 @@ import { RouterPath } from '@abner/router';
 export struct FlowViewHeaderAndFooterPage {
   controller: RefreshController = new RefreshController() //刷新控制器
   lazyDataSource: RefreshDataSource = new RefreshDataSource()
-  private itemHeightArray: number[] = []
+  @State private itemHeightArray: number[] = []
   @State colors: ResourceColor[] = ["#ee6d82", "#e5682f", "#eeb272", "#cbb41b", "#d86fea", "#5f97ea"]
   @State minSize: number = 80
   @State maxSize: number = 180
@@ -91,7 +91,7 @@ export struct FlowViewHeaderAndFooterPage {
         onLoadMore: () => {
           //模拟耗时
           setTimeout(() => {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 20; i++) {
               this.itemHeightArray.push(this.getSize())
               this.lazyDataSource.pushData(i)
             }

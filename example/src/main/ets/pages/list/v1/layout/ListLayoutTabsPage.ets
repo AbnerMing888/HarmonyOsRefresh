@@ -50,7 +50,7 @@ export struct ListTabsPage {
   mRefreshController: RefreshController = new RefreshController
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
@@ -83,6 +83,9 @@ export struct ListTabsPage {
       onLoadMore: () => {
         //上拉加载 模拟耗时
         setTimeout(() => {
+          for (let i = 0; i < 20; i++) {
+            this.array.push(i)
+          }
           this.mRefreshController.finishLoadMore()
         }, 3000)
       }

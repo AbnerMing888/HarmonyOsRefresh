@@ -68,18 +68,12 @@ struct StickyStaggeredView {
     return (ret > this.minSize ? ret : this.minSize)
   }
 
-  // 设置FlowItem的宽/高数组
-  setItemSizeArray() {
-    for (let i = 0; i < 100; i++) {
-      this.itemHeightArray.push(this.getSize())
-    }
-  }
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
+      this.itemHeightArray.push(this.getSize())
       this.lazyDataSource?.pushData(i)
     }
-    this.setItemSizeArray()
   }
 
   @Builder
@@ -109,7 +103,10 @@ struct StickyStaggeredView {
       onLoadMore: () => {
         // 上拉加载 模拟耗时
         setTimeout(() => {
-          this.lazyDataSource?.pushData(100)
+          for (let i = 0; i < 20; i++) {
+            this.itemHeightArray.push(this.getSize())
+            this.lazyDataSource?.pushData(i)
+          }
           this.controller.finishLoadMore()
         }, 1000)
       }

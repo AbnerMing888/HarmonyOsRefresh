@@ -10,7 +10,14 @@ import { RouterPath } from '@abner/router'
 @RouterPath("example_GridDropPage")
 @Component
 export struct GridDropPage {
-  @State items: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+  @State items: number[] = []
+
+  aboutToAppear(): void {
+    for (let i = 0; i < 50; i++) {
+      this.items.push(i)
+    }
+  }
+
   /**
    * Author:AbnerMing
    * Describe:条目视图
@@ -68,7 +75,7 @@ export struct GridDropPage {
         onDropData: (items) => {
           console.log("拖拽结束：" + JSON.stringify(items))
         }
-      }) .layoutWeight(1)
+      }).layoutWeight(1)
     }.width("100%")
     .height("100%")
   }

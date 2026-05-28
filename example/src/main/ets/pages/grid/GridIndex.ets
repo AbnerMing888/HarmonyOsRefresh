@@ -99,7 +99,9 @@ export struct GridIndex {
   build() {
     Column() {
       TitleBar({
-        title: "Grid网格组件"
+        title: "Grid网格组件", rightText: "查看文档", onRightClick: () => {
+
+        }
       })
 
       Text(this.gridInfo)

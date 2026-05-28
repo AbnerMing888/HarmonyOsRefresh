@@ -1,5 +1,5 @@
 import { TitleBar } from '@abner/bar'
-import { GridView, ListView, RefreshController } from '@abner/refresh'
+import { GridView, RefreshController } from '@abner/refresh'
 import { RouterPath } from '@abner/router'
 import { ListItemView } from '../../../../view/ListItemView'
 
@@ -16,7 +16,7 @@ export struct GridViewEnableSpringPage {
   @State array: Array<number> = []
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
       this.array.push(i)
     }
   }
@@ -53,7 +53,9 @@ export struct GridViewEnableSpringPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
-            this.array.push(100)
+            for (let i = 0; i < 20; i++) {
+              this.array.push(i)
+            }
             this.controller.finishLoadMore()
           }, 3000)
         }

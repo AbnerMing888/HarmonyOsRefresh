@@ -17,7 +17,7 @@ export struct ListViewNoSpringPage {
   private tempTimeoutId: number = -1
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
@@ -52,8 +52,8 @@ export struct ListViewNoSpringPage {
           clearTimeout(this.tempTimeoutId)
           this.tempTimeoutId = setTimeout(() => {
             //模拟耗时
-            for (let i = 0; i < 10; i++) {
-              this.array.push(100)
+            for (let i = 0; i < 20; i++) {
+              this.array.push(i)
             }
             this.controller.finishLoadMore()
           }, 3000)

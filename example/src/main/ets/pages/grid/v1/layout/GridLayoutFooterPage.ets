@@ -1,5 +1,5 @@
 import { TitleBar } from '@abner/bar';
-import { GridLayout, GridView, RefreshController, RefreshDataSource } from '@abner/refresh';
+import { GridLayout, RefreshController, RefreshDataSource } from '@abner/refresh';
 import { RouterPath } from '@abner/router';
 import { ListItemView } from '../../../../view/ListItemView';
 
@@ -56,13 +56,18 @@ export struct GridLayoutFooterPage {
         itemFooterLayout:this.itemFooterLayout,
         onRefresh: () => {
           setTimeout(() => {
+
             this.controller.finishRefresh()
           }, 3000)
         },
         onLoadMore: () => {
           //模拟耗时
           setTimeout(() => {
-            this.lazyDataSource.pushDataArray([0, 1, 2, 3, 4, 5, 6])
+            let array :number[]=[]
+            for (let i = 0; i < 20; i++) {
+              array.push(i)
+            }
+            this.lazyDataSource.pushDataArray(array)
             this.controller.finishLoadMore()
           }, 3000)
         }

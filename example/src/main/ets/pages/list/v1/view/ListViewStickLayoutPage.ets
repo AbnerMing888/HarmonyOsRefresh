@@ -22,10 +22,10 @@ export struct ListViewStickLayoutPage {
   @State enableScrollInteraction: boolean = true
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       this.arr1.push(i)
     }
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       this.arr2.push(i)
     }
   }
@@ -108,8 +108,9 @@ export struct ListViewStickLayoutPage {
         onLoadMore: () => {
           setTimeout(() => {
             //模拟耗时
-            this.arr1.push(100)
-            this.arr1.push(101)
+            for (let i = 0; i < 20; i++) {
+              this.arr1.push(i)
+            }
             this.controller.finishLoadMore()
           }, 3000)
         }

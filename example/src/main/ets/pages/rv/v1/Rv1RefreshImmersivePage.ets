@@ -1,5 +1,4 @@
-import { ActionBar, TitleBar } from '@abner/bar';
-import router from '@ohos.router';
+import { BarMenuType, TitleBar } from '@abner/bar';
 import { RefreshController, RefreshView } from '@abner/refresh';
 import { RouterPath } from '@abner/router';
 
@@ -28,7 +27,15 @@ export struct Rv1RefreshImmersivePage {
     Column() {
       Column() {
         TitleBar({
-          title: "【任意组件刷新】"
+          title: "【沉浸式】",
+          onTitleAttribute: (attr) => {
+            attr.fontColor = Color.White
+          },
+          leftText: "返回",
+          leftMenuType: BarMenuType.DEFAULT,
+          onLeftMenuAttribute: (attr) => {
+            attr.fontColor = Color.White
+          }
         })
       }.backgroundColor($r("app.color.tab_select_color"))
       .width("100%")

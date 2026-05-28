@@ -64,7 +64,7 @@ export struct FlowViewRefreshAndLoadMorePage {
         onLoadMore: () => {
           //模拟耗时
           setTimeout(() => {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 20; i++) {
               this.itemHeightArray.push(this.getSize())
               this.array.push(i)
             }

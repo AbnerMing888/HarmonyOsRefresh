@@ -71,7 +71,7 @@ struct StickyGridView {
   }
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
       this.arr1.push(i)
       this.itemHeightArray.push(this.getSize())
     }

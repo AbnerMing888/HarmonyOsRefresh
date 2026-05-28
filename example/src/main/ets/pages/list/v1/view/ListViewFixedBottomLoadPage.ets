@@ -15,7 +15,7 @@ export struct ListViewFixedBottomLoadPage {
   @State array: Array<number> = []
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
@@ -50,13 +50,9 @@ export struct ListViewFixedBottomLoadPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
-
-            this.array.push(100)
-            this.array.push(100)
-            this.array.push(100)
-            this.array.push(100)
-            this.array.push(100)
-
+            for (let i = 0; i < 20; i++) {
+              this.array.push(i)
+            }
             this.controller.finishLoadMoreFixedBottom(true) //开启
           }, 3000)
         }

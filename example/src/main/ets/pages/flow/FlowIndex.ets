@@ -40,12 +40,12 @@ export struct FlowIndex {
     "example_FlowViewRefreshHeaderAndFooterPage",
     "example_FlowViewStickyTopPage",
     "example_FlowViewStickyRLTopPage",
-    "example_FlowViewTopActionBarPage",//顶部吸顶
+    "example_FlowViewTopActionBarPage", //顶部吸顶
     "example_FlowViewStickyTopActionBarPage",
     "example_FlowViewArbitrarilyStickyTopPage",
     "example_FlowViewTabsPage",
     "example_FlowViewAutoRefreshPage",
-    "example_FlowViewPositioningPage",//定位
+    "example_FlowViewPositioningPage", //定位
     "example_FlowViewEnableSpringPage",
     "example_FlowViewAutoLoadMorePage"
   ]
@@ -74,13 +74,13 @@ export struct FlowIndex {
     "example_FlowLayoutRefreshHeaderAndFooterPage",
     "example_FlowLayoutStickyTopPage",
     "example_FlowLayoutStickyRLTopPage",
-    "example_FlowLayoutTopActionBarPage",//顶部吸顶
+    "example_FlowLayoutTopActionBarPage", //顶部吸顶
     "example_FlowViewStickyTopActionBarPage",
     "example_FlowViewArbitrarilyStickyTopPage",
-    "example_FlowViewTabsPage",
-    "example_FlowViewAutoRefreshPage",
-    "example_FlowLayoutPositioningPage",//定位
-    "example_FlowLayoutEnableSpringPage",
+    "example_FlowLayoutTabsPage",//结合tabs
+    "example_FlowLayoutAutoRefreshPage", //自动刷新
+    "example_FlowLayoutPositioningPage", //定位
+    "example_FlowLayoutEnableSpringPage", //禁止之后带阻尼
     "example_FlowLayoutAutoLoadMorePage"
   ]
   private gridInfo =
@@ -91,7 +91,9 @@ export struct FlowIndex {
   build() {
     Column() {
       TitleBar({
-        title: "WaterFlow瀑布流组件"
+        title: "WaterFlow瀑布流组件", rightText: "查看文档", onRightClick: () => {
+
+        }
       })
 
       Text(this.gridInfo)
@@ -125,7 +127,7 @@ export struct FlowIndex {
       .width("100%")
       .height("100%")
       .layoutWeight(1)
-      .columnsTemplate("1fr 1fr 1fr")
+      .columnsTemplate("1fr 1fr")
       .columnsGap(10)
       .rowsGap(10)
       .padding({ left: 20, right: 20, bottom: 20 })

@@ -54,7 +54,7 @@ export struct ListLayoutFixedBottomLoadPage {
           setTimeout(() => {
             //模拟耗时
             let array: number[] = []
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 20; i++) {
               array.push(i)
             }
             this.lazyDataSource?.pushDataArray(array)

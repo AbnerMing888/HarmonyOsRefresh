@@ -10,9 +10,15 @@ import { RouterPath } from '@abner/router'
 @RouterPath("example_LitheV1ListUpAndDownPage")
 @Component
 export struct LitheV1ListUpAndDownPage {
-  @State testArray: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  @State testArray: number[] = []
   scroller: Scroller = new Scroller()
   controller: RefreshController = new RefreshController()
+
+  aboutToAppear(): void {
+    for (let i = 0; i < 20; i++) {
+      this.testArray.push(i)
+    }
+  }
 
   @Builder
   itemLayout() {
@@ -64,8 +70,9 @@ export struct LitheV1ListUpAndDownPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.testArray.push(13)
-            this.testArray.push(14)
+            for (let i = 0; i < 20; i++) {
+              this.testArray.push(i)
+            }
             this.controller.finishLoadMore()
           }, 2000)
         }

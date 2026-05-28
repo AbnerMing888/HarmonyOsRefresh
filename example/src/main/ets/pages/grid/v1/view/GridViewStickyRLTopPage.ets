@@ -81,7 +81,7 @@ struct StickyGridView {
   @Prop listPosition: RefreshPositionEnum = RefreshPositionEnum.TOP
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
       this.arr1.push(i)
     }
     for (let i = 0; i < 50; i++) {
@@ -110,7 +110,9 @@ struct StickyGridView {
       onLoadMore: () => {
         // 上拉加载 模拟耗时
         setTimeout(() => {
-          this.arr1.push(300)
+          for (let i = 0; i < 50; i++) {
+            this.arr1.push(i)
+          }
           this.controller.finishLoadMore()
         }, 3000)
       }

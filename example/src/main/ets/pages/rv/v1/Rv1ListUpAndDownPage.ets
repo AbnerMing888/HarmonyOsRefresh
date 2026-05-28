@@ -34,7 +34,7 @@ export struct Rv1ListUpAndDownPage {
     .edgeEffect(EdgeEffect.None)
     .width("100%")
     .height("100%")
-    .padding({ left: 20, right: 20 })
+    .padding({ left: 10, right: 10 })
     .nestedScroll({
       scrollForward: NestedScrollMode.PARENT_FIRST,
       scrollBackward: NestedScrollMode.PARENT_FIRST
@@ -51,9 +51,6 @@ export struct Rv1ListUpAndDownPage {
       RefreshView({
         scroller: this.scroller,
         controller: this.controller,
-        refreshHeaderAttribute: (attr) => {
-          attr.fontColor = Color.Blue
-        },
         itemLayout: () => {
           this.itemLayout()
         },

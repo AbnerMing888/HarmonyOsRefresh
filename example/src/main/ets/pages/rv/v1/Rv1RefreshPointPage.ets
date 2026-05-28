@@ -1,6 +1,5 @@
 import {  RefreshController, RefreshHeaderType, RefreshView } from '@abner/refresh'
-import { ActionBar } from '@abner/bar'
-import router from '@ohos.router'
+import { TitleBar } from '@abner/bar'
 import { RouterPath } from '@abner/router'
 
 /**
@@ -11,13 +10,18 @@ import { RouterPath } from '@abner/router'
 @RouterPath("example_Rv1RefreshPointPage")
 @Component
 export struct Rv1RefreshPointPage {
-  @State testArray: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  @State testArray: number[] = []
   scroller: Scroller = new Scroller()
   controller: RefreshController = new RefreshController()
+  aboutToAppear(): void {
+    for (let i = 0; i < 20; i++) {
+      this.testArray.push(i)
+    }
+  }
 
   @Builder
   itemLayout() {
-    List({ scroller: this.scroller, space: 20 }) {
+    List({ scroller: this.scroller, space: 10 }) {
       ForEach(this.testArray, (item: number) => {
         ListItem() {
           Text('' + item)
@@ -34,7 +38,7 @@ export struct Rv1RefreshPointPage {
     .edgeEffect(EdgeEffect.None)
     .width("100%")
     .height("100%")
-    .padding({ left: 20, right: 20 })
+    .padding({ left: 10, right: 10 })
     .nestedScroll({
       scrollForward: NestedScrollMode.PARENT_FIRST,
       scrollBackward: NestedScrollMode.PARENT_FIRST
@@ -44,12 +48,8 @@ export struct Rv1RefreshPointPage {
   build() {
     Column() {
 
-      ActionBar({
-        title: "【三个小圆点刷新】",
-        leftText: "返回",
-        onLeftClick: () => {
-          router.back()
-        },
+      TitleBar({
+        title: "【三个小圆点刷新】"
       })
 
       RefreshView({
@@ -70,8 +70,9 @@ export struct Rv1RefreshPointPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.testArray.push(13)
-            this.testArray.push(14)
+            for (let i = 0; i < 20; i++) {
+              this.testArray.push(i)
+            }
             this.controller.finishLoadMore()
           }, 2000)
         }

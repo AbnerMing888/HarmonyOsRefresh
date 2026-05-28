@@ -73,6 +73,10 @@ export struct FlowViewEnableSpringPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
+            for (let i = 0; i < 20; i++) {
+              this.itemHeightArray.push(this.getSize())
+              this.lazyDataSource.pushData(i)
+            }
             this.controller.finishLoadMore()
           }, 3000)
         }

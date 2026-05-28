@@ -16,7 +16,7 @@ export struct ListViewNoReboundPage {
   @State array: Array<number> = []
 
   aboutToAppear() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
@@ -50,7 +50,7 @@ export struct ListViewNoReboundPage {
           //上拉加载
           setTimeout(() => {
             //模拟耗时
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 20; i++) {
               this.array.push(i)
             }
             this.controller.finishLoadMore()

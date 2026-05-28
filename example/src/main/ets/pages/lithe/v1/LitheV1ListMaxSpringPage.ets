@@ -1,7 +1,6 @@
 import { TitleBar } from '@abner/bar'
 import { LitheRefresh, RefreshController } from '@abner/refresh'
 import { RouterPath } from '@abner/router'
-import router from '@ohos.router'
 
 /**
  * AUTHOR:AbnerMing
@@ -11,13 +10,18 @@ import router from '@ohos.router'
 @RouterPath("example_LitheV1ListMaxSpringPage")
 @Component
 export struct LitheV1ListMaxSpringPage {
-  @State testArray: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  @State testArray: number[] = []
   scroller: Scroller = new Scroller()
   controller: RefreshController = new RefreshController()
+  aboutToAppear(): void {
+    for (let i = 0; i < 20; i++) {
+      this.testArray.push(i)
+    }
+  }
 
   @Builder
   itemLayout() {
-    List({ scroller: this.scroller, space: 20 }) {
+    List({ scroller: this.scroller, space: 10 }) {
       ForEach(this.testArray, (_: number, index: number) => {
         ListItem() {
           Text('列表数据:' + index)
@@ -34,7 +38,7 @@ export struct LitheV1ListMaxSpringPage {
     .edgeEffect(EdgeEffect.None)
     .width("100%")
     .height("100%")
-    .padding({ left: 20, right: 20 })
+    .padding({ left: 10, right: 10 })
     .nestedScroll({
       scrollForward: NestedScrollMode.PARENT_FIRST,
       scrollBackward: NestedScrollMode.PARENT_FIRST
@@ -45,11 +49,7 @@ export struct LitheV1ListMaxSpringPage {
     Column() {
 
       TitleBar({
-        title: "最大阻尼",
-        leftText: "返回",
-        onLeftClick: () => {
-          router.back()
-        },
+        title: "最大阻尼"
       })
 
       LitheRefresh({
@@ -69,8 +69,9 @@ export struct LitheV1ListMaxSpringPage {
         onLoadMore: () => {
           //上拉加载
           setTimeout(() => {
-            this.testArray.push(13)
-            this.testArray.push(14)
+            for (let i = 0; i < 20; i++) {
+              this.testArray.push(i)
+            }
             this.controller.finishLoadMore()
           }, 2000)
         }

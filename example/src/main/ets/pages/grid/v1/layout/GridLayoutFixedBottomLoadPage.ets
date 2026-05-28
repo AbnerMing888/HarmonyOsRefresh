@@ -51,7 +51,9 @@ export struct GridLayoutFixedBottomLoadPage {
         onLoadMore: () => {
           //模拟耗时
           setTimeout(() => {
-            this.lazyDataSource.pushDataArray([0, 1, 2, 3, 4, 5, 6])
+            for (let i = 0; i < 20; i++) {
+              this.lazyDataSource.pushData(i)
+            }
             this.controller.finishLoadMoreFixedBottom(true) //开启
           }, 3000)
         }

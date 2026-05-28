@@ -15,7 +15,7 @@ export struct ListLayoutRefreshPage {
   @State array: number[] = []
 
   aboutToAppear() {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
       this.array.push(i)
     }
   }
